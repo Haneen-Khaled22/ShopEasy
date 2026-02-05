@@ -1,0 +1,35 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { createBrowserRouter, NavLink, RouterProvider } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
+import Home from './components/Home/Home'
+import Contact from './components/Contact/Contact'
+import About from './components/About/About'
+import Products from './components/Products/Products'
+
+
+function App() {
+  
+  const router = createBrowserRouter([
+    {
+      path:"/",
+      element:<Layout/>,
+      children:[
+        {index:true,element:<Home/>},
+         {path:'/products',element:<Products/>}, 
+         {path:'/contact',element:<Contact/>},
+         {path:'/about',element:<About/>}
+      ]
+    }
+  ])
+
+  return (
+    <>
+     <RouterProvider router={router}/>
+    </>
+  )
+}
+
+export default App
