@@ -8,6 +8,7 @@ import About from './components/About/About'
 import Products from './components/Products/Products'
 
 
+
 function App() {
   
   const router = createBrowserRouter([
@@ -18,7 +19,8 @@ function App() {
         {index:true,element:<Home/>},
          {path:'/products',element:<Products/>}, 
          {path:'/contact',element:<Contact/>},
-         {path:'/about',element:<About/>}
+         {path:'/about',element:<About/>},
+        //  {path:'/category',element:<CategorySection/>}
       ]
     }
   ])
