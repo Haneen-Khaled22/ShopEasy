@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Contact from './components/Contact/Contact'
 import About from './components/About/About'
 import Products from './components/Products/Products'
+import CategoriesComponent from './components/Categories/Categories'
 
 
 
@@ -20,7 +21,7 @@ function App() {
          {path:'/products',element:<Products/>}, 
          {path:'/contact',element:<Contact/>},
          {path:'/about',element:<About/>},
-        //  {path:'/category',element:<CategorySection/>}
+        {path:'/category',element:<CategoriesComponent/>}
       ]
     }
   ])

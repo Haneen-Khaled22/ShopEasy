@@ -3,6 +3,7 @@ import HeroSection from '../HeroSection/HeroSection';
 import Products from '../Products/Products';
 import{ IoIosArrowForward } from "react-icons/io"; 
 import { useNavigate } from 'react-router-dom';
+import CategoriesComponent from '../Categories/Categories';
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
   return (
    <div >
     <HeroSection/>
+    <CategoriesComponent/>
      <div className='flex items-center justify-between mb-4 max-w-7xl mx-auto mt-8'>
           <div>
             <h2 className='text-2xl font-semibold'>Featured Products</h2>
@@ -25,6 +27,7 @@ const Home = () => {
           <button onClick={navigateToAllProducts} className='p-3 rounded-full border border-gray-500 flex items-center gap-2 hover:bg-gray-100 transition cursor-pointer'>See More  <IoIosArrowForward className="text-sm" /></button>
     
         </div>
+        
         
     <Products limit={8}/>
   
