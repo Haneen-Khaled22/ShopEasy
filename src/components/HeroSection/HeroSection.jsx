@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import img1 from "../../assets/model1.png"
-import img2 from "../../assets/model2.png"
-import img3 from "../../assets/model3.png"
-import top from "../../assets/topimg.png"
-import left from "../../assets/leftimgg.png"
+import img1 from "../../assets/slider1.png"
+import img2 from "../../assets/slider2.png"
+import img3 from "../../assets/slider3.png"
+import top from "../../assets/rightttimg.png"
+import left from "../../assets/lefttimg.png"
+
 
 // كومبوننت الأرقام المتحركة
 const AnimatedCounter = ({ target, suffix = '', duration = 2000 }) => {
   const [count, setCount] = useState(0)
+
+
   
   useEffect(() => {
     let startTime

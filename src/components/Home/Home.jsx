@@ -29,7 +29,7 @@ const Home = () => {
         </div>
         
         
-    <Products limit={8}/>
+    <Products limit={8} showFilter={false} showBread={false}/>
   
    </div>
   );

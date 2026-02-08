@@ -1,12 +1,24 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowForward } from 'react-icons/io';
+import beauty from "../../assets/beauty.png"
+import fragrances from "../../assets/fragrances.png"
+import furniture from "../../assets/furniture.png"
+import groceries from "../../assets/groceries.png"
+import { useNavigate } from 'react-router-dom';
+
 
 const Categories = () => {
+       const navigate = useNavigate();
+  
+     const navigateToAllProducts =()=>{
+      navigate('/products')
+     }
+      
   const [categories, setCategories] = useState([]);
   
   const getAllCategories = async () => {
-    const { data } = await axios.get('https://api.escuelajs.co/api/v1/categories');
+    const { data } = await axios.get('https://dummyjson.com/products/categories');
     console.log(data);
     setCategories(data)
   }
@@ -19,7 +31,7 @@ const Categories = () => {
     <div className="w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
       {/* Header with See All Button */}
       <div className="flex justify-end mb-6">
-                  <button  className='p-3 rounded-full border border-gray-500 flex items-center gap-2 hover:bg-gray-100 transition cursor-pointer'>See All Categories <IoIosArrowForward className="text-sm" /></button>
+                  <button onClick={navigateToAllProducts}  className='p-3 rounded-full border border-gray-500 flex items-center gap-2 hover:bg-gray-100 transition cursor-pointer'>See All <IoIosArrowForward className="text-sm" /></button>
         
       </div>
 
@@ -32,7 +44,7 @@ const Categories = () => {
               {/* Image Background */}
               <div className="absolute inset-0 bg-gray-300">
                 <img
-                  src={categories[0].image}
+                  src={beauty}
                   alt={categories[0].name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -70,7 +82,7 @@ const Categories = () => {
               {/* Image Background */}
               <div className="absolute inset-0 bg-gray-300">
                 <img
-                  src={categories[1].image}
+                  src={fragrances}
                   alt={categories[1].name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -108,7 +120,7 @@ const Categories = () => {
               {/* Image Background */}
               <div className="absolute inset-0 bg-gray-300">
                 <img
-                  src={categories[2].image}
+                  src={furniture}
                   alt={categories[2].name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -146,7 +158,7 @@ const Categories = () => {
               {/* Image Background */}
               <div className="absolute inset-0 bg-gray-300">
                 <img
-                  src={categories[3].image}
+                  src={groceries}
                   alt={categories[3].name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
