@@ -7,6 +7,10 @@ import Contact from './components/Contact/Contact'
 import About from './components/About/About'
 import Products from './components/Products/Products'
 import CategoriesComponent from './components/Categories/Categories'
+import { Provider } from 'react-redux'
+import { store } from './Redux/Store'
+import Cart from './components/Cart/Cart'
+import CategoryDetails from './components/CategoryDetails/CategoryDetails'
 
 
 
@@ -21,14 +25,21 @@ function App() {
          {path:'/products',element:<Products/>}, 
          {path:'/contact',element:<Contact/>},
          {path:'/about',element:<About/>},
-        {path:'/category',element:<CategoriesComponent/>}
+         {path:'/cart',element:<Cart/>},
+        {path:'/category',element:<CategoriesComponent/>},
+                {path:'/category/:slug',element:<CategoryDetails/>}
+
       ]
     }
   ])
 
   return (
     <>
+    <Provider store={store}>
+
+   
      <RouterProvider router={router}/>
+      </Provider>
     </>
   )
 }

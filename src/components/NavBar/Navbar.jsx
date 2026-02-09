@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi"; 
 import shopicon from "../../assets/shopeasy.png"
+import { HiOutlineShoppingBag } from "react-icons/hi";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const navigate = useNavigate();
+  function navigateToCart(){
+    navigate('/cart')
+  }
 
   return (
   <nav className="bg-white">
@@ -116,20 +122,13 @@ const Navbar = () => {
           SIGN IN / UP
         </button>
 
-        <button className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-            />
-          </svg>
+        <button
+        onClick={navigateToCart}
+        className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+          
+          <HiOutlineShoppingBag className="w-5 h-5 text-white" />
+
+
         </button>
 
         {/* User Dropdown */}
