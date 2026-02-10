@@ -19,23 +19,23 @@ const Cart = () => {
     <div className='max-w-7xl mx-auto'>
         <Breadcrumbs/>
         
-        <div className="flex items-center justify-between">
+        {cart.length>4?<div className="flex items-center justify-between">
                 <FilterBar/>
                   <button
                   onClick={()=>dispatch(clearCart())}
                   className="bg-red-800 w-20 h-8 cursor-pointer text-white rounded-4xl hover:bg-red-700 transition ease-in ">Clear all</button>
-        </div>
+        </div>:null}
         
             
       
 
       
 
-        <div className="flex items-center gap-4 justify-between">
+        <div className="flex items-center gap-4 justify-between h-auto">
             
              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
              
-      {cart.length > 0 ?
+      {cart.length > 0?
       (cart.map((product, index) => (
         <div
           key={product.id}

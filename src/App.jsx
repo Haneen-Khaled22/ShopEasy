@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import { store } from './Redux/Store'
 import Cart from './components/Cart/Cart'
 import CategoryDetails from './components/CategoryDetails/CategoryDetails'
+import ProductsDetails from './components/ProductDetails/ProductsDetails'
 
 
 
@@ -27,7 +28,8 @@ function App() {
          {path:'/about',element:<About/>},
          {path:'/cart',element:<Cart/>},
         {path:'/category',element:<CategoriesComponent/>},
-                {path:'/category/:slug',element:<CategoryDetails/>}
+        {path:'/category/:slug',element:<CategoryDetails/>},
+        {path:'/product/:id',element:<ProductsDetails/>}
 
       ]
     }

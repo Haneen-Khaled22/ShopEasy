@@ -12,11 +12,24 @@ const Home = () => {
    const navigateToAllProducts =()=>{
     navigate('/products')
    }
+
+      const navigateToAllCategories =()=>{
+    navigate('/category')
+   }
     
 
   return (
    <div >
     <HeroSection/>
+      <div className='flex items-center justify-between mb-4 max-w-7xl mx-auto mt-8'>
+          <div>
+           
+    
+          </div>
+          <button onClick={navigateToAllCategories} className='p-3 rounded-full border border-gray-500 flex items-center gap-2 hover:bg-gray-100 transition cursor-pointer'>See All Categories  <IoIosArrowForward className="text-sm" /></button>
+    
+        </div>
+        
     <CategoriesComponent/>
      <div className='flex items-center justify-between mb-4 max-w-7xl mx-auto mt-8'>
           <div>

@@ -7,8 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../Redux/Slices/ProductsSlice";
 import { FiCheck, FiPlus } from "react-icons/fi";
 import { addToCart } from "../../Redux/Slices/CartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Products = ({ limit, showFilter = true, showBread = true }) => {
+
+  const navigate = useNavigate();
+  
   
 
   const products = useSelector((state) => state.products);
@@ -37,6 +41,7 @@ const Products = ({ limit, showFilter = true, showBread = true }) => {
            const isInCart = cart.some((item)=>item.id===product.id)
           return (
              <div
+             onClick={()=>navigate(`/product/${product.id}`)}
             key={product.id}
             className="rounded-2xl p-3 cursor-pointer animate-fadeInUp m-5"
             style={{ animationDelay: `${index * 0.1}s` }}
@@ -57,7 +62,12 @@ const Products = ({ limit, showFilter = true, showBread = true }) => {
                   ))}
               </div>
             <div
-  onClick={() => !isInCart && dispatch(addToCart(product))}
+   onClick={(e) => {
+    e.stopPropagation();  
+    if (!isInCart) {
+      dispatch(addToCart(product));
+    }
+  }}
   className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
 >
   {isInCart ? (

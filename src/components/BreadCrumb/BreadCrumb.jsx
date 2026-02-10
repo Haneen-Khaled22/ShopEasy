@@ -1,7 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { Link, useLocation } from "react-router-dom";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ customLabels = {} }) => {
   const location = useLocation();
 
   const pathnames = location.pathname
@@ -17,9 +17,11 @@ const Breadcrumbs = () => {
       {pathnames.map((value, index) => {
         const to = "/" + pathnames.slice(0, index + 1).join("/");
 
-        const label = value
-          .replace(/-/g, " ")
-          .replace(/\b\w/g, (l) => l.toUpperCase());
+        const label =
+          customLabels[value] ||
+          value
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
 
         return (
           <div key={to} className="flex items-center gap-2">
@@ -40,5 +42,4 @@ const Breadcrumbs = () => {
     </div>
   );
 };
-
 export default Breadcrumbs;

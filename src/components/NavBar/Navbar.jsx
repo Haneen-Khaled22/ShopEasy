@@ -3,10 +3,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi"; 
 import shopicon from "../../assets/shopeasy.png"
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const cart = useSelector((state)=>state.cart);
 
   const navigate = useNavigate();
   function navigateToCart(){
@@ -124,10 +127,28 @@ const Navbar = () => {
 
         <button
         onClick={navigateToCart}
-        className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+        className="bg-black relative text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
           
           <HiOutlineShoppingBag className="w-5 h-5 text-white" />
 
+       { cart.length>0?    <span className="
+      absolute
+      -top-2
+      -right-2
+       w-6
+       h-6
+      p-1
+      bg-red-800
+      text-white
+      text-sm
+      rounded-full
+      flex
+      items-center
+      justify-center
+      font-normal
+      
+      
+    ">{cart.length}</span>:null}
 
         </button>
 
