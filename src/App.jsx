@@ -10,8 +10,11 @@ import CategoriesComponent from './components/Categories/Categories'
 import { Provider } from 'react-redux'
 import { store } from './Redux/Store'
 import Cart from './components/Cart/Cart'
-import CategoryDetails from './components/CategoryDetails/CategoryDetails'
 import ProductsDetails from './components/ProductDetails/ProductsDetails'
+import CategorySections from './components/All Categories/CategorySections'
+import CategoryProducts from './components/CategoryProducts/CategoryProducts'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import Checkout from './components/Checkout/Checkout'
 
 
 
@@ -28,19 +31,27 @@ function App() {
          {path:'/about',element:<About/>},
          {path:'/cart',element:<Cart/>},
         {path:'/category',element:<CategoriesComponent/>},
-        {path:'/category/:slug',element:<CategoryDetails/>},
-        {path:'/product/:id',element:<ProductsDetails/>}
+        {path:'/category/:slug',element:<CategoryProducts/>},
+                {path:'/categories',element:<CategorySections/>},
+
+        {path:'/product/:id',element:<ProductsDetails/>},
+                 {path:'/checkout',element:<Checkout/>},
+
 
       ]
     }
   ])
+  
 
   return (
     <>
+   
     <Provider store={store}>
 
-   
+      
      <RouterProvider router={router}/>
+      
+     
       </Provider>
     </>
   )

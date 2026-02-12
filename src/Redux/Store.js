@@ -3,6 +3,7 @@ import productsReducer from "../Redux/Slices/ProductsSlice"
 import CartReducer from "../Redux/Slices/CartSlice"
 import CategoryReducer from "../Redux/Slices/CategoriesSlice"
 import productDetailsReducer from "../Redux/Slices/ProductDetailsSlice";
+import  categoryProductsReducer  from "../Redux/Slices/CategoryProducts";
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         products:productsReducer,
         cart:CartReducer,
         category:CategoryReducer,
-        productDetails:productDetailsReducer
+        productDetails:productDetailsReducer,
+        categoryProducts:categoryProductsReducer
     }
 
 })

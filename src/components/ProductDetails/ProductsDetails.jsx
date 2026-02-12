@@ -143,10 +143,10 @@ const ProductsDetails = () => {
                     </button>
                     {showCharacteristics && (
                       <div className="pb-4 space-y-2 text-sm">
-                        <div className="flex justify-between">
+                       {productDetails.brand&& <div className="flex justify-between">
                           <span className="text-gray-600">Brand</span>
                           <span className="text-gray-900">{productDetails.brand}</span>
-                        </div>
+                        </div>}
                         <div className="flex justify-between">
                           <span className="text-gray-600">Stock</span>
                           <span className="text-gray-900">{productDetails.stock}</span>

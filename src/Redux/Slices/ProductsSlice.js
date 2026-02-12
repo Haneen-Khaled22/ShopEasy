@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export const getAllProducts = createAsyncThunk('productsSlice/getAllProducts',async()=>{
-    const {data} = await axios.get('https://dummyjson.com/products');
+    const {data} = await axios.get('https://dummyjson.com/products?limit=3000');
     return data.products;
 })
 

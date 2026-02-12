@@ -1,49 +1,34 @@
 import { useState } from "react";
 
-const FilterBar = () => {
-  const [filters, setFilters] = useState({
-    category: "",
-    color: "",
-    brand: "",
-    price: "",
-    sort: "",
-  });
-
-  const handleChange = (e) => {
-    setFilters({
-      ...filters,
-      [e.target.name]: e.target.value,
-    });
-  };
-
+const FilterBar = ({ filters, handleChange, brands, categories }) => {
   return (
-    <div className="bg-white p-4 rounded-md mt-8 max-w-2xl ">
+    <div className="p-4 rounded-md mt-8 max-w-4xl bg-gray-50 text-center ">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        
         <select
           name="category"
+          className="filter-select"
           value={filters.category}
           onChange={handleChange}
-          className="filter-select"
         >
           <option value="">Category</option>
-          <option value="furniture">Furniture</option>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
+          {categories.map((category, index) => (
+            <option
+            className="cursor-pointer"
+            key={index} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
 
-        
-
-        <select
-          name="brand"
-          value={filters.brand}
-          onChange={handleChange}
-          className="filter-select"
-        >
+        <select name="brand"
+        className="filter-select"
+        value={filters.brand} onChange={handleChange}>
           <option value="">Brand</option>
-          <option value="ikea">IKEA</option>
-          <option value="samsung">Samsung</option>
-          <option value="apple">Apple</option>
+          {brands.map((brand, index) => (
+            <option key={index} value={brand}>
+              {brand}
+            </option>
+          ))}
         </select>
 
         <select
@@ -65,9 +50,10 @@ const FilterBar = () => {
         >
           <option value="">Sort By</option>
           <option value="newest">Newest</option>
-          <option value="popular">Most Popular</option>
-        </select>
+          <option value="rating">Highest Rating</option>
 
+          <option value="discount">Biggest Discount</option>
+        </select>
       </div>
     </div>
   );

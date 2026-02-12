@@ -58,6 +58,16 @@ const Navbar = () => {
             Products
           </NavLink>
           <NavLink
+            to="/categories"
+            className={({ isActive }) =>
+              isActive
+                ? "text-red-900 underline text-md font-medium"
+                : "text-gray-800 hover:underline text-md font-medium"
+            }
+          >
+            Categories
+          </NavLink>
+          <NavLink
             to="/about"
             className={({ isActive }) =>
               isActive
@@ -213,6 +223,16 @@ const Navbar = () => {
           }
         >
           Products
+        </NavLink>
+         <NavLink
+          to="/categories"
+          className={({ isActive }) =>
+            isActive
+              ? "block px-3 py-2 text-red-900 underline font-medium"
+              : "block px-3 py-2 text-gray-800 hover:underline font-medium"
+          }
+        >
+          Categories
         </NavLink>
         <NavLink
           to="/about"

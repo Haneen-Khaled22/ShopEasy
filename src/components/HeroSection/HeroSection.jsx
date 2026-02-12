@@ -5,12 +5,14 @@ import img2 from "../../assets/slider2.png"
 import img3 from "../../assets/slider3.png"
 import top from "../../assets/rightttimg.png"
 import left from "../../assets/lefttimg.png"
+import { useNavigate } from 'react-router-dom'
 
 
 // كومبوننت الأرقام المتحركة
 const AnimatedCounter = ({ target, suffix = '', duration = 2000 }) => {
   const [count, setCount] = useState(0)
 
+ 
 
   
   useEffect(() => {
@@ -123,6 +125,7 @@ const HeroSection = () => {
   }
 
   const imageVariants = {
+    
     enter: {
       opacity: 0,
       scale: 1.1,
@@ -146,6 +149,7 @@ const HeroSection = () => {
       }
     }
   }
+   const navigate = useNavigate()
 
   return (
     <div className='flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12 lg:py-16 max-w-7xl mx-auto'>
@@ -205,6 +209,7 @@ const HeroSection = () => {
               boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)"
             }}
             whileTap={{ scale: 0.95 }}
+              onClick={()=>navigate(`/products`)}
           >
             Shop Now
             <motion.svg 
@@ -226,6 +231,8 @@ const HeroSection = () => {
               borderColor: "#666"
             }}
             whileTap={{ scale: 0.95 }}
+            // onClick={()=>navigate(`/category`)}
+
           >
             Trendy Collections
             <motion.svg 

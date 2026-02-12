@@ -16,6 +16,63 @@
   animation: fadeInUp 0.7s ease forwards;
 }
 .filter-select {
-  @apply w-full border border-gray-300 rounded-md px-3 py-2 text-sm 
-  focus:outline-none focus:ring-1 focus:ring-black bg-white cursor-pointer;
+  @apply w-full border border-gray-200 rounded-xl px-2 py-2 text-sm 
+  focus:outline-none  focus:ring-1 bg-white cursor-pointer;
 }
+
+.gallery-wrapper {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.circle {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  transition: transform 0.1s linear;
+}
+
+.item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  text-align: center;
+}
+
+.item img {
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.item span {
+  display: block;
+  margin-top: 8px;
+  color: white;
+  font-size: 14px;
+}
+
+
+.circular-gallery:active {
+  cursor: grabbing;
+}
+
+@keyframes autoScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-auto {
+  animation: autoScroll 25s linear infinite;
+}
+

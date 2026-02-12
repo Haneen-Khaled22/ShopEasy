@@ -14,7 +14,7 @@ const Home = () => {
    }
 
       const navigateToAllCategories =()=>{
-    navigate('/category')
+    navigate('/categories')
    }
     
 
