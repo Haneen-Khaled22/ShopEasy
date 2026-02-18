@@ -42,7 +42,7 @@ const Home = () => {
         </div>
         
         
-    <Products limit={8} showFilter={false} showBread={false}/>
+    <Products limit={8} showFilter={false} showBread={false} showPagination={false} showHeroSrip={false} showBottomBanner={false} showNumberOfProducts={false}/>
   
    </div>
   );

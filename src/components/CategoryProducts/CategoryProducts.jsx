@@ -63,7 +63,7 @@ const CategoryProducts = () => {
         {isInCart ? (
           <FiCheck className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
         ) : (
-          <FiPlus className="text-white bg-red-900 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
+          <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
         )}
       </div>
       
@@ -79,7 +79,7 @@ const CategoryProducts = () => {
                     {product.availabilityStatus} 
                   </p>
       
-                  <h2 className="text-xl text-red-900 mt-2 font-normal">
+                  <h2 className="text-xl text-[#776a5d] mt-2 font-semibold">
                     ${product.price}
                   </h2>
                 </div>

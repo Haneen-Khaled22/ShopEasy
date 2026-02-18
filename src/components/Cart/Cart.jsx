@@ -1,121 +1,136 @@
-import React, { useEffect, useState } from "react";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, deleteFromCart } from "../../Redux/Slices/CartSlice";
 import { FiMinusCircle } from "react-icons/fi";
 import Breadcrumbs from "../BreadCrumb/BreadCrumb";
-import FilterBar from "../FilterBar/FilterBar";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [productToDelete, setProductToDelete] = useState(null);
   const [productsToClear, setProductsToClear] = useState(null);
 
-
-  // حساب الإجمالي
   const total = cart.reduce((sum, product) => {
-  const discountedPrice =
-    product.price - (product.price * product.discountPercentage) / 100;
-
-  return sum + discountedPrice;
-}, 0);
+    const discountedPrice =
+      product.price - (product.price * product.discountPercentage) / 100;
+    return sum + discountedPrice;
+  }, 0);
 
   return (
     <div className="min-h-screen ">
-      <div className="max-w-7xl mx-auto px-4 ">
+      <div className="max-w-7xl mx-auto px-4">
         <Breadcrumbs />
 
-        {/* Header with Filter and Clear Button */}
-        {cart.length >0 ? (
+        {/* Header */}
+        {cart.length > 0 ? (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between  bg-white rounded-2xl "
+            className="flex items-center justify-between mb-2"
           >
-            {/* <FilterBar /> */}
+            <div>
+              <h1
+                className="text-3xl font-light text-[#1a1410]"
+                style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+              >
+                My <span className="italic text-[#5c3d1e]">Cart</span>
+              </h1>
+              <p className="text-sm text-[#776a5d] mt-1">{cart.length} item{cart.length !== 1 ? "s" : ""}</p>
+            </div>
             <button
               onClick={setProductsToClear}
-              className="bg-gradient-to-r from-red-950 to-red-800 px-6 py-2 text-white rounded-full cursor-pointer hover:scale-105 transition-all duration-300 font-medium"
+              className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-light border transition-all duration-300"
+              style={{
+                border: "1px solid #c8b49a",
+                color: "#5c3d1e",
+                background: "transparent",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#5c3d1e";
+                e.currentTarget.style.color = "#fffcf7";
+                e.currentTarget.style.borderColor = "#5c3d1e";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#5c3d1e";
+                e.currentTarget.style.borderColor = "#c8b49a";
+              }}
             >
-              Clear All
+              ✕ Clear All
             </button>
           </motion.div>
         ) : null}
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
+
           {/* Products Grid */}
           <div className="flex-1">
             {cart.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-5">
                 {cart.map((product, index) => (
                   <motion.div
                     key={product.id}
-                     onClick={()=>navigate(`/product/${product.id}`)}
+                    onClick={() => navigate(`/product/${product.id}`)}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="cursor-pointer bg-white rounded-2xl p-4  transition-all duration-300 group"
+                    className="cursor-pointer bg-white rounded-2xl p-4 transition-all duration-300 group "
+                    // style={{ boxShadow: "0 1px 3px rgba(100,70,40,0.06)" }}
                   >
-                    {/* Product Image */}
+                    {/* Image */}
                     <div className="relative overflow-hidden rounded-xl mb-4">
                       <img
                         src={product.images?.[0]}
                         alt={product.title}
-                        className="w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
+                        className="border border-gray-50 border-2 w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
                       />
 
                       {/* Delete Icon */}
                       <motion.div
-                       onClick={(e) => {
-                          e.stopPropagation();  
-                          setProductToDelete(product.id)
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setProductToDelete(product.id);
                         }}
-                      
-                        // whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="absolute -top-0 -right-0 cursor-pointer"
+                        className="absolute top-0 right-0 cursor-pointer"
                       >
-                        <FiMinusCircle className="text-white bg-red-800 hover:bg-red-600 p-1 text-3xl rounded-full " />
+                        <FiMinusCircle
+                          className="p-1 text-3xl rounded-full transition-colors duration-200"
+                          style={{ color: "white", background: "#5c3d1e" }}
+                          onMouseEnter={(e) => e.currentTarget.style.background = "#3d2b1a"}
+                          onMouseLeave={(e) => e.currentTarget.style.background = "#5c3d1e"}
+                        />
                       </motion.div>
 
                       {/* Stock Badge */}
-                      <div className="absolute bottom-0 left-0 px-3  bg-white/30 rounded-2xl  py-1  text-xs font-medium text-gray-600">
+                      <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
                         {product.availabilityStatus} • {product.stock} left
                       </div>
                     </div>
 
                     {/* Rating */}
                     <div className="flex items-center gap-1 mb-2">
-                      {Array(Math.round(product.rating))
-                        .fill()
-                        .map((_, i) => (
-                          <span key={i} className="text-amber-400">
-                            ⭐
-                          </span>
-                        ))}
-                      <span className="text-sm text-gray-500 ml-1">
-                        ({product.rating})
-                      </span>
+                      {Array(Math.round(product.rating)).fill().map((_, i) => (
+                        <span key={i} className="text-amber-400">⭐</span>
+                      ))}
+                      <span className="text-sm text-gray-500 ml-1">({product.rating})</span>
                     </div>
 
-                    {/* Product Title */}
+                    {/* Title */}
                     <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
                       {product.title}
                     </h2>
 
                     {/* Price */}
                     <div className="flex items-center justify-between mt-auto">
-                      <span className="text-2xl font-semibold text-red-900">
+                      <span className="text-2xl font-semibold" style={{ color: "#5c3d1e" }}>
                         ${product.price}
                       </span>
-                      <span className="text-sm text-gray-700">
+                      <span className="text-sm text-[#776a5d]">
                         {product.discountPercentage}% off
                       </span>
                     </div>
@@ -126,15 +141,28 @@ const Cart = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-2xl p-12 text-center "
+                className="bg-white rounded-3xl p-16 text-center mt-8"
+                style={{ boxShadow: "0 2px 20px rgba(100,70,40,0.07)" }}
               >
-                <div className="text-6xl mb-4">🛒</div>
-                <p className="text-2xl text-gray-600 font-light mb-2">
-                  Your cart is empty
+                <div className="text-6xl mb-5">🛍️</div>
+                <p
+                  className="text-2xl font-light mb-2"
+                  style={{ color: "#3d2b1a", fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                >
+                  Your cart is <span className="italic">empty</span>
                 </p>
-                <p className="text-gray-500">
+                <p className="text-sm mb-8" style={{ color: "#776a5d" }}>
                   Start shopping and add items to your cart!
                 </p>
+                <button
+                  onClick={() => navigate("/products")}
+                  className="px-8 py-3 rounded-full text-sm font-light transition-all duration-300"
+                  style={{ background: "#5c3d1e", color: "#fffcf7" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#3d2b1a"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#5c3d1e"}
+                >
+                  Browse Products
+                </button>
               </motion.div>
             )}
           </div>
@@ -147,47 +175,64 @@ const Cart = () => {
               transition={{ duration: 0.6 }}
               className="lg:w-96 w-full"
             >
-              <div className="bg-gradient-to-br from-white/30 to-white rounded-2xl p-6 sticky top-6">
-                <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-                  Order Summary
-                </h3>
+              <div
+                className="rounded-3xl p-6 sticky top-6"
+                style={{
+                  background: "#fff",
+                  border: "1px solid #e8dfd0",
+                  boxShadow: "0 4px 24px rgba(100,70,40,0.08)",
+                }}
+              >
+                {/* Sidebar Header */}
+                <div className="flex items-center gap-3 mb-6 pb-5" style={{ borderBottom: "1px solid #ede4d3" }}>
+                  <div className="w-1 h-6 rounded-full" style={{ background: "#8a5c2e" }} />
+                  <h3
+                    className="text-xl font-light text-[#1a1410]"
+                    style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                  >
+                    Order Summary
+                  </h3>
+                </div>
 
-                {/* Cart Items Count */}
-                <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
-                  <span className="text-gray-600">Items in cart</span>
-                  <span className="font-semibold text-gray-800">
+                {/* Items Count */}
+                <div className="flex justify-between items-center mb-4 pb-4" style={{ borderBottom: "1px solid #f0e8da" }}>
+                  <span className="text-sm font-light text-[#776a5d]">Items in cart</span>
+                  <span
+                    className="text-sm font-medium px-3 py-0.5 rounded-full"
+                    style={{ background: "#f0e4d0", color: "#5c3d1e" }}
+                  >
                     {cart.length}
                   </span>
                 </div>
 
                 {/* Subtotal */}
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-semibold text-gray-800">
-                    ${total.toFixed(2)}
-                  </span>
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-light text-[#776a5d]">Subtotal</span>
+                  <span className="text-sm font-medium text-[#3d2b1a]">${total.toFixed(2)}</span>
                 </div>
 
                 {/* Shipping */}
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="font-semibold text-green-600">Free</span>
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-light text-[#776a5d]">Shipping</span>
+                  <span className="text-sm font-medium text-green-600">Free</span>
                 </div>
 
                 {/* Tax */}
-                <div className="flex justify-between items-center mb-6 pb-6 border-b border-gray-200">
-                  <span className="text-gray-600">Tax (10%)</span>
-                  <span className="font-semibold text-gray-800">
-                    ${(total * 0.1).toFixed(2)}
-                  </span>
+                <div
+                  className="flex justify-between items-center mb-5 pb-5"
+                  style={{ borderBottom: "1px solid #f0e8da" }}
+                >
+                  <span className="text-sm font-light text-[#776a5d]">Tax (10%)</span>
+                  <span className="text-sm font-medium text-[#3d2b1a]">${(total * 0.1).toFixed(2)}</span>
                 </div>
 
                 {/* Total */}
                 <div className="flex justify-between items-center mb-6">
-                  <span className="text-xl font-semibold text-gray-800">
-                    Total
-                  </span>
-                  <span className="text-2xl font-semibold text-red-900">
+                  <span className="text-base font-medium text-[#1a1410]">Total</span>
+                  <span
+                    className="text-2xl font-light"
+                    style={{ color: "#5c3d1e", fontFamily: "'Palatino Linotype', Palatino, serif" }}
+                  >
                     ${(total * 1.1).toFixed(2)}
                   </span>
                 </div>
@@ -196,105 +241,121 @@ const Cart = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={()=>navigate('/checkout')}
-                  className="w-full cursor-pointer bg-gradient-to-r from-red-950 to-red-800 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  onClick={() => navigate("/checkout")}
+                  className="w-full cursor-pointer py-4 rounded-xl font-light text-base tracking-wide transition-all duration-300"
+                  style={{ background: "#3d2b1a", color: "#fffcf7" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#5c3d1e"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#3d2b1a"}
                 >
-                  Proceed to Checkout
+                  Proceed to Checkout →
                 </motion.button>
 
                 {/* Continue Shopping */}
                 <button
-                onClick={()=>navigate(`/products`)}
-                className=" cursor-pointer w-full mt-3 border-2 border-red-900 text-red-900 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300">
+                  onClick={() => navigate("/products")}
+                  className="w-full mt-3 py-3 rounded-xl font-light text-sm transition-all duration-300"
+                  style={{ border: "1px solid #c8b49a", color: "#5c3d1e", background: "transparent" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#f5ede0"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                >
                   Continue Shopping
                 </button>
 
                 {/* Trust Badges */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
-                      <span>Secure Payment</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
-                      <span>Free Returns</span>
-                    </div>
-                  </div>
+                <div className="mt-5 pt-5 flex items-center justify-center gap-5" style={{ borderTop: "1px solid #f0e8da" }}>
+                  {["🔒 Secure Payment", "🔄 Free Returns"].map((badge) => (
+                    <span key={badge} className="text-xs font-light" style={{ color: "#9a8878" }}>{badge}</span>
+                  ))}
                 </div>
               </div>
             </motion.div>
           )}
         </div>
+
+        {/* ── Delete Modal ── */}
         {productToDelete && (
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-2xl shadow-xl w-80 text-center">
-      <h3 className="text-lg font-semibold mb-4">
-       Remove this product from cart ?
-      </h3>
-
-      <div className="flex justify-center gap-4">
-        <motion.button
-        onClick={() => setProductToDelete(null)}
-          className="px-4 py-2 border font-normal rounded-full cursor-pointer hover:bg-gray-100 transition-all duration-300"
-        >
-        Cancel
-
-        </motion.button>
-        
-
-<motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-               
-                  onClick={() => {
-            dispatch(deleteFromCart(productToDelete));
-            setProductToDelete(null);
-          }}
-                  className="px-4 py-2 cursor-pointer bg-gradient-to-r from-red-950 to-red-800 text-white  rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
+              style={{ border: "1px solid #e8dfd0" }}
+            >
+              <div className="text-4xl mb-3">🗑️</div>
+              <h3
+                className="text-lg font-light mb-2 text-[#1a1410]"
+                style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+              >
+                Remove this product?
+              </h3>
+              <p className="text-xs text-[#776a5d] mb-6">This item will be removed from your cart.</p>
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => setProductToDelete(null)}
+                  className="px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
+                  style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#f5ede0"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
                 >
-                  Delete
-                </motion.button>
-       
-      </div>
-    </div>
-  </div>
-)}
-
-  {productsToClear && (
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-2xl shadow-xl w-80 text-center">
-      <h3 className="text-lg font-semibold mb-4">
-       Clear all products in cart ?
-      </h3>
-
-      <div className="flex justify-center gap-4">
-        <motion.button
-        onClick={() => setProductsToClear(null)}
-          className="px-4 py-2 border font-normal rounded-full cursor-pointer hover:bg-gray-100 transition-all duration-300"
-        >
-        Cancel
-
-        </motion.button>
-        
-
-<motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-               
-                  onClick={() => {
-            dispatch(clearCart(productsToClear));
-            setProductsToClear(null);
-          }}
-                  className="px-4 py-2 cursor-pointer bg-gradient-to-r from-red-950 to-red-800 text-white  rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  Cancel
+                </button>
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => { dispatch(deleteFromCart(productToDelete)); setProductToDelete(null); }}
+                  className="px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
+                  style={{ background: "#5c3d1e" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#3d2b1a"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#5c3d1e"}
                 >
-                  Clear
+                  Remove
                 </motion.button>
-       
-      </div>
-    </div>
-  </div>
-)}
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* ── Clear All Modal ── */}
+        {productsToClear && (
+          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
+              style={{ border: "1px solid #e8dfd0" }}
+            >
+              <div className="text-4xl mb-3">🛒</div>
+              <h3
+                className="text-lg font-light mb-2 text-[#1a1410]"
+                style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
+              >
+                Clear entire cart?
+              </h3>
+              <p className="text-xs text-[#776a5d] mb-6">All {cart.length} items will be removed.</p>
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => setProductsToClear(null)}
+                  className="px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
+                  style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#f5ede0"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                >
+                  Cancel
+                </button>
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => { dispatch(clearCart()); setProductsToClear(null); }}
+                  className="px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
+                  style={{ background: "#5c3d1e" }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = "#3d2b1a"}
+                  onMouseLeave={(e) => e.currentTarget.style.background = "#5c3d1e"}
+                >
+                  Clear All
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
       </div>
     </div>
   );
