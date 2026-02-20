@@ -15,6 +15,7 @@ import CategorySections from './components/All Categories/CategorySections'
 import CategoryProducts from './components/CategoryProducts/CategoryProducts'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Checkout from './components/Checkout/Checkout'
+import { SnackbarProvider } from 'notistack'
 
 
 
@@ -45,14 +46,22 @@ function App() {
 
   return (
     <>
-   
-    <Provider store={store}>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
+    >
+         <Provider store={store}>
 
       
      <RouterProvider router={router}/>
       
      
       </Provider>
+    </SnackbarProvider>
+ 
     </>
   )
 }
