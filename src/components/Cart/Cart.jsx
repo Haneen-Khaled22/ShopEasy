@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, decreaseQuantity, deleteFromCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
 import { FiMinus, FiMinusCircle, FiPlus } from "react-icons/fi";
@@ -13,6 +13,16 @@ const Cart = () => {
   const navigate = useNavigate();
   const [productToDelete, setProductToDelete] = useState(null);
   const [productsToClear, setProductsToClear] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsPageLoading(false);
+  }, 800);
+
+  return () => clearTimeout(timer);
+}, []);
+
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -21,8 +31,16 @@ const Cart = () => {
     product.price - (product.price * product.discountPercentage) / 100;
   return sum + discountedPrice * product.quantity; // ضرب في الكمية
 }, 0);
+if (isPageLoading) {
+  return (
+    <div className="flex justify-center items-center py-24 min-h-screen">
+      <span className="loader"></span>
+    </div>
+  );
+}
 
   return (
+    
     <div className="min-h-screen ">
       <div className="max-w-7xl mx-auto px-4">
         <Breadcrumbs />
@@ -409,29 +427,32 @@ const Cart = () => {
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={() => {
-                    const deletedProduct = cart.find(
-                      (p) => p.id === productToDelete,
-                    );
+  setLoading(true);
 
-                    dispatch(deleteFromCart(productToDelete));
-                    setProductToDelete(null);
-                    enqueueSnackbar(
-                      `${deletedProduct.title} deleted from Cart`,
-                      {
-                        variant: "default",
-                        sx: {
-                          backgroundColor: "#776a5d", // لون الخلفية
-                          color: "#fff", // لون النص
-                          fontWeight: "bold",
-                        },
-                        anchorOrigin: {
-                          vertical: "top",
-                          horizontal: "left",
-                        },
-                        autoHideDuration: 2500,
-                      },
-                    );
-                  }}
+  setTimeout(() => {
+    const deletedProduct = cart.find(
+      (p) => p.id === productToDelete,
+    );
+
+    dispatch(deleteFromCart(productToDelete));
+    setProductToDelete(null);
+    setLoading(false);
+
+    enqueueSnackbar(
+      `${deletedProduct.title} deleted from Cart`,
+      { variant: "default", sx: {
+                                backgroundColor: "#776a5d", // لون الخلفية
+                                color: "#fff", // لون النص
+                                fontWeight: "bold",
+                              },
+                              anchorOrigin: {
+                                vertical: "top",
+                                horizontal: "left",
+                              },
+                              autoHideDuration: 2500, },
+    );
+  }, 500);
+}}
                   className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
                   style={{ background: "#5c3d1e" }}
                   onMouseEnter={(e) =>
@@ -441,7 +462,7 @@ const Cart = () => {
                     (e.currentTarget.style.background = "#5c3d1e")
                   }
                 >
-                  Remove
+                  {loading ? "loading.." : "Remove"}
                 </motion.button>
               </div>
             </motion.div>
@@ -483,23 +504,30 @@ const Cart = () => {
                 </button>
                 <motion.button
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => {
-                    dispatch(clearCart());
-                    (setProductsToClear(null),
-                      enqueueSnackbar(`Cart has been cleared`, {
-                        variant: "default",
-                        sx: {
-                          backgroundColor: "#776a5d", // لون الخلفية
-                          color: "#fff", // لون النص
-                          fontWeight: "bold",
-                        },
-                        anchorOrigin: {
-                          vertical: "top",
-                          horizontal: "left",
-                        },
-                        autoHideDuration: 2500,
-                      }));
-                  }}
+                 onClick={() => {
+  setLoading(true);
+
+  setTimeout(() => {
+    dispatch(clearCart());
+    setProductsToClear(null);
+    setLoading(false);
+
+    enqueueSnackbar("Cart has been cleared", {
+      variant: "default",
+      sx: {
+                                backgroundColor: "#776a5d", // لون الخلفية
+                                color: "#fff", // لون النص
+                                fontWeight: "bold",
+                              },
+                              anchorOrigin: {
+                                vertical: "top",
+                                horizontal: "left",
+                              },
+                              autoHideDuration: 2500,
+    })
+    ;
+  }, 600);
+}}
                   className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
                   style={{ background: "#5c3d1e" }}
                   onMouseEnter={(e) =>
@@ -509,7 +537,7 @@ const Cart = () => {
                     (e.currentTarget.style.background = "#5c3d1e")
                   }
                 >
-                  Clear All
+                 {loading ? "loading" : "Clear All"}
                 </motion.button>
               </div>
             </motion.div>

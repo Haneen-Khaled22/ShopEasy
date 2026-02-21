@@ -35,14 +35,7 @@ const Categories = () => {
       }
     }, [error]);
   
-  
-
-//   const categoryLayout = [
-//   { img: beauty, col: "md:col-span-2 md:row-span-2 h-[500px] md:h-full min-h-[500px]" },
-//   { img: fragrances, col: "h-[400px] md:h-[245px] lg:h-auto" },
-//   { img: furniture, col: "h-[400px] md:h-[245px] lg:h-auto" },
-//   { img: groceries, col: "md:col-span-2 h-[400px] md:h-[245px] lg:h-auto" },
-// ];
+ 
 
 const categoryImages = [beauty, fragrances, furniture, groceries];
 

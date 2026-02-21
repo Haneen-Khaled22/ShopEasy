@@ -35,12 +35,12 @@ const ProductsDetails = () => {
     }
   }, [product]);
 
-  // if(loading){
-  //   return(
-  //     <div>loafinfgfg</div>
-  //   )
-  // }
-
+    useEffect(() => {
+        if (error) {
+          enqueueSnackbar(error, { variant: "error" });
+        }
+      }, [error]);
+    
   return (
     <div className="min-h-screen bg-white max-w-7xl mx-auto">
       <Breadcrumbs
@@ -48,6 +48,12 @@ const ProductsDetails = () => {
           [id]: product?.title,
         }}
       />
+       {loading && (
+       
+       <div className="flex justify-center items-center py-24 min-h-screen">
+          <span className="loader"></span>
+        </div>
+      )}
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image Gallery Section */}
