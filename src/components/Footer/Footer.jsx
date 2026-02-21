@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-200 mt-12 pt-10 pb-6">
+    <footer className="bg-[#3d2b1a] text-gray-200 mt-12 pt-10 pb-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
 
         {/* 🏢 About */}
@@ -30,9 +30,9 @@ const Footer = () => {
         {/* 📞 Contact */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-          <p className="text-gray-400 text-sm mb-2">123 Fashion Street, New York, NY</p>
-          <p className="text-gray-400 text-sm mb-2">Email: support@shopeasy.com</p>
-          <p className="text-gray-400 text-sm mb-2">Phone: +1 234 567 890</p>
+          <p className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white">123 Fashion Street, New York, NY</p>
+          <p className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white">Email: support@shopeasy.com</p>
+          <p className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white">Phone: +1 234 567 890</p>
         </div>
 
         {/* 🌐 Social Media */}

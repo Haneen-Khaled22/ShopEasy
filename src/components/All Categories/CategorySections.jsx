@@ -50,7 +50,7 @@ const features = [
 ];
 
 const CategorySections = () => {
-  const categories = useSelector((state) => state.category);
+  const {data,loading,error} = useSelector((state) => state.category);
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
@@ -104,9 +104,19 @@ const CategorySections = () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }, 50);
   };
-
+ useEffect(() => {
+    if (error) {
+      enqueueSnackbar(error, { variant: "error" });
+    }
+  }, [error]);
   return (
     <div className=" min-h-screen">
+        {loading && (
+       
+       <div className="flex justify-center items-center py-24 min-h-screen">
+          <span className="loader"></span>
+        </div>
+      )}
 
       {/* ══ HERO ══ */}
       <div className="relative w-full h-[680px] overflow-hidden">
@@ -220,6 +230,7 @@ const CategorySections = () => {
       </div>
 
       {/* ══ SHOP BY CATEGORY ══ */}
+       
       <div className="max-w-7xl mx-auto mt-20 px-4">
         {/* Section heading */}
         <div className="flex items-end justify-between mb-10">
@@ -236,7 +247,7 @@ const CategorySections = () => {
             </h2>
           </div>
           <p className="hidden md:block text-sm text-gray-400 font-light">
-            {categories.length} categories available
+            {data?.length} categories available
           </p>
         </div>
 
@@ -257,7 +268,7 @@ const CategorySections = () => {
             cursor: isDragging ? "grabbing" : "grab",
           }}
         >
-          {[...categories, ...categories].map((cat, index) => (
+          {[...data, ...data].map((cat, index) => (
             <motion.div
               key={index}
               onClick={() => handleCategoryClick(cat)}
@@ -335,6 +346,7 @@ const CategorySections = () => {
       </AnimatePresence>
 
       {/* ══ PRODUCTS SECTION ══ */}
+      
       <div id="category-products" className="mt-10">
         {selectedCategory ? (
           <CategoryProducts slug={selectedCategory} />
@@ -345,6 +357,7 @@ const CategorySections = () => {
             >
              <span> Featured Products</span>
             </h3>
+            
           <Products limit={3} showFilter={false} showBread={false} showPagination={false} showBottomBanner={false} showNumberOfProducts={false} showHeroSrip={false}/>
         </div>
          

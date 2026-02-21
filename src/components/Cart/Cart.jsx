@@ -90,7 +90,7 @@ const Cart = () => {
                       <img
                         src={product.images?.[0]}
                         alt={product.title}
-                        className="border border-gray-50 border-2 w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
+                        className=" w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
                       />
 
                       {/* Delete Icon */}
@@ -135,7 +135,7 @@ const Cart = () => {
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-lg font-semibold text-gray-800  line-clamp-2 h-10">
+                    <h2 className="text-lg font-semibold text-gray-800  line-clamp-2 h-15">
                       {product.title}
                     </h2>
                     {/* quantity */}

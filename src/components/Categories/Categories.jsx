@@ -8,22 +8,34 @@ import groceries from "../../assets/groceries.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../../Redux/Slices/CategoriesSlice";
+import { useSnackbar } from "notistack";
+
 
 
 const Categories = () => {
   const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
+    
+  
 
   const navigateToAllProducts = () => {
     navigate("/products");
   };
 
-  const categories = useSelector((state)=>state.category);
-  console.log(categories)
+  const {data,loading,error} = useSelector((state)=>state.category);
+  console.log(data)
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(getAllCategories())
-  },[])
+  },[]);
+   useEffect(() => {
+      if (error) {
+        enqueueSnackbar(error, { variant: "error" });
+      }
+    }, [error]);
+  
+  
 
 //   const categoryLayout = [
 //   { img: beauty, col: "md:col-span-2 md:row-span-2 h-[500px] md:h-full min-h-[500px]" },
@@ -36,9 +48,16 @@ const categoryImages = [beauty, fragrances, furniture, groceries];
 
 
 
+
   return (
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
-  {categories.slice(0, 4).map((category, index) => (
+      {loading && (
+       
+       <div className="flex justify-center items-center py-24 min-h-screen">
+          <span className="loader"></span>
+        </div>
+      )}
+  {data?.slice(0, 4).map((category, index) => (
   <div
   onClick={()=>navigate(`/category/${category.slug}`)}
     key={category.slug}

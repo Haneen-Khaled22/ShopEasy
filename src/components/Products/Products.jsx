@@ -3,8 +3,12 @@ import Breadcrumb from "../BreadCrumb/BreadCrumb";
 import FilterBar from "../FilterBar/FilterBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../Redux/Slices/ProductsSlice";
-import { FiCheck, FiPlus } from "react-icons/fi";
-import { addToCart } from "../../Redux/Slices/CartSlice";
+import { FiCheck, FiMinus, FiPlus } from "react-icons/fi";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../Redux/Slices/CartSlice";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnackbar } from "notistack";
@@ -41,23 +45,15 @@ const Products = ({
 
   useEffect(() => {
     dispatch(getAllProducts());
-    
   }, []);
 
   useEffect(() => {
-  if (error) {
-    enqueueSnackbar(error, { variant: "error" });
-  }
-}, [error]);
+    if (error) {
+      enqueueSnackbar(error, { variant: "error" });
+    }
+  }, [error]);
 
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       <span className="loader"></span>
-  //     </div>
-  //   );
-  // }
-
+ 
   let filteredProducts = [...data];
   if (filters.category)
     filteredProducts = filteredProducts.filter(
@@ -113,10 +109,11 @@ const Products = ({
   return (
     <div className=" min-h-screen">
        {loading && (
-      <div className="flex justify-center items-center py-24">
-        <span className="loader"></span>
-      </div>
-    )}
+       
+       <div className="flex justify-center items-center py-24 min-h-screen">
+          <span className="loader"></span>
+        </div>
+      )}
       {/* ══ PAGE HEADER ══ */}
       {showBread && (
         <div className="bg-white border-b border-[#ede8e0]">
@@ -243,224 +240,269 @@ const Products = ({
       )}
 
       {/* ══ PRODUCTS GRID ══ */}
-      { !loading &&<div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Result count */}
-        {showNumberOfProducts && (
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-sm text-gray-500">
-              Showing{" "}
-              <span className="text-[#1a1a1a] font-medium">
-                {startIndex + 1}–
-                {Math.min(
-                  startIndex + productsPerPage,
-                  filteredProducts.length,
-                )}
-              </span>{" "}
-              of{" "}
-              <span className="text-[#1a1a1a] font-medium">
-                {filteredProducts.length}
-              </span>{" "}
-              results
-            </p>
-            {hasActiveFilters && (
-              <div className="flex flex-wrap gap-2">
-                {Object.entries(filters)
-                  .filter(([, v]) => v)
-                  .map(([k, v]) => (
-                    <span
-                      key={k}
-                      className="text-[11px] bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full capitalize"
-                    >
-                      {k}: {v}
-                    </span>
-                  ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Grid */}
-        <AnimatePresence mode="wait">
-          {displayedProducts.length === 0 ? (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-24"
-            >
-              <p className="text-5xl mb-4">◎</p>
-              <p
-                className="text-xl font-light text-gray-400"
-                style={{ fontFamily: "'Georgia', serif" }}
-              >
-                No products found
+    
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          {/* Result count */}
+          {showNumberOfProducts && (
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm text-gray-500">
+                Showing{" "}
+                <span className="text-[#1a1a1a] font-medium">
+                  {startIndex + 1}–
+                  {Math.min(
+                    startIndex + productsPerPage,
+                    filteredProducts.length,
+                  )}
+                </span>{" "}
+                of{" "}
+                <span className="text-[#1a1a1a] font-medium">
+                  {filteredProducts.length}
+                </span>{" "}
+                results
               </p>
-              <p className="text-sm text-gray-400 mt-2">
-                Try adjusting your filters
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={currentPage + JSON.stringify(filters)}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12"
-            >
-              {displayedProducts.map((product, index) => {
-                const isInCart = cart.some((item) => item.id === product.id);
-                return (
-                  <motion.div
-                    key={product.id}
-                    onClick={() => navigate(`/product/${product.id}`)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: index * 0.05 }}
-                    className="cursor-pointer   p-4 transition-all duration-200 group  "
-                    // style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}
-                  >
-                    {/* Image */}
-                    <div className="relative overflow-hidden rounded-xl mb-4">
-                      <img
-                        src={product.images?.[0]}
-                        alt={product.title}
-                        className=" w-full rounded-2xl h-48 object-contain transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (!isInCart) dispatch(addToCart(product));
-                        }}
-                        className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
+              {hasActiveFilters && (
+                <div className="flex flex-wrap gap-2">
+                  {Object.entries(filters)
+                    .filter(([, v]) => v)
+                    .map(([k, v]) => (
+                      <span
+                        key={k}
+                        className="text-[11px] bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full capitalize"
                       >
-                        {isInCart ? (
-                          <FiCheck className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
-                        ) : (
-                          <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
-                        )}
-                      </div>
-                      <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
-                        {product.availabilityStatus} • {product.stock} left
-                      </div>
-                    </div>
-
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {Array(Math.round(product.rating))
-                        .fill()
-                        .map((_, i) => (
-                          <span key={i} className="text-amber-400">
-                            ⭐
-                          </span>
-                        ))}
-                      <span className="text-sm text-gray-500 ml-1">
-                        ({product.rating})
+                        {k}: {v}
                       </span>
-                    </div>
-
-                    {/* Title */}
-                    <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
-                      {product.title}
-                    </h2>
-
-                    {/* Price */}
-                    <div className="flex items-center justify-between mt-auto">
-                      <span className="text-xl font-semibold text-[#776a5d]">
-                        ${product.price}
-                      </span>
-                      <span className="text-sm text-gray-600">
-                        {product.discountPercentage}% off
-                      </span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* ══ PAGINATION ══ */}
-        {showPagination && totalPages > 1 && (
-          <div className="mt-16 flex flex-col items-center gap-4">
-            {/* Progress bar */}
-            <div className="w-full max-w-xs h-px bg-[#ede8e0] rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#6b5744] rounded-full transition-all duration-500"
-                style={{ width: `${(currentPage / totalPages) * 100}%` }}
-              />
+                    ))}
+                </div>
+              )}
             </div>
-            <p className="text-xs text-gray-400 tracking-widest uppercase">
-              Page {currentPage} of {totalPages}
-            </p>
+          )}
 
-            {/* Page buttons */}
-            <div className="flex items-center gap-2">
-              {/* Prev */}
-              <button
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+          {/* Grid */}
+          <AnimatePresence mode="wait">
+            {displayedProducts.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-24"
               >
-                ‹
-              </button>
+                <p className="text-5xl mb-4">◎</p>
+                <p
+                  className="text-xl font-light text-gray-400"
+                  style={{ fontFamily: "'Georgia', serif" }}
+                >
+                  No products found
+                </p>
+                <p className="text-sm text-gray-400 mt-2">
+                  Try adjusting your filters
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={currentPage + JSON.stringify(filters)}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12"
+              >
+                {displayedProducts.map((product, index) => {
+                  const cartItem = cart.find((item) => item.id === product.id);
+                  const isInCart = !!cartItem;
+                  return (
+                    <motion.div
+                      key={product.id}
+                      onClick={() => navigate(`/product/${product.id}`)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: index * 0.05 }}
+                      className="cursor-pointer   p-4 transition-all duration-200 group  "
+                      // style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}
+                    >
+                      {/* Image */}
+                      <div className="relative overflow-hidden rounded-xl mb-4">
+                        <img
+                          src={product.images?.[0]}
+                          alt={product.title}
+                          className=" w-full rounded-2xl h-48 object-contain transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (!isInCart) dispatch(addToCart(product));
+                            enqueueSnackbar(`${product.title} added to Cart`, {
+                              variant: "default",
+                              sx: {
+                                backgroundColor: "#776a5d", // لون الخلفية
+                                color: "#fff", // لون النص
+                                fontWeight: "bold",
+                              },
+                              anchorOrigin: {
+                                vertical: "top",
+                                horizontal: "left",
+                              },
+                              autoHideDuration: 2500,
+                            });
+                          }}
+                          className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
+                        >
+                          {isInCart ? (
+                            <FiCheck className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
+                          ) : (
+                            <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
+                          )}
+                        </div>
+                        <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
+                          {product.availabilityStatus} • {product.stock} left
+                        </div>
+                      </div>
 
-              {getPagination().map((page, index) =>
-                page === "..." ? (
-                  <span
-                    key={index}
-                    className="w-8 text-center text-gray-400 text-sm"
-                  >
-                    ···
-                  </span>
-                ) : (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPage(page)}
-                    className={`w-10 h-10 rounded-full text-sm font-light transition-all duration-200
+                      {/* Rating */}
+                      <div className="flex items-center gap-1 mb-2">
+                        {Array(Math.round(product.rating))
+                          .fill()
+                          .map((_, i) => (
+                            <span key={i} className="text-amber-400">
+                              ⭐
+                            </span>
+                          ))}
+                        <span className="text-sm text-gray-500 ml-1">
+                          ({product.rating})
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
+                        {product.title}
+                      </h2>
+                      {/* quantity */}
+                      {isInCart && (
+                        <div className="mb-2">
+                          <button
+                            onClick={(e) => {
+                              (e.stopPropagation(),
+                                dispatch(decreaseQuantity(product.id)));
+                            }}
+                            // disabled={!cartItem || quantity <= 1}
+                            className="p-1 border border-gray-200 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <FiMinus />
+                          </button>
+
+                          <span className="px-2 font-normal">
+                            {cartItem?.quantity}
+                          </span>
+
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              dispatch(increaseQuantity(product.id));
+                            }}
+                            className="p-1 border border-gray-200 rounded hover:bg-gray-100"
+                          >
+                            <FiPlus />
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Price */}
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-xl font-semibold text-[#776a5d]">
+                          ${product.price}
+                        </span>
+                        <span className="text-sm text-gray-600">
+                          {product.discountPercentage}% off
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* ══ PAGINATION ══ */}
+          {showPagination && totalPages > 1 && (
+            <div className="mt-16 flex flex-col items-center gap-4">
+              {/* Progress bar */}
+              <div className="w-full max-w-xs h-px bg-[#ede8e0] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#6b5744] rounded-full transition-all duration-500"
+                  style={{ width: `${(currentPage / totalPages) * 100}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-400 tracking-widest uppercase">
+                Page {currentPage} of {totalPages}
+              </p>
+
+              {/* Page buttons */}
+              <div className="flex items-center gap-2">
+                {/* Prev */}
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+                >
+                  ‹
+                </button>
+
+                {getPagination().map((page, index) =>
+                  page === "..." ? (
+                    <span
+                      key={index}
+                      className="w-8 text-center text-gray-400 text-sm"
+                    >
+                      ···
+                    </span>
+                  ) : (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 rounded-full text-sm font-light transition-all duration-200
                       ${
                         currentPage === page
                           ? "bg-[#3d2b1f] text-white shadow-md shadow-[#3d2b1f]/30"
                           : "bg-white text-gray-600 border border-[#ede8e0] hover:border-[#6b5744] hover:text-[#6b5744]"
                       }`}
-                  >
-                    {page}
-                  </button>
-                ),
-              )}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
 
-              {/* Next */}
-              <button
-                onClick={() =>
-                  setCurrentPage((p) => Math.min(totalPages, p + 1))
-                }
-                disabled={currentPage === totalPages}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
-              >
-                ›
-              </button>
-            </div>
-
-            {/* Jump to page */}
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs text-gray-400">Go to page</span>
-              <input
-                type="number"
-                min={1}
-                max={totalPages}
-                defaultValue={currentPage}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    const val = parseInt(e.target.value);
-                    if (val >= 1 && val <= totalPages) setCurrentPage(val);
+                {/* Next */}
+                <button
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
-                }}
-                className="w-12 text-center text-sm border border-[#ede8e0] rounded-lg py-1 outline-none focus:border-[#6b5744] text-gray-600"
-              />
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+                >
+                  ›
+                </button>
+              </div>
+
+              {/* Jump to page */}
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-xs text-gray-400">Go to page</span>
+                <input
+                  type="number"
+                  min={1}
+                  max={totalPages}
+                  defaultValue={currentPage}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      const val = parseInt(e.target.value);
+                      if (val >= 1 && val <= totalPages) setCurrentPage(val);
+                    }
+                  }}
+                  className="w-12 text-center text-sm border border-[#ede8e0] rounded-lg py-1 outline-none focus:border-[#6b5744] text-gray-600"
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </div>}
+          )}
+        </div>
+   
 
       {/* ══ BOTTOM BANNER ══ */}
       {showBottomBanner && (

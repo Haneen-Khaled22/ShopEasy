@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+body {
+  font-family: 'Quicksand', sans-serif;
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("./assets/fonts/Quicksand-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -77,13 +91,14 @@
 }
 
 .loader {
-  width: 12px;
-  height: 12px;
+
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   display: block;
-  margin:15px auto;
+  margin:auto;
   position: relative;
-  color: #FFF;
+  color: #776a5d;
   box-sizing: border-box;
   animation: animloader 2s linear infinite;
 }
