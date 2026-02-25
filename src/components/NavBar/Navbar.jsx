@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import shopicon from "../../assets/shopeasy.png";
 import { useSelector } from "react-redux";
+import { FiHeart } from "react-icons/fi";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -18,6 +19,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const cart = useSelector((state) => state.cart);
+    const wishlist = useSelector((state) => state.wishList);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -175,6 +178,39 @@ const Navbar = () => {
                     className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] rounded-full flex items-center justify-center"
                   >
                     {cart.length}
+                  </span>
+                )}
+              </button>
+                {/* fav */}
+              <button
+                onClick={() => navigate("/wishlist")}
+                style={{
+                  background: "rgba(92,61,30,0.07)",
+                  border: "1px solid #d4c4b0",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(92,61,30,0.13)";
+                  e.currentTarget.style.borderColor = "#b89870";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(92,61,30,0.07)";
+                  e.currentTarget.style.borderColor = "#d4c4b0";
+                }}
+                className="cursor-pointer relative w-10 h-10 rounded-full flex items-center justify-center"
+              >
+                <FiHeart className="w-[18px] h-[18px]" style={{ color: "#5c3d1e" }} />
+                {wishlist.length > 0 && (
+                  <span
+                    style={{
+                      background: "#5c3d1e",
+                      color: "#fffcf7",
+                      fontSize: 10,
+                      fontWeight: 700,
+                    }}
+                    className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] rounded-full flex items-center justify-center"
+                  >
+                    {wishlist.length}
                   </span>
                 )}
               </button>

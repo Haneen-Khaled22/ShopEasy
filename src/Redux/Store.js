@@ -4,6 +4,7 @@ import CartReducer from "../Redux/Slices/CartSlice"
 import CategoryReducer from "../Redux/Slices/CategoriesSlice"
 import productDetailsReducer from "../Redux/Slices/ProductDetailsSlice";
 import  categoryProductsReducer  from "../Redux/Slices/CategoryProducts";
+import WishListReducer from "../Redux/Slices/WishListSlice"
 
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
         cart:CartReducer,
         category:CategoryReducer,
         productDetails:productDetailsReducer,
-        categoryProducts:categoryProductsReducer
+        categoryProducts:categoryProductsReducer,
+        wishList:WishListReducer
     }
 
 })

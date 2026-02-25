@@ -16,6 +16,7 @@ import CategoryProducts from './components/CategoryProducts/CategoryProducts'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Checkout from './components/Checkout/Checkout'
 import { SnackbarProvider } from 'notistack'
+import WishList from './components/WishList/WishList'
 
 
 
@@ -31,6 +32,7 @@ function App() {
          {path:'/contact',element:<Contact/>},
          {path:'/about',element:<About/>},
          {path:'/cart',element:<Cart/>},
+         {path:'/wishlist',element:<WishList/>},
         {path:'/category',element:<CategoriesComponent/>},
         {path:'/category/:slug',element:<CategoryProducts/>},
                 {path:'/categories',element:<CategorySections/>},

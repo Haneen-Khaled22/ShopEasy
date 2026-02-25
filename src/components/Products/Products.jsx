@@ -3,15 +3,18 @@ import Breadcrumb from "../BreadCrumb/BreadCrumb";
 import FilterBar from "../FilterBar/FilterBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../Redux/Slices/ProductsSlice";
-import { FiCheck, FiMinus, FiPlus } from "react-icons/fi";
+import { FiCheck, FiHeart, FiMinus, FiPlus } from "react-icons/fi";
 import {
   addToCart,
   decreaseQuantity,
+  deleteFromCart,
   increaseQuantity,
 } from "../../Redux/Slices/CartSlice";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnackbar } from "notistack";
+import { addToWishList, deleteFromWishList } from "../../Redux/Slices/WishListSlice";
+import { FaHeart } from "react-icons/fa";
 
 const Products = ({
   limit,
@@ -39,6 +42,8 @@ const Products = ({
 
   const { data, loading, error } = useSelector((state) => state.products);
   const cart = useSelector((state) => state.cart);
+    const wishlist = useSelector((state) => state.wishList);
+
   const dispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -309,6 +314,8 @@ const Products = ({
                 {displayedProducts.map((product, index) => {
                   const cartItem = cart.find((item) => item.id === product.id);
                   const isInCart = !!cartItem;
+                  const favItem = wishlist.find((item) => item.id === product.id)
+                  const isInFav = !!favItem;
                   return (
                     <motion.div
                       key={product.id}
@@ -347,7 +354,24 @@ const Products = ({
                           className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
                         >
                           {isInCart ? (
-                            <FiCheck className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
+                            <FiCheck
+                            onClick={()=>{
+                              dispatch(deleteFromCart(product.id)),
+                              enqueueSnackbar(`${product.title} deleted from Cart`, {
+                              variant: "default",
+                              sx: {
+                                backgroundColor: "#776a5d", // لون الخلفية
+                                color: "#fff", // لون النص
+                                fontWeight: "bold",
+                              },
+                              anchorOrigin: {
+                                vertical: "top",
+                                horizontal: "left",
+                              },
+                              autoHideDuration: 2500,
+                            });
+                            }}
+                            className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                           ) : (
                             <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                           )}
@@ -371,10 +395,42 @@ const Products = ({
                         </span>
                       </div>
 
-                      {/* Title */}
-                      <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
+                      {/* Title , fav*/}
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
                         {product.title}
                       </h2>
+                       {isInFav ? (
+  <FaHeart
+    onClick={(e) => {
+      e.stopPropagation();
+      dispatch(deleteFromWishList(product.id));
+      enqueueSnackbar(`${product.title} deleted from Wishlist`, {
+        variant: "default",
+      });
+    }}
+    className="cursor-pointer text-red-600 hover:text-red-700 
+               transition-all duration-200 
+               transform hover:scale-110 active:scale-95"
+  />
+) : (
+  <FiHeart
+    onClick={(e) => {
+      e.stopPropagation();
+      dispatch(addToWishList(product));
+      enqueueSnackbar(`${product.title} added to Wishlist`, {
+        variant: "default",
+      });
+    }}
+    className="cursor-pointer text-gray-400 
+               hover:text-red-500 
+               transition-all duration-200 
+               transform hover:scale-110 active:scale-95"
+  />
+)}
+                        
+                      </div>
+                      
                       {/* quantity */}
                       {isInCart && (
                         <div className="mb-2">

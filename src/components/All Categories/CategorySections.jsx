@@ -241,7 +241,6 @@ const CategorySections = () => {
             </div>
             <h2
               className="text-3xl md:text-4xl font-light text-[#1a1a1a]"
-              style={{ fontFamily: "'Georgia', serif" }}
             >
               Shop By <span className="italic text-[#6b5744]">Category</span>
             </h2>
@@ -353,7 +352,6 @@ const CategorySections = () => {
         ) : (<div className="max-w-7xl mx-auto px-4 mt-14">
              <h3
               className="text-3xl md:text-4xl font-light text-[#1a1a1a]"
-              style={{ fontFamily: "'Georgia', serif" }}
             >
              <span> Featured Products</span>
             </h3>
