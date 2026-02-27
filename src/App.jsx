@@ -17,6 +17,10 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Checkout from './components/Checkout/Checkout'
 import { SnackbarProvider } from 'notistack'
 import WishList from './components/WishList/WishList'
+import Login from './components/Login/Login'
+import Register from './components/Rejester/Rejester'
+import { ThemeProvider } from './Context/ThemeContext'
+
 
 
 
@@ -28,6 +32,8 @@ function App() {
       element:<Layout/>,
       children:[
         {index:true,element:<Home/>},
+         {path:'/login',element:<Login/>},
+          {path:'/register',element:<Register/>},
          {path:'/products',element:<Products/>}, 
          {path:'/contact',element:<Contact/>},
          {path:'/about',element:<About/>},
@@ -48,6 +54,7 @@ function App() {
 
   return (
     <>
+    <ThemeProvider>
     <SnackbarProvider
       maxSnack={3}
       anchorOrigin={{
@@ -63,7 +70,7 @@ function App() {
      
       </Provider>
     </SnackbarProvider>
- 
+ </ThemeProvider>
     </>
   )
 }

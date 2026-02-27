@@ -11,6 +11,7 @@ const navLinks = [
   { to: "/categories", label: "Categories" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
+ 
 ];
 
 const Navbar = () => {
@@ -127,6 +128,7 @@ const Navbar = () => {
 
               {/* Sign In */}
               <button
+              onClick={() => navigate('/login')}
                 style={{
                   border: "1px solid #c8b49a",
                   color: "#776a5d",
@@ -347,6 +349,7 @@ const Navbar = () => {
                   color: "#5c3d1e",
                   background: "transparent",
                 }}
+                onClick={() => navigate('/login')}
                 className="w-full py-3 rounded-full text-[12px] tracking-[0.15em] uppercase font-light"
               >
                 Sign In / Sign Up
