@@ -19,13 +19,10 @@ const Home = () => {
     
 
   return (
-   <div >
+   <div className='bg-white dark:bg-black dark:text-white min-h-screen'>
     <HeroSection/>
       <div className='flex items-center justify-between mb-4 max-w-7xl mx-auto mt-8'>
-          <div>
-           
-    
-          </div>
+          
           <button onClick={navigateToAllCategories} className='p-3 rounded-full border border-gray-500 flex items-center gap-2 hover:bg-gray-100 transition cursor-pointer'>See All Categories  <IoIosArrowForward className="text-sm" /></button>
     
         </div>

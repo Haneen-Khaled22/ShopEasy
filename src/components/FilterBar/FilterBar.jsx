@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const FilterBar = ({ filters, handleChange, brands, categories }) => {
   return (
-    <div className="p-4 rounded-md mt-8 max-w-4xl bg-gray-50 text-center ">
+    <div className="p-4 rounded-md mt-8 max-w-4xl bg-gray-50 dark:bg-black/20 dark:text-black text-center ">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <select
           name="category"

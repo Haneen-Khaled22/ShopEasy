@@ -9,7 +9,7 @@ const Breadcrumbs = ({ customLabels = {} }) => {
     .filter((x) => x);
 
   return (
-    <div className="flex items-center text-sm text-gray-500 gap-2 m-6">
+    <div className="flex items-center text-sm text-gray-500 dark:text-gray-300  gap-2 m-6">
       <Link to="/" className="hover:text-black">
         Home
       </Link>
@@ -28,7 +28,7 @@ const Breadcrumbs = ({ customLabels = {} }) => {
             <IoIosArrowForward className="text-xs" />
 
             {index === pathnames.length - 1 ? (
-              <span className="text-black font-medium">
+              <span className="text-black dark:text-white  font-medium dark:font-semibold">
                 {label}
               </span>
             ) : (

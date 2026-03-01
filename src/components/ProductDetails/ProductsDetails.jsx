@@ -42,7 +42,7 @@ const ProductsDetails = () => {
       }, [error]);
     
   return (
-    <div className="min-h-screen bg-white max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white dark:bg-black   max-w-7xl mx-auto">
       <Breadcrumbs
         customLabels={{
           [id]: product?.title,
@@ -89,20 +89,20 @@ const ProductsDetails = () => {
           <div className="space-y-6">
             {/* Header */}
             <div>
-              <p className="text-sm text-gray-500 uppercase tracking-wider mb-2">
+              <p className="text-sm text-gray-500 dark:text-gray-300  uppercase tracking-wider mb-2">
                 {product?.category}
               </p>
-              <h1 className="text-3xl sm:text-4xl font-light text-gray-900 mb-3">
+              <h1 className="text-3xl sm:text-4xl font-light text-gray-900 dark:text-gray-300  mb-3">
                 {product?.title}
               </h1>
 
-              <p className="text-2xl font-light text-gray-900">
+              <p className="text-2xl font-light text-gray-900 dark:text-gray-300 ">
                 ${product?.price}
               </p>
             </div>
 
             {/* Description Short */}
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300  leading-relaxed">
               {product?.description}
             </p>
 
@@ -161,12 +161,12 @@ const ProductsDetails = () => {
                   }
                   
                 }}
-                className="w-full bg-black text-white py-4 rounded hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider cursor-pointer"
+                className="w-full bg-black dark:bg-[#776a5d] text-white py-4 rounded hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider cursor-pointer"
               >
                 <FiShoppingBag className="w-4 h-4" />
                 Add to Bag
               </button>
-              <button className="cursor-pointer w-full border-2 border-black text-black py-4 rounded hover:bg-gray-50 transition-colors text-sm font-medium uppercase tracking-wider">
+              <button className="cursor-pointer w-full border-2 border-black dark:border-white text-black dark:text-white py-4 rounded hover:bg-gray-50 transition-colors text-sm font-medium uppercase tracking-wider">
                 Buy Now
               </button>
             </div>
@@ -179,34 +179,34 @@ const ProductsDetails = () => {
                   onClick={() => setShowCharacteristics(!showCharacteristics)}
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wider">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider">
                     Characteristics
                   </span>
                   {showCharacteristics ? (
-                    <FiChevronUp className="w-5 h-5 text-gray-500" />
+                    <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   ) : (
-                    <FiChevronDown className="w-5 h-5 text-gray-500" />
+                    <FiChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   )}
                 </button>
                 {showCharacteristics && (
                   <div className="pb-4 space-y-2 text-sm">
                     {product?.brand && (
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Brand</span>
-                        <span className="text-gray-900">
+                        <span className="text-gray-600 dark:text-gray-300 ">Brand</span>
+                        <span className="text-gray-900 dark:text-gray-300 ">
                           {product.brand}
                         </span>
                       </div>
                     )}
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Stock</span>
-                      <span className="text-gray-900">
+                      <span className="text-gray-600 dark:text-gray-300 ">Stock</span>
+                      <span className="text-gray-900 dark:text-gray-300 ">
                         {product?.stock}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Rating</span>
-                      <span className="text-gray-900">
+                      <span className="text-gray-600 dark:text-gray-300 ">Rating</span>
+                      <span className="text-gray-900 dark:text-gray-300 ">
                         {product?.rating}
                       </span>
                     </div>
@@ -218,19 +218,19 @@ const ProductsDetails = () => {
               <div>
                 <button
                   onClick={() => setShowDescription(!showDescription)}
-                  className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
+                  className="w-full py-4 flex items-center justify-between text-left cursor-pointer "
                 >
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wider ">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
                     DESCRIPTION
                   </span>
                   {showDescription ? (
-                    <FiChevronUp className="w-5 h-5 text-gray-500" />
+                    <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   ) : (
-                    <FiChevronDown className="w-5 h-5 text-gray-500" />
+                    <FiChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   )}
                 </button>
                 {showDescription && (
-                  <div className="pb-4 text-sm text-gray-600 leading-relaxed space-y-3">
+                  <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed space-y-3">
                     <p>{product?.description}</p>
                   </div>
                 )}
@@ -242,17 +242,17 @@ const ProductsDetails = () => {
                   onClick={() => setShowPayment(!showPayment)}
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wider ">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
                     Payment & Delivery
                   </span>
                   {showPayment ? (
-                    <FiChevronUp className="w-5 h-5 text-gray-500" />
+                    <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   ) : (
-                    <FiChevronDown className="w-5 h-5 text-gray-500" />
+                    <FiChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   )}
                 </button>
                 {showPayment && (
-                  <div className="pb-4 text-sm text-gray-600 leading-relaxed">
+                  <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed">
                     <p>
                       We accept all major credit cards and secure payment
                       methods. Free delivery on orders over $100.
@@ -267,17 +267,17 @@ const ProductsDetails = () => {
                   onClick={() => setShowReturns(!showReturns)}
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wider ">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
                     Returns
                   </span>
                   {showReturns ? (
-                    <FiChevronUp className="w-5 h-5 text-gray-500" />
+                    <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   ) : (
-                    <FiChevronDown className="w-5 h-5 text-gray-500" />
+                    <FiChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   )}
                 </button>
                 {showReturns && (
-                  <div className="pb-4 text-sm text-gray-600 leading-relaxed">
+                  <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed">
                     <p>
                       {product?.returnPolicy}. Items must be unused and in
                       original packaging.
@@ -291,23 +291,23 @@ const ProductsDetails = () => {
                   onClick={() => setShowReviews(!showReviews)}
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
-                  <span className="text-sm font-medium text-gray-900 uppercase tracking-wider ">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
                     Reviews
                   </span>
                   {showReviews ? (
-                    <FiChevronUp className="w-5 h-5 text-gray-500" />
+                    <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   ) : (
-                    <FiChevronDown className="w-5 h-5 text-gray-500" />
+                    <FiChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
                   )}
                 </button>
                 {showReviews && (
-                  <div className="pb-4 text-sm text-gray-600 leading-relaxed">
+                  <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed">
                     {product?.reviews?.map((review) => (
                       <div
                       key={review.rating}
-                      className="bg-gray-50 rounded-xl p-4 mb-4">
+                      className="bg-gray-50 dark:bg-gray-200 rounded-xl p-4 mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-gray-900  ">
                             {review?.reviewerName}
                           </p>
 
@@ -320,8 +320,8 @@ const ProductsDetails = () => {
                                   key={i}
                                   className={`text-lg ${
                                     i < Math.round(review?.rating)
-                                      ? "text-yellow-400"
-                                      : "text-gray-300"
+                                      ? "text-yellow-500 "
+                                      : "text-gray-300 dark:text-gray-400"
                                   }`}
                                 >
                                   ★

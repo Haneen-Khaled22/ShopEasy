@@ -112,7 +112,7 @@ const Products = ({
   const hasActiveFilters = Object.values(filters).some((v) => v !== "");
 
   return (
-    <div className=" min-h-screen">
+    <div >
        {loading && (
        
        <div className="flex justify-center items-center py-24 min-h-screen">
@@ -121,8 +121,8 @@ const Products = ({
       )}
       {/* ══ PAGE HEADER ══ */}
       {showBread && (
-        <div className="bg-white border-b border-[#ede8e0]">
-          <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="border-b border-[#ede8e0] dark:border-black">
+          <div className="max-w-7xl mx-auto px-4 ">
             <Breadcrumb />
           </div>
         </div>
@@ -222,7 +222,7 @@ const Products = ({
 
       {/* ══ FILTER BAR ══ */}
       {showFilter && (
-        <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-[#ede8e0] ">
+        <div className="sticky top-0 z-20 bg-white/90 dark:bg-black backdrop-blur-md border-b border-[#ede8e0] dark:border-black ">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
             <FilterBar
               filters={filters}
@@ -235,7 +235,7 @@ const Products = ({
                 onClick={() =>
                   setFilters({ category: "", brand: "", price: "", sort: "" })
                 }
-                className="text-xs text-[#6b5744] border border-[#c8b89e] hover:bg-[#6b5744] hover:text-white transition-all duration-300 px-4 py-2 rounded-full whitespace-nowrap ml-auto"
+                className=" cursor-pointer text-xs text-[#6b5744] dark:text-gray-300 border border-[#c8b89e] dark:border-gray-300 hover:bg-[#6b5744] hover:text-white transition-all duration-300 px-4 py-2 rounded-full whitespace-nowrap ml-auto"
               >
                 ✕ Clear Filters
               </button>
@@ -252,7 +252,7 @@ const Products = ({
             <div className="flex items-center justify-between mb-6">
               <p className="text-sm text-gray-500">
                 Showing{" "}
-                <span className="text-[#1a1a1a] font-medium">
+                <span className="text-[#1a1a1a] dark:text-gray-400 font-medium">
                   {startIndex + 1}–
                   {Math.min(
                     startIndex + productsPerPage,
@@ -260,7 +260,7 @@ const Products = ({
                   )}
                 </span>{" "}
                 of{" "}
-                <span className="text-[#1a1a1a] font-medium">
+                <span className="text-[#1a1a1a] dark:text-gray-400  font-medium">
                   {filteredProducts.length}
                 </span>{" "}
                 results
@@ -376,7 +376,7 @@ const Products = ({
                             <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                           )}
                         </div>
-                        <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
+                        <div className="absolute bottom-0 left-0 px-3 bg-white/30 dark:bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-white">
                           {product.availabilityStatus} • {product.stock} left
                         </div>
                       </div>
@@ -390,14 +390,14 @@ const Products = ({
                               ⭐
                             </span>
                           ))}
-                        <span className="text-sm text-gray-500 ml-1">
+                        <span className="text-sm text-gray-500 dark:text-gray-300 ml-1">
                           ({product.rating})
                         </span>
                       </div>
 
                       {/* Title , fav*/}
                       <div className="flex justify-between items-center">
-                        <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
+                        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-2 line-clamp-2 h-14">
                         {product.title}
                       </h2>
                        {isInFav ? (
@@ -440,7 +440,7 @@ const Products = ({
                                 dispatch(decreaseQuantity(product.id)));
                             }}
                             // disabled={!cartItem || quantity <= 1}
-                            className="p-1 border border-gray-200 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="cursor-pointer p-1 border border-gray-100 rounded hover:bg-gray-100 dark:hover:text-black disabled:opacity-50 "
                           >
                             <FiMinus />
                           </button>
@@ -454,7 +454,7 @@ const Products = ({
                               e.stopPropagation();
                               dispatch(increaseQuantity(product.id));
                             }}
-                            className="p-1 border border-gray-200 rounded hover:bg-gray-100"
+                            className="p-1 border border-gray-100 rounded hover:bg-gray-100 dark:hover:text-black cursor-pointer"
                           >
                             <FiPlus />
                           </button>
@@ -463,10 +463,10 @@ const Products = ({
 
                       {/* Price */}
                       <div className="flex items-center justify-between mt-auto">
-                        <span className="text-xl font-semibold text-[#776a5d]">
+                        <span className="text-xl font-semibold text-[#776a5d] dark:text-[#bd9e7d]">
                           ${product.price}
                         </span>
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-gray-600 dark:text-gray-300 ">
                           {product.discountPercentage}% off
                         </span>
                       </div>
@@ -532,7 +532,7 @@ const Products = ({
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
                   disabled={currentPage === totalPages}
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#ede8e0] text-gray-500 dark:text-gray-300 hover:border-[#6b5744] hover:text-[#6b5744] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 text-sm"
                 >
                   ›
                 </button>
@@ -540,7 +540,7 @@ const Products = ({
 
               {/* Jump to page */}
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-xs text-gray-400">Go to page</span>
+                <span className="text-xs text-gray-400 ">Go to page</span>
                 <input
                   type="number"
                   min={1}
@@ -552,7 +552,7 @@ const Products = ({
                       if (val >= 1 && val <= totalPages) setCurrentPage(val);
                     }
                   }}
-                  className="w-12 text-center text-sm border border-[#ede8e0] rounded-lg py-1 outline-none focus:border-[#6b5744] text-gray-600"
+                  className="w-12 text-center text-sm border border-[#ede8e0] rounded-lg py-1 outline-none focus:border-[#6b5744] text-gray-600 dark:text-gray-300"
                 />
               </div>
             </div>
@@ -593,7 +593,7 @@ const Products = ({
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => navigate("/products")}
-                className="cursor-pointer px-8 py-3.5 bg-white text-black text-sm font-medium hover:bg-amber-500 hover:text-white transition-all duration-300 rounded-full"
+                className="cursor-pointer px-8 py-3.5 bg-white text-black text-sm font-medium hover:bg-amber-900 hover:text-white transition-all duration-300 rounded-full"
               >
                 Shop Now
               </button>

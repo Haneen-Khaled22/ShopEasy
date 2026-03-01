@@ -94,7 +94,7 @@ const WishList = () => {
           >
             <div>
               <h1
-                className="text-3xl font-light text-[#1a1410]"
+                className="text-3xl font-light text-[#1a1410] dark:text-white"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
                 My{" "}
@@ -144,22 +144,16 @@ const WishList = () => {
                 onClick={() => {setClearModalOpen(true)
                 
                 }}
-                className="cursor-pointer flex items-center gap-2 px-5 py-2 rounded-full text-sm font-light border transition-all duration-300"
-                style={{
-                  border: "1px solid #c8b49a",
-                  color: "#5c3d1e",
-                  background: "transparent",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#5c3d1e";
-                  e.currentTarget.style.color = "#fffcf7";
-                  e.currentTarget.style.borderColor = "#5c3d1e";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#5c3d1e";
-                  e.currentTarget.style.borderColor = "#c8b49a";
-                }}
+ className="
+    cursor-pointer flex items-center gap-2 px-5 py-2 
+    rounded-full text-sm font-light 
+    border border-[#c8b49a] text-[#5c3d1e] bg-transparent 
+    transition-all duration-300
+    dark:text-gray-300
+    dark:border-gray-300
+    
+    hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]
+  "               
               >
                 ✕ Clear All
               </button>
@@ -224,7 +218,7 @@ const WishList = () => {
     <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
   )}
 </div>
-                                         <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
+                                         <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
                                            {product.availabilityStatus} • {product.stock} left
                                          </div>
                                        </div>
@@ -238,14 +232,14 @@ const WishList = () => {
                                                ⭐
                                              </span>
                                            ))}
-                                         <span className="text-sm text-gray-500 ml-1">
+                                         <span className="text-sm text-gray-500 dark:text-gray-300 ml-1">
                                            ({product.rating})
                                          </span>
                                        </div>
                  
                                        {/* Title , fav*/}
                                        <div className="flex justify-between items-center">
-                                         <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
+                                         <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-2 line-clamp-2 h-14">
                                          {product.title}
                                        </h2>
                     {isInFav ? (
@@ -279,10 +273,10 @@ const WishList = () => {
                  
                                        {/* Price */}
                                        <div className="flex items-center justify-between mt-auto">
-                                         <span className="text-xl font-semibold text-[#776a5d]">
+                                         <span className="text-xl font-semibold text-[#776a5d] dark:text-[#bd9e7d]">
                                            ${product.price}
                                          </span>
-                                         <span className="text-sm text-gray-600">
+                                         <span className="text-sm text-gray-600 dark:text-gray-300">
                                            {product.discountPercentage}% off
                                          </span>
                                        </div>

@@ -162,7 +162,7 @@ const HeroSection = () => {
       >
         {/* Badge */}
         <motion.div 
-          className='inline-flex items-center bg-gray-100 text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full'
+          className='inline-flex items-center bg-gray-100 dark:bg-gray-100 text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full'
           variants={itemVariants}
         >
           <motion.span 
@@ -177,7 +177,7 @@ const HeroSection = () => {
               ease: "easeInOut"
             }}
           />
-          <span className='whitespace-nowrap'>Discover Fashion with Purpose</span>
+          <span className='whitespace-nowrap dark:text-black'>Discover Fashion with Purpose</span>
         </motion.div>
 
         {/* Heading */}

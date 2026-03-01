@@ -240,9 +240,9 @@ const CategorySections = () => {
               <p className="text-xs uppercase tracking-[0.3em] text-amber-600 font-medium">Discover</p>
             </div>
             <h2
-              className="text-3xl md:text-4xl font-light text-[#1a1a1a]"
+              className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white"
             >
-              Shop By <span className="italic text-[#6b5744]">Category</span>
+              Shop By <span className="italic text-[#6b5744] ">Category</span>
             </h2>
           </div>
           <p className="hidden md:block text-sm text-gray-400 font-light">
@@ -351,7 +351,7 @@ const CategorySections = () => {
           <CategoryProducts slug={selectedCategory} />
         ) : (<div className="max-w-7xl mx-auto px-4 mt-14">
              <h3
-              className="text-3xl md:text-4xl font-light text-[#1a1a1a]"
+              className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white"
             >
              <span> Featured Products</span>
             </h3>

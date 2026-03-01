@@ -5,7 +5,7 @@ import { getCategoryProducts } from "../../Redux/Slices/CategoryProducts";
 import { FiCheck, FiMinus, FiPlus } from "react-icons/fi";
 import Breadcrumbs from "../BreadCrumb/BreadCrumb";
 import { motion, AnimatePresence } from "framer-motion";
-import { addToCart, decreaseQuantity, increaseQuantity } from "../../Redux/Slices/CartSlice";
+import { addToCart, decreaseQuantity, deleteFromCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
 import { enqueueSnackbar, useSnackbar } from "notistack";
 
 const CategoryProducts = () => {
@@ -89,7 +89,9 @@ const CategoryProducts = () => {
                   className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
                 >
                   {isInCart ? (
-                    <FiCheck className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
+                    <FiCheck 
+                    
+                    className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                   ) : (
                     <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                   )}

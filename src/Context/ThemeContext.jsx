@@ -1,29 +1,31 @@
-import { ThemeContext } from "@emotion/react";
 import { createContext, useEffect, useState } from "react";
 
-export const themeContext = createContext();
+export const ThemeContext = createContext();
 
-export const ThemeProvider =({children})=>{
-    const [theme,setTheme] = useState("light");
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "light"
+  );
 
-    useEffect(()=>{
+  // 👇 ده أهم جزء في الموضوع كله
+  useEffect(() => {
+    document.documentElement.classList.toggle(
+      "dark",
+      theme === "dark"
+    );
 
-        const savedTheme = localStorage.getItem('theme');
-        if(savedTheme) setTheme(savedTheme);
-    },[]);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    const toggleTheme = (prev)=>{
-        setTheme((prev)=>{
-            const newTheme = prev === "light"?"dark":"light";
-            localStorage.setItem("theme",newTheme);
-            return newTheme
-        })
-    }
+  const toggleTheme = () => {
+    setTheme((prev) =>
+      prev === "light" ? "dark" : "light"
+    );
+  };
 
-    return (
-        <ThemeContext.Provider value={{theme,toggleTheme}}>
-            {children}
-        </ThemeContext.Provider>
-    )
-
-}
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};

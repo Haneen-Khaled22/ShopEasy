@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import shopicon from "../../assets/shopeasy.png";
 import { useSelector } from "react-redux";
-import { FiHeart } from "react-icons/fi";
+import { FiHeart, FiMoon, FiSun } from "react-icons/fi";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const {toggleTheme,theme} = useContext(ThemeContext);
 
   const cart = useSelector((state) => state.cart);
     const wishlist = useSelector((state) => state.wishList);
@@ -216,6 +218,7 @@ const Navbar = () => {
                   </span>
                 )}
               </button>
+            
 
               {/* Avatar */}
               <div className="relative" id="user-menu">
@@ -278,6 +281,13 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+                {/* theme */}
+         <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full border dark:border-white border-white transition"
+    >
+      {theme === "dark" ? <FiSun /> : <FiMoon />}
+    </button>
 
               {/* Hamburger */}
               <button

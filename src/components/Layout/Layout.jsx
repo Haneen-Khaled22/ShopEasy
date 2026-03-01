@@ -10,7 +10,11 @@ const Layout = () => {
     <Navbar/>
   
   <ScrollToTop/>
-    <Outlet/>
+  <div className='dark:bg-black dark:text-white'>
+     <Outlet/>
+
+  </div>
+   
 
  
       
