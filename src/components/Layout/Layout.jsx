@@ -7,10 +7,11 @@ import ScrollToTop from '../ScrollToTop/ScrollToTop'
 const Layout = () => {
   return (
     <>
-    <Navbar/>
+   
+  <div className='dark:bg-black dark:text-white'>
+     <Navbar/>
   
   <ScrollToTop/>
-  <div className='dark:bg-black dark:text-white'>
      <Outlet/>
 
   </div>

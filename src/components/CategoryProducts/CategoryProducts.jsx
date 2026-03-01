@@ -39,6 +39,9 @@ const CategoryProducts = () => {
           <span className="loader"></span>
         </div>
       )}
+      <h1 className="text-2xl font-meduim text-black dark:text-white mb-6 capitalize">
+  {slug.replace("-", " ")}
+</h1>
       <motion.div
         // key={currentPage + JSON.stringify(filters)}
         initial={{ opacity: 0, y: 12 }}
@@ -48,8 +51,10 @@ const CategoryProducts = () => {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:gap-12"
       >
         
+        
         {data?.map((product, index) => {
           const cartItem = cart.find((item) => item.id === product.id);
+         
           const isInCart = !!cartItem;
           return (
             <motion.div
@@ -90,13 +95,28 @@ const CategoryProducts = () => {
                 >
                   {isInCart ? (
                     <FiCheck 
-                    
+                    onClick={(e)=>
+                       {e.stopPropagation()
+                     dispatch(deleteFromCart(product.id)),
+                      enqueueSnackbar(`${product.title} deleted from Cart`, {
+                      variant: "default",
+                      sx: {
+                        backgroundColor: "#776a5d", // لون الخلفية
+                        color: "#fff", // لون النص
+                        fontWeight: "bold",
+                      },
+                      anchorOrigin: {
+                        vertical: "top",
+                        horizontal: "left",
+                      },
+                      autoHideDuration: 2500,
+                    })}}
                     className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                   ) : (
                     <FiPlus className="text-white bg-[#776a5d] rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]" />
                   )}
                 </div>
-                <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
+                <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
                   {product.availabilityStatus} • {product.stock} left
                 </div>
               </div>
@@ -110,13 +130,13 @@ const CategoryProducts = () => {
                       ⭐
                     </span>
                   ))}
-                <span className="text-sm text-gray-500 ml-1">
+                <span className="text-sm text-gray-500 dark:text-gray-300 ml-1">
                   ({product.rating})
                 </span>
               </div>
 
               {/* Title */}
-              <h2 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 h-14">
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-2 line-clamp-2 h-14">
                 {product.title}
               </h2>
                {isInCart && (
@@ -150,10 +170,10 @@ const CategoryProducts = () => {
 
               {/* Price */}
               <div className="flex items-center justify-between mt-auto">
-                <span className="text-xl font-semibold text-[#776a5d]">
+                <span className="text-xl font-semibold text-[#776a5d] dark:text-[#bd9e7d] ">
                   ${product.price}
                 </span>
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 dark:text-gray-300">
                   {product.discountPercentage}% off
                 </span>
               </div>

@@ -309,7 +309,7 @@ const Products = ({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12 px-4 sm:px-8"
               >
                 {displayedProducts.map((product, index) => {
                   const cartItem = cart.find((item) => item.id === product.id);

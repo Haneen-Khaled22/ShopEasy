@@ -161,12 +161,12 @@ const ProductsDetails = () => {
                   }
                   
                 }}
-                className="w-full bg-black dark:bg-[#776a5d] text-white py-4 rounded hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider cursor-pointer"
+                className="w-full bg-black dark:bg-[#776a5d] text-white py-4 rounded hover:bg-gray-800 dark:hover:dark:bg-[#b19d86] transition-colors flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider cursor-pointer"
               >
                 <FiShoppingBag className="w-4 h-4" />
                 Add to Bag
               </button>
-              <button className="cursor-pointer w-full border-2 border-black dark:border-white text-black dark:text-white py-4 rounded hover:bg-gray-50 transition-colors text-sm font-medium uppercase tracking-wider">
+              <button className="cursor-pointer w-full border-2 border-black dark:border-white text-black dark:text-white dark:hover:text-black py-4 rounded hover:bg-gray-50 transition-colors text-sm font-medium uppercase tracking-wider">
                 Buy Now
               </button>
             </div>

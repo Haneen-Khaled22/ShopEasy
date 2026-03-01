@@ -44,12 +44,15 @@ const Navbar = () => {
     <>
       {/* ── Announcement bar ── */}
       <div
-        style={{
-          background: "linear-gradient(90deg, #f5f0e8 0%, #ede4d3 50%, #f5f0e8 100%)",
-          borderBottom: "1px solid #ddd4c0",
-        }}
-        className="text-center py-2 px-4"
-      >
+  className="
+    text-center py-2 px-4
+    bg-gradient-to-r
+    from-[#f5f0e8]
+    via-[#ede4d3]
+    to-[#f5f0e8]
+    border-b border-[#ddd4c0]
+  "
+>
         <p className="text-[11px] tracking-[0.3em] uppercase text-[#8a6f4e]">
           ✦ Free shipping on orders over $50 &nbsp;·&nbsp; Use code{" "}
           <span className="text-[#5c3d1e] font-medium">WELCOME20</span> for 20% off ✦
@@ -57,18 +60,16 @@ const Navbar = () => {
       </div>
 
       {/* ── Main Navbar ── */}
-      <nav
-        style={{
-          background: scrolled
-            ? "white"
-            : "#fffcf7",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
-          boxShadow: scrolled ? "0 4px 32px rgba(100,70,40,0.1)" : "none",
-          borderBottom: "1px solid #e8dfd0",
-          transition: "all 0.35s ease",
-        }}
-        className="sticky top-0 z-50"
-      >
+     <nav
+  className={`
+    sticky top-0 z-50 border-b border-[#e8dfd0]  dark:border-gray-300
+    transition-all duration-300 ease-in-out
+    ${scrolled 
+      ? "bg-white dark:bg-black backdrop-blur-lg shadow-[0_4px_32px_rgba(100,70,40,0.1)]" 
+      : "bg-[#fffcf7] dark:bg-black "
+    }
+  `}
+>
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="flex items-center justify-between h-[68px]">
 
@@ -78,14 +79,14 @@ const Navbar = () => {
                 className="relative w-9 h-9 rounded-lg overflow-hidden"
                 style={{ boxShadow: "0 0 0 1px #ddd4c0, 0 4px 12px rgba(100,70,40,0.12)" }}
               >
-                <img src={shopicon} alt="ShopEasy" className="w-full h-full object-cover" />
+                <img src={shopicon} alt="ShopEasy" className="w-full h-full object-cover dark:invert" />
               </div>
               <div className="flex flex-col leading-none">
                 <span
-                  className="text-[17px] font-normal text-[#1a1410] tracking-wide"
+                  className="text-[17px] font-normal text-[#1a1410] dark:text-gray-300 tracking-wide"
                   style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif" }}
                 >
-                  Shop<span style={{ color: "#8a5c2e", fontStyle: "italic" }}>Easy</span>
+                  Shop<span className="text-#8a5c2e  dark:text-[#bd9e7d]">Easy</span>
                 </span>
                 <span className="text-[8px] tracking-[0.35em] uppercase mt-0.5" style={{ color: "#b89870" }}>
                   Premium Store
@@ -101,7 +102,7 @@ const Navbar = () => {
                   to={to}
                   className={({ isActive }) =>
                     `relative px-5 py-2 text-[13px] tracking-[0.08em] uppercase font-semibold transition-all duration-250 group
-                    ${isActive ? "text-[#5c3d1e]" : "text-[#776a5d] hover:text-[#1a1410]"}`
+                    ${isActive ? "text-[#5c3d1e] dark:text-[#ba8c5b]" : "text-[#776a5d] dark:text-[#bd9e7d] hover:text-[#1a1410] hover:dark:text-[#bd9e7d]"}`
                   }
                 >
                   {({ isActive }) => (
@@ -129,48 +130,43 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
 
               {/* Sign In */}
-              <button
-              onClick={() => navigate('/login')}
-                style={{
-                  border: "1px solid #c8b49a",
-                  color: "#776a5d",
-                  background: "transparent",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#5c3d1e";
-                  e.currentTarget.style.color = "#fffcf7";
-                  e.currentTarget.style.borderColor = "#5c3d1e";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#5c3d1e";
-                  e.currentTarget.style.borderColor = "#c8b49a";
-                }}
-                className="hidden sm:flex items-center gap-1.5 px-5 py-2 rounded-full text-[12px] tracking-[0.12em] uppercase font-semibold cursor-pointer"
-              >
+             <button
+  onClick={() => navigate("/login")}
+  className="
+    hidden sm:flex items-center gap-1.5
+    px-5 py-2 rounded-full
+    text-[12px] tracking-[0.12em] uppercase font-semibold
+    border border-[#c8b49a]
+    dark:border-gray-300
+    text-[#776a5d]
+    dark:text-gray-300
+    bg-transparent
+    transition-all duration-300 ease-in-out
+    hover:bg-[#5c3d1e]
+    hover:text-[#fffcf7]
+    hover:border-[#5c3d1e]
+    cursor-pointer
+  "
+>
                 Sign In
               </button>
 
               {/* Cart */}
-              <button
-                onClick={() => navigate("/cart")}
-                style={{
-                  background: "rgba(92,61,30,0.07)",
-                  border: "1px solid #d4c4b0",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(92,61,30,0.13)";
-                  e.currentTarget.style.borderColor = "#b89870";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(92,61,30,0.07)";
-                  e.currentTarget.style.borderColor = "#d4c4b0";
-                }}
-                className="cursor-pointer relative w-10 h-10 rounded-full flex items-center justify-center"
-              >
-                <HiOutlineShoppingBag className="w-[18px] h-[18px]" style={{ color: "#5c3d1e" }} />
+            <button
+  onClick={() => navigate("/cart")}
+  className="
+    cursor-pointer relative
+    w-10 h-10 rounded-full
+    flex items-center justify-center
+    bg-[rgba(92,61,30,0.07)]
+    border border-[#d4c4b0]
+    dark:border-gray-300
+    transition-all duration-300 ease-in-out
+    hover:bg-[rgba(92,61,30,0.13)]
+    hover:border-[#b89870]
+  "
+>
+                <HiOutlineShoppingBag className="w-[18px] h-[18px] text-[#5c3d1e] dark:text-gray-300" />
                 {cart.length > 0 && (
                   <span
                     style={{
@@ -188,22 +184,19 @@ const Navbar = () => {
                 {/* fav */}
               <button
                 onClick={() => navigate("/wishlist")}
-                style={{
-                  background: "rgba(92,61,30,0.07)",
-                  border: "1px solid #d4c4b0",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(92,61,30,0.13)";
-                  e.currentTarget.style.borderColor = "#b89870";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(92,61,30,0.07)";
-                  e.currentTarget.style.borderColor = "#d4c4b0";
-                }}
-                className="cursor-pointer relative w-10 h-10 rounded-full flex items-center justify-center"
+                  className="
+    cursor-pointer relative
+    w-10 h-10 rounded-full
+    flex items-center justify-center
+    bg-[rgba(92,61,30,0.07)]
+    border border-[#d4c4b0]
+    dark:border-gray-300
+    transition-all duration-300 ease-in-out
+    hover:bg-[rgba(92,61,30,0.13)]
+    hover:border-[#b89870]
+  "
               >
-                <FiHeart className="w-[18px] h-[18px]" style={{ color: "#5c3d1e" }} />
+                <FiHeart className="w-[18px] h-[18px] text-[#5c3d1e] dark:text-gray-300"  />
                 {wishlist.length > 0 && (
                   <span
                     style={{
@@ -284,32 +277,55 @@ const Navbar = () => {
                 {/* theme */}
          <button
       onClick={toggleTheme}
-      className="p-2 rounded-full border dark:border-white border-white transition"
+      className="cursor-pointer p-2 rounded-full border dark:border-gray-50 border-gray-50 transition"
     >
       {theme === "dark" ? <FiSun /> : <FiMoon />}
     </button>
 
               {/* Hamburger */}
               <button
-                onClick={() => setMobileOpen(!mobileOpen)}
-                style={{
-                  background: "rgba(92,61,30,0.06)",
-                  border: "1px solid #d4c4b0",
-                  transition: "all 0.25s",
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = "#b89870"}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = "#d4c4b0"}
-                className="md:hidden w-9 h-9 rounded-full flex items-center justify-center"
-              >
+  onClick={() => setMobileOpen(!mobileOpen)}
+  className="
+    md:hidden
+    w-9 h-9 rounded-full
+    flex items-center justify-center
+    bg-[rgba(92,61,30,0.06)]
+    border border-[#d4c4b0]
+    
+    transition-all duration-200
+    hover:border-[#b89870]
+    cursor-pointer
+  "
+>
                 {mobileOpen ? (
-                  <svg className="w-4 h-4" style={{ color: "#5c3d1e" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" style={{ color: "#5c3d1e" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
+  <svg
+    className="w-4 h-4 text-[#5c3d1e] dark:text-gray-300"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+) : (
+  <svg
+    className="w-4 h-4 text-[#5c3d1e] dark:text-gray-300"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+)}
               </button>
             </div>
           </div>
@@ -317,15 +333,13 @@ const Navbar = () => {
 
         {/* ── Mobile Menu ── */}
         <div
-          style={{
-            maxHeight: mobileOpen ? "360px" : "0px",
-            opacity: mobileOpen ? 1 : 0,
-            overflow: "hidden",
-            transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease",
-            borderTop: mobileOpen ? "1px solid #e8dfd0" : "none",
-            background: "#fffcf7",
-          }}
-        >
+  className={`
+    overflow-hidden
+    transition-[max-height,opacity] duration-400 ease-in-out
+    ${mobileOpen ? "max-h-[360px] opacity-100 border-t border-[#e8dfd0]" : "max-h-0 opacity-0 border-t-0"}
+    bg-[#fffcf7] dark:bg-black 
+  `}
+>
           <div className="px-5 pt-4 pb-6 space-y-1">
             {navLinks.map(({ to, label }, i) => (
               <NavLink
@@ -336,7 +350,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `flex items-center justify-between px-4 py-3.5 rounded-xl text-[13px] uppercase tracking-[0.1em] font-light transition-all duration-200
                   ${isActive
-                    ? "bg-[#f0e4d0] text-[#5c3d1e] font-medium"
+                    ? "bg-[#f0e4d0] text-[#5c3d1e] dark:bg-[#d7c29f] dark:text-[#4b3116] font-medium"
                     : "text-[#7a6555] hover:bg-[#f5ede0] hover:text-[#3d2b1a]"
                   }`
                 }
@@ -353,15 +367,25 @@ const Navbar = () => {
             ))}
 
             <div className="pt-3 mt-2" style={{ borderTop: "1px solid #e8dfd0" }}>
-              <button
-                style={{
-                  border: "1px solid #c8b49a",
-                  color: "#5c3d1e",
-                  background: "transparent",
-                }}
-                onClick={() => navigate('/login')}
-                className="w-full py-3 rounded-full text-[12px] tracking-[0.15em] uppercase font-light"
-              >
+             <button
+  onClick={() => navigate('/login')}
+  className="
+  cursor-pointer
+    w-full
+    py-3
+    rounded-full
+    text-[12px]
+    tracking-[0.15em]
+    uppercase
+    font-light
+    border border-[#c8b49a]
+    dark:border-gray-300
+    text-[#5c3d1e]
+    dark:text-gray-300
+    bg-transparent
+    hover:bg-[#5c3d1e] hover:text-[#fffcf7] transition-colors
+  "
+>
                 Sign In / Sign Up
               </button>
             </div>

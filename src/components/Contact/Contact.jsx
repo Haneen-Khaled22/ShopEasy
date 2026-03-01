@@ -24,7 +24,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen">
+    <div className="bg-[#FAF8F5] dark:bg-black min-h-screen">
       {/* Hero Section */}
       <HeroSection />
 
@@ -86,7 +86,7 @@ const ContactUs = () => {
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
                   rows="6"
-                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none transition-colors duration-300 resize-none font-sans"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl  focus:outline-none transition-colors duration-300 resize-none font-sans"
                   placeholder=" "
                   required
                 />
@@ -105,7 +105,11 @@ const ContactUs = () => {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-gradient-to-r from-amber-600 to-amber-500 text-white font-sans font-semibold rounded-xl hover:shadow-xl transition-all duration-300 tracking-wide"
+                 style={{
+            background:
+              "linear-gradient(135deg, #1a1410 0%, #3d2b1f 50%, #6b4c36 100%)",
+          }}
+                className="w-full py-4  text-white font-sans font-semibold rounded-xl hover:shadow-xl transition-all duration-300 tracking-wide"
               >
                 Send Message
               </motion.button>
@@ -173,7 +177,7 @@ const ContactUs = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="bg-white rounded-2xl p-8 shadow-lg"
             >
-              <h3 className="text-2xl font-light mb-4">Follow Us</h3>
+              <h3 className="text-2xl font-light mb-4 dark:text-black">Follow Us</h3>
               <p className="text-gray-600 mb-6 font-sans">
                 Join our community and stay updated with the latest trends.
               </p>
@@ -337,7 +341,7 @@ const FAQSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-light mb-4">
+          <h2 className="text-4xl md:text-5xl font-light mb-4 dark:text-black">
             Frequently Asked <span className="italic">Questions</span>
           </h2>
           <p className="text-gray-600 text-lg font-sans">
@@ -368,7 +372,7 @@ const FAQItem = ({ faq, index }) => {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-amber-100 transition-colors duration-300"
+        className="cursor-pointer w-full px-6 py-5 text-left flex justify-between items-center hover:bg-amber-100 transition-colors duration-300"
       >
         <h3 className="font-semibold text-gray-800 font-sans">{faq.question}</h3>
         <motion.span
@@ -405,7 +409,12 @@ const NewsletterSection = () => {
 
   return (
     <section className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-600 to-amber-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-600 to-amber-500"
+       style={{
+            background:
+              "linear-gradient(135deg, #1a1410 0%, #3d2b1f 50%, #6b4c36 100%)",
+          }}
+      ></div>
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -438,7 +447,8 @@ const NewsletterSection = () => {
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-white text-amber-600 font-sans font-semibold rounded-xl hover:bg-amber-50 transition-colors duration-300 shadow-xl"
+
+            className=" cursor-pointer px-8 py-4 bg-white text-amber-600 font-sans font-semibold rounded-xl hover:bg-amber-50 transition-colors duration-300 shadow-xl"
           >
             Subscribe
           </motion.button>

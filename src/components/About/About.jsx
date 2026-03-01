@@ -17,7 +17,7 @@ const About = () => {
 
 
   return (
-    <div className="bg-[#FAF8F5] font-serif">
+    <div className="bg-[#FAF8F5] dark:bg-black font-serif">
       {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div 
@@ -172,7 +172,7 @@ const ValuesSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-amber-50 to-white py-24 md:py-32">
+    <section className="bg-gradient-to-b from-amber-50 to-white  py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -181,7 +181,7 @@ const ValuesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-light mb-4">
+          <h2 className="text-4xl md:text-5xl font-light mb-4 dark:text-black">
             What We <span className="italic">Stand For</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto font-sans">
@@ -236,7 +236,7 @@ const GallerySection = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-white">
+    <section className="py-24 md:py-32 bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -274,7 +274,7 @@ const GallerySection = () => {
 // Team Section
 const TeamSection = () => {
   return (
-    <section className="bg-gradient-to-b from-white to-amber-50 py-24 md:py-32">
+    <section className="bg-gradient-to-b from-white to-amber-50 dark:bg-black py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -282,7 +282,7 @@ const TeamSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-light mb-6">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 dark:text-black">
             Meet The <span className="italic">Curators</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto font-sans">
@@ -311,7 +311,7 @@ const TeamSection = () => {
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-2xl font-light mb-2">{member.name}</h3>
+              <h3 className="text-2xl dark:text-black font-meduim mb-2 ">{member.name}</h3>
               <p className="text-amber-700 font-sans text-sm tracking-wide">{member.role}</p>
             </motion.div>
           ))}
