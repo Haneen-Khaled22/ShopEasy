@@ -75,7 +75,7 @@ const Navbar = () => {
       <nav
         className={`
     sticky top-0 z-50 border-b border-[#e8dfd0]  dark:border-gray-300
-    transition-all duration-300 ease-in-out
+    transition-all duration-300 ease-in-out w-full
     ${
       scrolled
         ? "bg-white dark:bg-black backdrop-blur-lg shadow-[0_4px_32px_rgba(100,70,40,0.1)]"
@@ -83,7 +83,7 @@ const Navbar = () => {
     }
   `}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <div className=" mx-auto px-12 sm:px-8">
           <div className="flex items-center justify-between h-[68px]">
             {/* ── Logo ── */}
             <NavLink to="/" className="flex items-center gap-3 group shrink-0">
@@ -377,16 +377,14 @@ const Navbar = () => {
         </div>
 
         {/* ── Mobile Menu ── */}
-       <div
-  className={`
-    fixed top-[68px] left-0 w-screen
+        <div
+          className={`
     overflow-hidden
     transition-[max-height,opacity] duration-400 ease-in-out
-    ${mobileOpen ? "max-h-[400px] opacity-100 border-t border-[#e8dfd0]" : "max-h-0 opacity-0 border-t-0"}
+    ${mobileOpen ? "max-h-[360px] opacity-100 border-t border-[#e8dfd0]" : "max-h-0 opacity-0 border-t-0"}
     bg-[#fffcf7] dark:bg-black 
-    z-40
   `}
->
+        >
           <div className="w-full px-5 sm:px-8 pt-4 pb-6 space-y-1">
             {navLinks.map(({ to, label }, i) => (
               <NavLink
