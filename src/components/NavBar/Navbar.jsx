@@ -185,6 +185,7 @@ const Navbar = () => {
                 className="
     cursor-pointer relative
     w-10 h-10 rounded-full
+    
     flex items-center justify-center
     bg-[rgba(92,61,30,0.07)]
     border border-[#d4c4b0]
@@ -314,17 +315,17 @@ const Navbar = () => {
               <button
                 onClick={handleSignOut}
                 className="
-        flex items-center justify-center gap-2
-        px-4 py-2 rounded-lg
+        flex items-center justify-center 
+         py-2 rounded-lg
         text-black
         cursor-pointer
         dark:text-gray-300 
         transition-colors duration-200
-        md:px-5 md:py-3
+        md:py-3
       "
               >
                 <FiLogOut className="text-lg md:text-xl" />
-                <span className="hidden md:inline font-small">Sign Out</span>
+                
               </button>
 
               {/* Hamburger */}
