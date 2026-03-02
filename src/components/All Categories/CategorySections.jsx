@@ -32,6 +32,7 @@ import CategoryProducts from "../CategoryProducts/CategoryProducts";
 import { useNavigate } from "react-router-dom";
 import { getCategoryProducts } from "../../Redux/Slices/CategoryProducts";
 import Products from "../Products/Products";
+import { useSnackbar } from "notistack";
 
 const categoryImages = [
   beauty, fragrances, furniture, groceries,
@@ -61,6 +62,7 @@ const CategorySections = () => {
   const navigate = useNavigate();
 
   useEffect(() => { dispatch(getAllCategories()); }, []);
+  const { enqueueSnackbar } = useSnackbar();
 
   // Auto-scroll
   useEffect(() => {
@@ -105,10 +107,10 @@ const CategorySections = () => {
     }, 50);
   };
  useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: "error" });
-    }
-  }, [error]);
+  if (error) {
+    enqueueSnackbar(String(error), { variant: "error" });
+  }
+}, [error, enqueueSnackbar]);
   return (
     <div className=" min-h-screen">
         {loading && (
@@ -119,115 +121,115 @@ const CategorySections = () => {
       )}
 
       {/* ══ HERO ══ */}
-      <div className="relative w-full h-[680px] overflow-hidden">
-        <motion.img
-          src={background}
-          alt="category background"
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.08 }}
-          transition={{ duration: 22, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-        />
+     <div className="relative w-full h-[680px] md:h-[720px] lg:h-[760px] overflow-hidden">
+  <motion.img
+    src={background}
+    alt="category background"
+    className="absolute inset-0 w-full h-full object-cover"
+    initial={{ scale: 1 }}
+    animate={{ scale: 1.08 }}
+    transition={{ duration: 22, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+  />
 
-        {/* Multi-layer overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+  {/* Multi-layer overlay for depth */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-        {/* Decorative lines */}
-        <div className="absolute top-12 left-12 w-16 h-px bg-white/40" />
-        <div className="absolute top-12 left-12 w-px h-16 bg-white/40" />
-        <div className="absolute bottom-12 right-12 w-16 h-px bg-white/40" />
-        <div className="absolute bottom-12 right-12 w-px h-16 bg-white/40" />
+  {/* Decorative lines */}
+  <div className="absolute top-12 left-12 w-16 h-px bg-white/40" />
+  <div className="absolute top-12 left-12 w-px h-16 bg-white/40" />
+  <div className="absolute bottom-12 right-12 w-16 h-px bg-white/40" />
+  <div className="absolute bottom-12 right-12 w-px h-16 bg-white/40" />
 
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-center px-12 md:px-20 max-w-3xl">
-          <motion.div
-            className="flex items-center gap-3 mb-6"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <div className="w-8 h-px bg-amber-400" />
-            <span className="text-xs uppercase tracking-[0.35em] text-amber-400 font-medium">
-              New Collection 2025
-            </span>
-          </motion.div>
+  {/* Content */}
+  <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 md:px-20 max-w-3xl">
+    <motion.div
+      className="flex items-center gap-3 mb-4 sm:mb-6"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, delay: 0.2 }}
+    >
+      <div className="w-6 h-px sm:w-8 bg-amber-400" />
+      <span className="text-[9px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-amber-400 font-medium">
+        New Collection 2025
+      </span>
+    </motion.div>
 
-          <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.15] mb-6"
-            style={{ fontFamily: "'Georgia', serif" }}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
-          >
-            Where Timeless
-            <br />
-            <span className="italic text-amber-200">Beauty</span> Meets
-            <br />
-            <span className="font-normal">Modern Craft</span>
-          </motion.h1>
+    <motion.h1
+      className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.15] mb-4 sm:mb-6"
+      style={{ fontFamily: "'Georgia', serif" }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
+    >
+      Where Timeless
+      <br />
+      <span className="italic text-amber-200 text-3xl sm:text-5xl md:text-6xl lg:text-7xl">Beauty</span> Meets
+      <br />
+      <span className="font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Modern Craft</span>
+    </motion.h1>
 
-          <motion.p
-            className="text-base text-gray-300 mb-8 font-light leading-relaxed max-w-md"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-          >
-            Discover the latest trends and exclusive styles curated just for you — from beauty to furniture.
-          </motion.p>
+    <motion.p
+      className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-8 font-light leading-relaxed max-w-md"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.55 }}
+    >
+      Discover the latest trends and exclusive styles curated just for you — from beauty to furniture.
+    </motion.p>
 
-          <motion.div
-            className="flex items-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.75 }}
-          >
-            <button
-              onClick={() => navigate("/products")}
-              className=" cursor-pointer group px-8 py-3.5 bg-white text-black text-sm font-medium flex items-center gap-2 hover:bg-amber-500 hover:text-white transition-all duration-300 rounded-full"
-            >
-              Explore Collection
-              <HiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
-            <button
-              onClick={() => scrollRef.current?.scrollIntoView({ behavior: "smooth" })}
-              className=" cursor-pointer px-8 py-3.5 border border-white/40 text-white text-sm font-light hover:border-white/80 transition-all duration-300 rounded-full"
-            >
-              Browse Categories
-            </button>
-          </motion.div>
-        </div>
+   <motion.div
+  className="flex flex-wrap sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.75 }}
+>
+  <button
+    onClick={() => navigate("/products")}
+    className="cursor-pointer w-auto px-4 sm:px-6 py-2 sm:py-3 bg-white text-black text-sm font-medium flex items-center gap-2 hover:bg-amber-500 hover:text-white transition-all duration-300 rounded-full"
+  >
+    Explore Collection
+    <HiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+  </button>
+  <button
+    onClick={() => scrollRef.current?.scrollIntoView({ behavior: "smooth" })}
+    className="cursor-pointer w-auto px-4 sm:px-6 py-2 sm:py-3 border border-white/40 text-white text-sm font-light hover:border-white/80 transition-all duration-300 rounded-full"
+  >
+    Browse Categories
+  </button>
+</motion.div>
+  </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          <span className="text-[10px] uppercase tracking-widest text-white/50">Scroll</span>
-          <motion.div
-            className="w-px h-8 bg-white/30"
-            animate={{ scaleY: [1, 0.4, 1], opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </motion.div>
-      </div>
+  {/* Scroll indicator */}
+  <motion.div
+    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.5 }}
+  >
+    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/50">Scroll</span>
+    <motion.div
+      className="w-px h-8 sm:h-10 bg-white/30"
+      animate={{ scaleY: [1, 0.4, 1], opacity: [0.3, 0.8, 0.3] }}
+      transition={{ duration: 2, repeat: Infinity }}
+    />
+  </motion.div>
+</div>
 
-      {/* ══ FEATURE STRIP ══ */}
-      <div className="bg-[#1a1410] py-6">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-white/10">
-          {features.map((f, i) => (
-            <div key={i} className="flex items-center gap-4 px-8 py-2">
-              <span className="text-amber-400 text-xl">{f.icon}</span>
-              <div>
-                <p className="text-white text-sm font-medium">{f.title}</p>
-                <p className="text-gray-500 text-xs">{f.desc}</p>
-              </div>
-            </div>
-          ))}
+{/* ══ FEATURE STRIP ══ */}
+<div className="bg-[#1a1410] py-4 sm:py-6">
+  <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 divide-x divide-white/10">
+    {features.map((f, i) => (
+      <div key={i} className="flex items-center gap-3 sm:gap-4 px-4 sm:px-8 py-2">
+        <span className="text-amber-400 text-xl sm:text-2xl">{f.icon}</span>
+        <div>
+          <p className="text-white text-sm sm:text-base font-medium">{f.title}</p>
+          <p className="text-gray-500 text-xs sm:text-sm">{f.desc}</p>
         </div>
       </div>
+    ))}
+  </div>
+</div>
 
       {/* ══ SHOP BY CATEGORY ══ */}
        
@@ -326,7 +328,7 @@ const CategorySections = () => {
                 <div>
                   <p className="text-xs uppercase tracking-widest text-gray-400 mb-0.5">Browsing</p>
                   <h3
-                    className="text-2xl font-light text-[#1a1a1a] capitalize"
+                    className="text-2xl font-light text-[#1a1a1a] dark:text-gray-300 capitalize"
                     style={{ fontFamily: "'Georgia', serif" }}
                   >
                     {selectedCategory.replace(/-/g, " ")}
@@ -355,8 +357,9 @@ const CategorySections = () => {
             >
              <span> Featured Products</span>
             </h3>
-            
+            <div className="px-4">
           <Products limit={3} showFilter={false} showBread={false} showPagination={false} showBottomBanner={false} showNumberOfProducts={false} showHeroSrip={false}/>
+          </div>
         </div>
          
         )}

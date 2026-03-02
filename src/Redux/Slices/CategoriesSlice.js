@@ -36,7 +36,7 @@ const categorySlice = createSlice({
      }),
      builder.addCase(getAllCategories.rejected,(state,action)=>{
         state.loading = false
-        state.error =  action.payload;
+        state.error = action.error?.message || "Failed to fetch categories";
      })
 
     }

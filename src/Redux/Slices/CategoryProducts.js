@@ -36,7 +36,7 @@ const categoryProductsSlice = createSlice({
         }),
          builder.addCase(getCategoryProducts.rejected, (state,action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.error?.message || "Failed to fetch categories";
               })
     }
 })

@@ -24,11 +24,11 @@ const CategoryProducts = () => {
     dispatch(getCategoryProducts(slug));
   }, []);
 
-   useEffect(() => {
-      if (error) {
-        enqueueSnackbar(error, { variant: "error" });
-      }
-    }, [error]);
+  useEffect(() => {
+  if (error) {
+    enqueueSnackbar(typeof error === "string" ? error : "Something went wrong", { variant: "error" });
+  }
+}, [error, enqueueSnackbar]);
   
 
   return (
@@ -39,8 +39,8 @@ const CategoryProducts = () => {
           <span className="loader"></span>
         </div>
       )}
-      <h1 className="text-2xl font-meduim text-black dark:text-white mb-6 capitalize">
-  {slug.replace("-", " ")}
+    <h1 className="text-2xl font-medium text-gray-800 dark:text-gray-300 mb-6 capitalize">
+  {slug}
 </h1>
       <motion.div
         // key={currentPage + JSON.stringify(filters)}
@@ -147,7 +147,7 @@ const CategoryProducts = () => {
                                               dispatch(decreaseQuantity(product.id)));
                                           }}
                                           // disabled={!cartItem || quantity <= 1}
-                                          className="p-1 border border-gray-200 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                                          className="cursor-pointer p-1 border border-gray-200 rounded hover:dark:text-black hover:bg-gray-100 disabled:opacity-50 "
                                         >
                                           <FiMinus />
                                         </button>
@@ -161,7 +161,7 @@ const CategoryProducts = () => {
                                             e.stopPropagation();
                                             dispatch(increaseQuantity(product.id));
                                           }}
-                                          className="p-1 border border-gray-200 rounded hover:bg-gray-100"
+                                          className=" cursor-pointer p-1 border border-gray-200 hover:dark:text-black rounded hover:bg-gray-100"
                                         >
                                           <FiPlus />
                                         </button>
