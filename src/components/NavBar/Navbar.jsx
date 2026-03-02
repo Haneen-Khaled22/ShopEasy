@@ -83,7 +83,7 @@ const Navbar = () => {
     }
   `}
       >
-        <div className=" mx-auto px-12 sm:px-8">
+        <div className=" mx-auto px-4 sm:px-8">
           <div className="flex items-center justify-between h-[68px]">
             {/* ── Logo ── */}
             <NavLink to="/" className="flex items-center gap-3 group shrink-0">
@@ -378,13 +378,13 @@ const Navbar = () => {
 
         {/* ── Mobile Menu ── */}
         <div
-          className={`
-    overflow-hidden
+  className={`
+    overflow-hidden relative z-50
     transition-[max-height,opacity] duration-400 ease-in-out
     ${mobileOpen ? "max-h-[360px] opacity-100 border-t border-[#e8dfd0]" : "max-h-0 opacity-0 border-t-0"}
     bg-[#fffcf7] dark:bg-black 
   `}
-        >
+>
           <div className="w-full px-5 sm:px-8 pt-4 pb-6 space-y-1">
             {navLinks.map(({ to, label }, i) => (
               <NavLink
