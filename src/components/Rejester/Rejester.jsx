@@ -33,11 +33,11 @@ const Register = () => {
     validationSchema,
      onSubmit: async (values) => {
     try {
-      // dispatch registerUser وترقبي النتيجة
-      const resultAction = await dispatch(registerUser(values)).unwrap();
-      
-      // لو نجح → navigate للصفحة Login
-      navigate("/login");
+      await dispatch(registerUser(values)).unwrap();
+        localStorage.setItem("token", "dummy-token");
+
+      // 3️⃣ navigate للصفحة الرئيسية
+      navigate("/");
       
       enqueueSnackbar("Registered successfully!", { variant: "success" });
     } catch (error) {

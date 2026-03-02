@@ -38,6 +38,8 @@ if (isPageLoading) {
     </div>
   );
 }
+const token = localStorage.getItem("token"); // token موجود لو في يوزر
+// const user = useSelector(state => state.auth.auth); // لو عندك user مخزن
 
   return (
     
@@ -332,7 +334,18 @@ if (isPageLoading) {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => navigate("/checkout")}
+                 onClick={() => {
+  const token = localStorage.getItem("token"); // أو استخدمي user من Redux
+  if (token) {
+    navigate("/checkout");
+  } else {
+    enqueueSnackbar("You must login first to checkout!", { 
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+    navigate("/login"); // ممكن توجهه لصفحة تسجيل الدخول
+  }
+}}
                   className="w-full cursor-pointer py-4 rounded-xl font-light text-base tracking-wide transition-all duration-300"
                   style={{ background: "#3d2b1a", color: "#fffcf7" }}
                   onMouseEnter={(e) =>

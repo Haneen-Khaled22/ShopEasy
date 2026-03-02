@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import shopicon from "../../assets/shopeasy.png";
-import { useSelector } from "react-redux";
-import { FiHeart, FiMoon, FiSun } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { FiHeart, FiLogOut, FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../../Context/ThemeContext";
+import { logout } from "../../Redux/Slices/AuthSlice";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -23,6 +24,8 @@ const Navbar = () => {
 
   const cart = useSelector((state) => state.cart);
     const wishlist = useSelector((state) => state.wishList);
+    const {logout} = useSelector((state)=>state.auth);
+
 
   const navigate = useNavigate();
 
@@ -40,24 +43,33 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, [dropdownOpen]);
 
+  const dispatch = useDispatch()
+   const handleSignOut = (e) => {
+    e.stopPropagation(); // تمنع propagation لو داخل menu أو button
+    dispatch(logout());
+    navigate('/login') // لازم () عشان تنفذ الـ action
+  };
+
   return (
     <>
       {/* ── Announcement bar ── */}
-      <div
+   <div
   className="
-    text-center py-2 px-4
-    bg-gradient-to-r
-    from-[#f5f0e8]
-    via-[#ede4d3]
-    to-[#f5f0e8]
+    flex flex-col sm:flex-row 
+    justify-center items-center
+    py-2 px-4
+    bg-gradient-to-r from-[#f5f0e8] via-[#ede4d3] to-[#f5f0e8]
     border-b border-[#ddd4c0]
+    gap-2
   "
 >
-        <p className="text-[11px] tracking-[0.3em] uppercase text-[#8a6f4e]">
-          ✦ Free shipping on orders over $50 &nbsp;·&nbsp; Use code{" "}
-          <span className="text-[#5c3d1e] font-medium">WELCOME20</span> for 20% off ✦
-        </p>
-      </div>
+  <p className="text-[11px] tracking-[0.3em] uppercase text-[#8a6f4e]">
+    ✦ Free shipping on orders over $50
+  </p>
+  <p className="text-[11px] tracking-[0.3em] uppercase text-[#8a6f4e]">
+    Use code <span className="text-[#5c3d1e] font-medium">SHOPEASY20</span> for 20% off ✦
+  </p>
+</div>
 
       {/* ── Main Navbar ── */}
      <nav
@@ -215,7 +227,7 @@ const Navbar = () => {
 
               {/* Avatar */}
               <div className="relative" id="user-menu">
-                <button
+                {/* <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   style={{
                     boxShadow: dropdownOpen
@@ -226,9 +238,9 @@ const Navbar = () => {
                   className="w-9 h-9 rounded-full overflow-hidden"
                 >
                   <img src="https://i.pravatar.cc/40" alt="User" className="w-full h-full object-cover" />
-                </button>
+                </button> */}
 
-                {/* Dropdown */}
+                {/* Dropdown
                 {dropdownOpen && (
                   <div
                     style={{
@@ -272,14 +284,33 @@ const Navbar = () => {
                       Sign out
                     </a>
                   </div>
-                )}
+                )} */}
               </div>
+
+              
                 {/* theme */}
          <button
       onClick={toggleTheme}
       className="cursor-pointer p-2 rounded-full border dark:border-gray-50 border-gray-50 transition"
     >
       {theme === "dark" ? <FiSun /> : <FiMoon />}
+    </button>
+
+    {/* signout */}
+     <button
+      onClick={handleSignOut}
+      className="
+        flex items-center justify-center gap-2
+        px-4 py-2 rounded-lg
+        text-black
+        cursor-pointer
+        dark:text-gray-300 
+        transition-colors duration-200
+        md:px-5 md:py-3
+      "
+    >
+      <FiLogOut className="text-lg md:text-xl" />
+      <span className="hidden md:inline font-small">Sign Out</span>
     </button>
 
               {/* Hamburger */}
