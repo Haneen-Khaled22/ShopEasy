@@ -357,7 +357,7 @@ const CategorySections = () => {
             >
              <span> Featured Products</span>
             </h3>
-            <div className="px-4">
+            <div className="px-2">
           <Products limit={3} showFilter={false} showBread={false} showPagination={false} showBottomBanner={false} showNumberOfProducts={false} showHeroSrip={false}/>
           </div>
         </div>
