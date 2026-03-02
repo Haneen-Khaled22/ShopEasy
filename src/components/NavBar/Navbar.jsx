@@ -226,7 +226,7 @@ const Navbar = () => {
             
 
               {/* Avatar */}
-              <div className="relative" id="user-menu">
+              {/* <div className="relative" id="user-menu"> */}
                 {/* <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   style={{
@@ -285,7 +285,7 @@ const Navbar = () => {
                     </a>
                   </div>
                 )} */}
-              </div>
+              {/* </div> */}
 
               
                 {/* theme */}
@@ -371,7 +371,7 @@ const Navbar = () => {
     bg-[#fffcf7] dark:bg-black 
   `}
 >
-          <div className="px-5 pt-4 pb-6 space-y-1">
+          <div className="w-full px-5 sm:px-8 pt-4 pb-6 space-y-1">
             {navLinks.map(({ to, label }, i) => (
               <NavLink
                 key={to}
