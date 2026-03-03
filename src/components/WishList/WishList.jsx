@@ -9,7 +9,7 @@ import { FaHeart } from "react-icons/fa";
 
 import { deleteFromWishList, clearWishList, addToWishList } 
 from "../../Redux/Slices/WishListSlice";
-import { deleteFromCart } from "../../Redux/Slices/CartSlice";
+import { decreaseQuantity, deleteFromCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
 import { addToCart } from "../../Redux/Slices/CartSlice";
 
 const WishList = () => {
@@ -204,7 +204,7 @@ const WishList = () => {
 
     if (isInCart) {
       dispatch(deleteFromCart(product.id));
-      enqueueSnackbar(`${product.title} removed from Cart`, { variant: "default" });
+      enqueueSnackbar(`${product.title} deleted from Cart`, { variant: "default" });
     } else {
       dispatch(addToCart(product));
       enqueueSnackbar(`${product.title} added to Cart`, { variant: "default" });
@@ -268,6 +268,34 @@ const WishList = () => {
 )}
                                          
                                        </div>
+                                        {isInCart && (
+                                                               <div className="mb-2">
+                                                                 <button
+                                                                   onClick={(e) => {
+                                                                     (e.stopPropagation(),
+                                                                       dispatch(decreaseQuantity(product.id)));
+                                                                   }}
+                                                                   // disabled={!cartItem || quantity <= 1}
+                                                                   className="cursor-pointer p-1 border border-gray-100 rounded hover:bg-gray-100 dark:hover:text-black disabled:opacity-50 "
+                                                                 >
+                                                                   <FiMinus />
+                                                                 </button>
+                                       
+                                                                 <span className="px-2 font-normal">
+                                                                   {cartItem?.quantity}
+                                                                 </span>
+                                       
+                                                                 <button
+                                                                   onClick={(e) => {
+                                                                     e.stopPropagation();
+                                                                     dispatch(increaseQuantity(product.id));
+                                                                   }}
+                                                                   className="p-1 border border-gray-100 rounded hover:bg-gray-100 dark:hover:text-black cursor-pointer"
+                                                                 >
+                                                                   <FiPlus />
+                                                                 </button>
+                                                               </div>
+                                                             )}
                                        
                                       
                  

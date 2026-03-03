@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FiGlobe, FiPhone, FiUser } from "react-icons/fi";
 
 const Register = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -27,8 +28,11 @@ const Register = () => {
 
   const formik = useFormik({
     initialValues:{
-        email:"",
-        password:""
+        name: "",
+  email: "",
+  password: "",
+  phone: "",
+  country: "",
     },
     validationSchema,
      onSubmit: async (values) => {
@@ -99,6 +103,46 @@ const Register = () => {
 
           {/* Form */}
           <form onSubmit={formik.handleSubmit} className="space-y-5">
+            {/* name */}
+            {/* Name */}
+<div>
+  <label
+    className="block text-xs font-semibold uppercase tracking-widest mb-2"
+    style={{ color: "#776a5d" }}
+  >
+    Full Name
+  </label>
+  <div className="relative">
+    <span
+      className="absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+      style={{ color: "#9e8e81" }}
+    >
+      <FiUser/>
+    </span>
+    <input
+      type="text"
+      name="name"
+      placeholder="Your full name"
+      value={formik.values.name}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      className="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+      style={{
+        backgroundColor: "#ede3da",
+        color: "#3d332b",
+        border: "1.5px solid #cfc0b2",
+      }}
+      onFocus={(e) =>
+        (e.target.style.border = "1.5px solid #776a5d")
+      }
+    />
+  </div>
+  {formik.touched.name && formik.errors.name && (
+    <p className="text-red-500 text-xs mt-1">
+      {formik.errors.name}
+    </p>
+  )}
+</div>
             {/* Email */}
             <div>
               <label
@@ -146,6 +190,84 @@ const Register = () => {
               </div>
 )}
             </div>
+            {/* Phone */}
+<div>
+  <label
+    className="block text-xs font-semibold uppercase tracking-widest mb-2"
+    style={{ color: "#776a5d" }}
+  >
+    Phone Number
+  </label>
+  <div className="relative">
+    <span
+      className="absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+      style={{ color: "#9e8e81" }}
+    >
+      <FiPhone/>
+    </span>
+    <input
+      type="text"
+      name="phone"
+      placeholder="01XXXXXXXXX"
+      value={formik.values.phone}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      className="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+      style={{
+        backgroundColor: "#ede3da",
+        color: "#3d332b",
+        border: "1.5px solid #cfc0b2",
+      }}
+      onFocus={(e) =>
+        (e.target.style.border = "1.5px solid #776a5d")
+      }
+    />
+  </div>
+  {formik.touched.phone && formik.errors.phone && (
+    <p className="text-red-500 text-xs mt-1">
+      {formik.errors.phone}
+    </p>
+  )}
+</div>
+{/* Country */}
+<div>
+  <label
+    className="block text-xs font-semibold uppercase tracking-widest mb-2"
+    style={{ color: "#776a5d" }}
+  >
+    Country
+  </label>
+  <div className="relative">
+    <span
+      className="absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+      style={{ color: "#9e8e81" }}
+    >
+      <FiGlobe/>
+    </span>
+    <input
+      type="text"
+      name="country"
+      placeholder="Your country"
+      value={formik.values.country}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      className="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition-all duration-200"
+      style={{
+        backgroundColor: "#ede3da",
+        color: "#3d332b",
+        border: "1.5px solid #cfc0b2",
+      }}
+      onFocus={(e) =>
+        (e.target.style.border = "1.5px solid #776a5d")
+      }
+    />
+  </div>
+  {formik.touched.country && formik.errors.country && (
+    <p className="text-red-500 text-xs mt-1">
+      {formik.errors.country}
+    </p>
+  )}
+</div>
 
             {/* Password */}
             <div>

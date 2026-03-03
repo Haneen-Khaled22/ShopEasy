@@ -356,7 +356,7 @@ const CTASection = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={navigateToAllProducts}
-          className="px-10 py-4 bg-white text-black font-sans font-medium tracking-wider uppercase text-sm rounded-full hover:bg-amber-100 transition-colors duration-300 shadow-xl"
+          className=" cursor-pointer px-10 py-4 bg-white text-black font-sans font-medium tracking-wider uppercase text-sm rounded-full hover:bg-amber-100 transition-colors duration-300 shadow-xl"
         >
           Start Shopping
         </motion.button>

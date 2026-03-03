@@ -592,7 +592,7 @@ const Products = ({
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
-                onClick={() => navigate("/products")}
+                onClick={() => navigate("/")}
                 className="cursor-pointer px-8 py-3.5 bg-white text-black text-sm font-medium hover:bg-amber-900 hover:text-white transition-all duration-300 rounded-full"
               >
                 Shop Now
