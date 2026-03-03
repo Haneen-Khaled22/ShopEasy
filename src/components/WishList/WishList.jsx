@@ -108,16 +108,16 @@ const WishList = () => {
             <div className="flex items-center gap-3 flex-wrap">
               {/* Search */}
               <div
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm"
-                style={{ border: "1px solid #c8b49a", background: "#fff" }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm border border-[#c8b49a] bg-white
+                 dark:bg-black dark:text-gray-300 dark:border-gray-300"
               >
-                <FiSearch className="text-[#776a5d]" />
+                <FiSearch className="text-[#776a5d] dark:text-gray-300" />
                 <input
                   type="text"
                   placeholder="Search items..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="outline-none bg-transparent text-[#3d2b1a] placeholder-[#b0a090] text-sm w-36"
+                  className="outline-none bg-transparent text-[#3d2b1a] dark:text-gray-300 placeholder-[#b0a090] text-sm w-36"
                 />
               </div>
 
@@ -125,13 +125,8 @@ const WishList = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 rounded-full text-sm outline-none cursor-pointer"
-                style={{
-                  border: "1px solid #c8b49a",
-                  color: "#5c3d1e",
-                  background: "#fff",
-                 
-                }}
+                className="px-4 py-2 border border-[#c8b49a] bg-white rounded-full text-sm outline-none cursor-pointer dark:bg-black dark:text-gray-300 dark:border-gray-300"
+               
               >
                 <option value="default">Sort: Default</option>
                 <option value="price-asc">Price: Low → High</option>

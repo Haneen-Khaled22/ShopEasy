@@ -190,10 +190,10 @@ const Navbar = () => {
                   className="hidden md:flex items-center gap-1.5 cursor-pointer
                     px-3 lg:px-4 py-2 rounded-full
                     text-[11px] lg:text-[12px] tracking-[0.1em] uppercase font-semibold
-                    border border-red-200 dark:border-red-900
-                    text-red-500 dark:text-red-400 bg-transparent
+                    border border-red-200 dark:border-gray-300
+                    text-red-700 dark:text-gray-300 bg-transparent
                     transition-all duration-300
-                    hover:bg-red-500 hover:text-white hover:border-red-500"
+                    hover:bg-red-600 hover:text-white hover:border-red-700"
                 >
                   <FiLock className="w-3.5 h-3.5" />
                   <span>Sign Out</span>

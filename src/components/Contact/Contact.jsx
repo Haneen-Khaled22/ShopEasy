@@ -86,14 +86,14 @@ const ContactUs = () => {
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
                   rows="6"
-                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl  focus:outline-none transition-colors duration-300 resize-none font-sans"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl dark:bg-black  focus:outline-none transition-colors duration-300 resize-none font-sans"
                   placeholder=" "
                   required
                 />
                 <label
-                  className={`absolute left-4 transition-all duration-300 pointer-events-none font-sans ${
+                  className={`absolute left-4 transition-all  duration-300 pointer-events-none font-sans ${
                     focusedField === 'message' || formData.message
-                      ? '-top-3 text-sm bg-[#FAF8F5] px-2 text-amber-700'
+                      ? '-top-3 text-sm bg-[#FAF8F5]  px-2 text-amber-700'
                       : 'top-3 text-gray-500'
                   }`}
                 >
@@ -109,7 +109,7 @@ const ContactUs = () => {
             background:
               "linear-gradient(135deg, #1a1410 0%, #3d2b1f 50%, #6b4c36 100%)",
           }}
-                className="w-full py-4  text-white font-sans font-semibold rounded-xl hover:shadow-xl transition-all duration-300 tracking-wide"
+                className=" cursor-pointer w-full py-4  text-white font-sans font-semibold rounded-xl hover:shadow-xl transition-all duration-300 tracking-wide"
               >
                 Send Message
               </motion.button>
@@ -121,12 +121,14 @@ const ContactUs = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
+            className="space-y-8 dark:bg-black"
           >
             {/* Contact Cards */}
-            <div className="space-y-4">
+            <div className="space-y-4 ">
+            
               <ContactCard
-                icon={<HiPhone className="text-3xl" />}
+              
+                icon={<HiPhone className="text-3xl " />}
                 title="Phone"
                 info="+1 (555) 123-4567"
                 delay={0.1}
@@ -165,7 +167,7 @@ const ContactUs = () => {
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
-                className="grayscale group-hover:grayscale-0 transition-all duration-500"
+                className="grayscale group-hover:grayscale-0 transition-all duration-500 bg-black"
               ></iframe>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500"></div>
             </motion.div>
@@ -175,10 +177,10 @@ const ContactUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="bg-white rounded-2xl p-8 shadow-lg"
+              className="bg-white dark:bg-black rounded-2xl p-8 shadow-lg"
             >
-              <h3 className="text-2xl font-light mb-4 dark:text-black">Follow Us</h3>
-              <p className="text-gray-600 mb-6 font-sans">
+              <h3 className="text-2xl font-light mb-4 dark:text-white">Follow Us</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6 font-sans">
                 Join our community and stay updated with the latest trends.
               </p>
               <div className="flex gap-4">
@@ -272,7 +274,7 @@ const FloatingInput = ({ name, label, type, value, onChange, focusedField, setFo
         onChange={onChange}
         onFocus={() => setFocusedField(name)}
         onBlur={() => setFocusedField(null)}
-        className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:border-amber-500 focus:outline-none transition-colors duration-300 font-sans"
+        className="w-full px-4 py-3 bg-white dark:bg-black border-2 border-gray-200 dark:border-gray-50 rounded-xl  focus:outline-none transition-colors duration-300 font-sans"
         placeholder=" "
         required
       />
@@ -297,14 +299,14 @@ const ContactCard = ({ icon, title, info, delay }) => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ x: 5 }}
-      className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-start gap-4 group cursor-pointer"
+      className="bg-white dark:bg-black rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-start gap-4 group cursor-pointer"
     >
-      <div className="text-amber-600 bg-amber-50 p-3 rounded-lg group-hover:bg-amber-100 transition-colors duration-300">
+      <div className="text-[#3d2b1a] bg-amber-50 p-3 rounded-lg group-hover:bg-amber-100 transition-colors duration-300">
         {icon}
       </div>
       <div>
-        <h3 className="font-semibold text-gray-800 mb-1 font-sans">{title}</h3>
-        <p className="text-gray-600 font-sans">{info}</p>
+        <h3 className="font-semibold text-gray-800 mb-1 font-sans dark:text-gray-400">{title}</h3>
+        <p className="text-gray-600 font-sans dark:text-gray-300">{info}</p>
       </div>
     </motion.div>
   );
@@ -332,7 +334,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white dark:bg-black py-20">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -341,10 +343,10 @@ const FAQSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-light mb-4 dark:text-black">
+          <h2 className="text-4xl md:text-5xl font-light mb-4 dark:text-white">
             Frequently Asked <span className="italic">Questions</span>
           </h2>
-          <p className="text-gray-600 text-lg font-sans">
+          <p className="text-gray-500 text-lg font-sans">
             Find quick answers to common questions below.
           </p>
         </motion.div>
