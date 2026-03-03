@@ -97,7 +97,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="cursor-pointer bg-white rounded-2xl p-4 transition-all duration-300 group "
+                    className="cursor-pointer bg-white dark:bg-black rounded-2xl p-4 transition-all duration-300 group "
                     // style={{ boxShadow: "0 1px 3px rgba(100,70,40,0.06)" }}
                   >
                     {/* Image */}
@@ -130,7 +130,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                       </motion.div>
 
                       {/* Stock Badge */}
-                      <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600">
+                      <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
                         {product.availabilityStatus} • {product.stock} left
                       </div>
                     </div>
@@ -144,13 +144,13 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                             ⭐
                           </span>
                         ))}
-                      <span className="text-sm text-gray-500 ml-1">
+                      <span className="text-sm text-gray-500 ml-1 dark:text-gray-300">
                         ({product.rating})
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-lg font-semibold text-gray-800  line-clamp-2 h-15">
+                    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300  line-clamp-2 h-15">
                       {product.title}
                     </h2>
                     {/* quantity */}
@@ -158,12 +158,12 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                       <button
                         onClick={(e)=>{e.stopPropagation(),dispatch(decreaseQuantity(product.id))}}
                         // disabled={!cartItem || quantity <= 1}
-                        className="p-1 border border-gray-200 rounded dark:text-black hover:bg-gray-100 disabled:opacity-50  cursor-pointer"
+                        className="p-1 border border-gray-200 rounded dark:text-gray-300  hover:bg-gray-100  hover:dark:text-black disabled:opacity-50  cursor-pointer"
                       >
                         <FiMinus />
                       </button>
 
-                      <span className="px-2 font-normal dark:text-black">{product.quantity}</span>
+                      <span className="px-2 font-normal dark:text-gray-300 ">{product.quantity}</span>
 
                       <button
                         onClick={(e)=>{
@@ -172,7 +172,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                          
 
                         }}
-                        className="p-1 border border-gray-200 rounded dark:text-black cursor-pointer hover:bg-gray-100"
+                        className="p-1 border border-gray-200 rounded dark:text-gray-300  cursor-pointer hover:bg-gray-100 hover:dark:text-black "
                       >
                         <FiPlus />
                       </button>
@@ -181,12 +181,11 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                     {/* Price */}
                     <div className="flex items-center justify-between mt-auto">
                       <span
-                        className="text-2xl font-semibold"
-                        style={{ color: "#5c3d1e" }}
+                        className="text-2xl font-semibold text-[#5c3d1e] dark:text-[#bd9e7d]"
                       >
                         ${product.price}
                       </span>
-                      <span className="text-sm text-[#776a5d]">
+                      <span className="text-sm text-[#776a5d] dark:text-gray-300">
                         {product.discountPercentage}% off
                       </span>
                     </div>
@@ -238,12 +237,8 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
               className="lg:w-96 w-full"
             >
               <div
-                className="rounded-3xl p-6 sticky top-6"
-                style={{
-                  background: "#fff",
-                  border: "1px solid #e8dfd0",
-                  boxShadow: "0 4px 24px rgba(100,70,40,0.08)",
-                }}
+                className="rounded-3xl p-6 sticky top-6 bg-white dark:bg-black border border-[#e8dfd0] shadow-[0_4px_24px_rgba(100,70,40,0.08)]"
+                
               >
                 {/* Sidebar Header */}
                 <div
@@ -255,7 +250,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                     style={{ background: "#8a5c2e" }}
                   />
                   <h3
-                    className="text-xl font-light text-[#1a1410]"
+                    className="text-xl font-light text-[#1a1410] dark:text-white"
                     style={{
                       fontFamily: "'Palatino Linotype', Palatino, serif",
                     }}
@@ -269,7 +264,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                   className="flex justify-between items-center mb-4 pb-4"
                   style={{ borderBottom: "1px solid #f0e8da" }}
                 >
-                  <span className="text-sm font-light text-[#776a5d]">
+                  <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
                     Items in cart
                   </span>
                   <span
@@ -283,17 +278,17 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
 
                 {/* Subtotal */}
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-light text-[#776a5d]">
+                  <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
                     Subtotal
                   </span>
-                  <span className="text-sm font-medium text-[#3d2b1a]">
+                  <span className="text-sm font-medium text-[#3d2b1a] dark:text-gray-300">
                     ${total.toFixed(2)}
                   </span>
                 </div>
 
                 {/* Shipping */}
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-light text-[#776a5d]">
+                  <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
                     Shipping
                   </span>
                   <span className="text-sm font-medium text-green-600">
@@ -306,23 +301,23 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                   className="flex justify-between items-center mb-5 pb-5"
                   style={{ borderBottom: "1px solid #f0e8da" }}
                 >
-                  <span className="text-sm font-light text-[#776a5d]">
+                  <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
                     Tax (10%)
                   </span>
-                  <span className="text-sm font-medium text-[#3d2b1a]">
+                  <span className="text-sm font-medium text-[#3d2b1a] dark:text-gray-300">
                     ${(total * 0.1).toFixed(2)}
                   </span>
                 </div>
 
                 {/* Total */}
                 <div className="flex justify-between items-center mb-6">
-                  <span className="text-base font-medium text-[#1a1410]">
+                  <span className="text-base font-medium text-[#1a1410] dark:text-gray-400">
                     Total
                   </span>
                   <span
-                    className="text-2xl font-light"
+                    className="text-2xl font-light text-[#5c3d1e] dark:text-[#b07235]"
                     style={{
-                      color: "#5c3d1e",
+                     
                       fontFamily: "'Palatino Linotype', Palatino, serif",
                     }}
                   >
@@ -361,10 +356,10 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                 {/* Continue Shopping */}
                 <button
                   onClick={() => navigate("/products")}
-                  className="w-full mt-3 py-3 rounded-xl font-light text-sm transition-all duration-300"
+                  className=" cursor-pointer w-full text-[#5c3d1e] hover:text-black dark:text-gray-300 mt-3 py-3 rounded-xl font-light text-sm transition-all duration-300"
                   style={{
                     border: "1px solid #c8b49a",
-                    color: "#5c3d1e",
+                    
                     background: "transparent",
                   }}
                   onMouseEnter={(e) =>
