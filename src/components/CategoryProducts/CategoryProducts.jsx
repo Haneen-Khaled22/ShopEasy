@@ -63,7 +63,7 @@ const CategoryProducts = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: index * 0.05 }}
-              className="cursor-pointer   p-4 transition-all duration-200 group  "
+              className="cursor-pointer   p-4 transition-all duration-200 group px-4 "
               // style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}
             >
               {/* Image */}
