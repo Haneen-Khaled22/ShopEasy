@@ -9,7 +9,7 @@ const LanguageSwitcher = () => {
     <div className="flex items-center border border-[#c8b49a] rounded-full overflow-hidden text-sm">
       <button
         onClick={() => i18n.changeLanguage("en")}
-        className={`px-4 py-1 transition ${
+        className={`px-3 py-1 transition ${
           currentLang === "en"
             ? "bg-[#5c3d1e] text-white"
             : "bg-transparent text-[#5c3d1e]"
@@ -20,7 +20,7 @@ const LanguageSwitcher = () => {
 
       <button
         onClick={() => i18n.changeLanguage("ar")}
-        className={`px-4 py-1 transition ${
+        className={`px-3 py-1 transition ${
           currentLang === "ar"
             ? "bg-[#5c3d1e] text-white"
             : "bg-transparent text-[#5c3d1e]"

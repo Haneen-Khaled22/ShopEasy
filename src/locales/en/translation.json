@@ -33,17 +33,17 @@
   "Brands": "Brands",
  
   "tryAdjustingFilters": "Try adjusting your filters",
-  "addedToCart": "{{product}} added to Cart",
-  "deletedFromCart": "{{product}} deleted from Cart",
-  "addedToWishlist": "{{product}} added to Wishlist",
-  "deletedFromWishlist": "{{product}} deleted from Wishlist",
+  "addedToCart": "added to Cart",
+  "deletedFromCart": " deleted from Cart",
+  "addedToWishlist": " added to Wishlist",
+  "deletedFromWishlist": "deleted from Wishlist",
   "left": "left",
   "page": "Page",
   "of": "of",
   "goToPage": "Go to page",
   "limitedTime": "Limited time",
-  "getDiscount": "Get {{discount}} off your first order",
-  "useCode": "Use code {{code}} at checkout",
+  "getDiscount": "Get  off your first order",
+  "useCode": "Use code  at checkout",
    "off":"off",
   "learnMore": "Learn More",
   "all":"All",
@@ -83,12 +83,82 @@
   "24/7 Support": "24/7 Support",
   "Always here to help": "Always here to help",
   "FeaturedProducts":"Featured Products",
+  "see all categories":"See All Categories",
 
 
 
   "Discover": "Discover",
   "Shop By": "Shop By",
-  
+  "See More" :"See More" ,
   "categories available": " categories available",
-  "drag or scroll to explore": "← drag or scroll to explore →"
-}
+  "drag or scroll to explore": "← drag or scroll to explore →",
+    "Effortless style, inspired by the future of fashion":  "Effortless style, inspired by the future of fashion"
+
+
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   , "heroEst": "Get In Touch",
+  "heroTitle1": "We'd Love to",
+  "heroTitle2": "Hear From You",
+  "heroSubtitle": "Whether you have questions, feedback, or just want to say hello, we're here for you.",
+  
+  "contactTitle": "Let's",
+  "contactTitleItalic": "Connect",
+  "contactSubtitle": "Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+  
+  "name": "Your Name",
+  "email": "Email Address",
+  "subject": "Subject",
+  "message": "Your Message",
+  "sendButton": "Send Message",
+  
+  "phone": "Phone",
+  "phoneInfo": "+1 (555) 123-4567",
+  "emailInfoTitle": "Email",
+  "emailInfo": "easyshop@gmail.com",
+  "address": "Address",
+  "addressInfo": "123 Luxury Avenue, New York, NY 10001",
+  "hours": "Business Hours",
+  "hoursInfo": "Mon - Fri: 9AM - 6PM",
+  
+  "followUs": "Follow Us",
+  "followUsSubtitle": "Join our community and stay updated with the latest trends.",
+  
+  "faqTitle": "Frequently Asked Questions",
+  "faqTitleItalic": "Questions",
+  "faqSubtitle": "Find quick answers to common questions below.",
+  "newsletterTitle": "Stay In",
+  "newsletterTitleItalic": "The Loop",
+  "newsletterSubtitle": "Subscribe to our newsletter for exclusive offers, new arrivals, and design inspiration.",
+  "newsletterPlaceholder": "Enter your email",
+  "newsletterButton": "Subscribe",
+  "newsletterDisclaimer": "No spam, ever. Unsubscribe anytime.",
+
+
+  "faqShippingQ": "What are your shipping options?",
+  "faqShippingA": "We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on orders over $100.",
+  "faqReturnQ": "What is your return policy?",
+  "faqReturnA": "We accept returns within 30 days of delivery. Items must be unused and in original packaging.",
+  "faqInternationalQ": "Do you ship internationally?",
+  "faqInternationalA": "Yes! We ship to over 50 countries worldwide. Shipping costs vary by location.",
+  "faqTrackQ": "How can I track my order?",
+  "faqTrackA": "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account."
+  
+  }

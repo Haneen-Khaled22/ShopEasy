@@ -63,9 +63,10 @@ const Navbar = () => {
   const IconButton = ({ onClick, children, badge }) => (
     <button
       onClick={onClick}
-      className="cursor-pointer relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
+      className="cursor-pointer relative w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
         bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
-        transition-all duration-300 hover:bg-[rgba(92,61,30,0.13)] hover:border-[#b89870]"
+        transition-all duration-300 hover:bg-[rgba(92,61,30,0.13)] hover:border-[#b89870]
+        shrink-0"
     >
       {children}
       {badge > 0 && (
@@ -82,13 +83,20 @@ const Navbar = () => {
   return (
     <>
       {/* ── Announcement bar ── */}
-      <div className="flex flex-col sm:flex-row justify-center items-center py-2 px-4
-        bg-gradient-to-r from-[#f5f0e8] via-[#ede4d3] to-[#f5f0e8]
-        border-b border-[#ddd4c0] gap-1 sm:gap-4">
-        <p className="text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8a6f4e] text-center">
+     <div
+  className="
+    flex flex-col sm:flex-row
+    justify-center items-center
+    py-2 px-3
+    bg-gradient-to-r from-[#f5f0e8] via-[#ede4d3] to-[#f5f0e8]
+    border-b border-[#ddd4c0]
+    gap-0.5 xs:gap-2 sm:gap-4
+  "
+>
+        <p className="text-[9px] xs:text-[10px] sm:text-[11px] tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8a6f4e] text-center leading-relaxed">
           ✦ Free shipping on orders over $50
         </p>
-        <p className="text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8a6f4e] text-center">
+        <p className="text-[9px] xs:text-[10px] sm:text-[11px] tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8a6f4e] text-center leading-relaxed">
           Use code <span className="text-[#5c3d1e] font-medium">SHOPEASY20</span> for 20% off ✦
         </p>
       </div>
@@ -101,21 +109,21 @@ const Navbar = () => {
           : "bg-[#fffcf7] dark:bg-black"
         }`}
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[62px] sm:h-[68px]">
+        <div className="mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 max-w-screen-2xl">
+          <div className="flex items-center justify-between h-[56px] xs:h-[60px] sm:h-[68px]">
 
             {/* ── Logo ── */}
-            <NavLink to="/" className="flex items-center gap-2.5 group shrink-0">
-              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden"
+            <NavLink to="/" className="flex items-center gap-2 xs:gap-2.5 group shrink-0">
+              <div className="relative w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden"
                 style={{ boxShadow: "0 0 0 1px #ddd4c0, 0 4px 12px rgba(100,70,40,0.12)" }}>
                 <img src={shopicon} alt="ShopEasy" className="w-full h-full object-cover dark:invert" />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="text-[15px] sm:text-[17px] font-normal text-[#1a1410] dark:text-gray-300 tracking-wide"
+                <span className="text-[14px] xs:text-[15px] sm:text-[17px] font-normal text-[#1a1410] dark:text-gray-300 tracking-wide"
                   style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif" }}>
                   Shop<span className="dark:text-[#bd9e7d]">Easy</span>
                 </span>
-                <span className="text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.35em] uppercase mt-0.5"
+                <span className="hidden xs:block text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.35em] uppercase mt-0.5"
                   style={{ color: "#b89870" }}>
                   Premium Store
                 </span>
@@ -123,13 +131,13 @@ const Navbar = () => {
             </NavLink>
 
             {/* ── Desktop Links ── */}
-            <div className="hidden md:flex items-center gap-0.5 lg:gap-1">
+            <div className="hidden md:flex items-center gap-0 lg:gap-0.5 xl:gap-1">
               {navLinks.map(({ to, label }) => (
                 <NavLink
                   key={to}
                   to={to}
                   className={({ isActive }) =>
-                    `relative px-3 lg:px-5 py-2 text-[12px] lg:text-[13px] tracking-[0.06em] lg:tracking-[0.08em] uppercase font-semibold transition-all duration-250
+                    `relative px-2.5 lg:px-4 xl:px-5 py-2 text-[11px] lg:text-[12px] xl:text-[13px] tracking-[0.05em] lg:tracking-[0.07em] xl:tracking-[0.08em] uppercase font-semibold transition-all duration-250
                     ${isActive ? "text-[#5c3d1e] dark:text-[#ba8c5b]" : "text-[#776a5d] dark:text-[#bd9e7d] hover:text-[#1a1410] dark:hover:text-[#e0c9a8]"}`
                   }
                 >
@@ -150,13 +158,13 @@ const Navbar = () => {
             </div>
 
             {/* ── Right Actions ── */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5">
 
               {/* Sign In — desktop only */}
               <button
                 onClick={() => navigate("/login")}
-                className="hidden sm:flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full
-                  text-[11px] lg:text-[12px] tracking-[0.1em] lg:tracking-[0.12em] uppercase font-semibold
+                className="hidden lg:flex items-center gap-1.5 px-4 xl:px-5 py-2 rounded-full
+                  text-[11px] xl:text-[12px] tracking-[0.1em] xl:tracking-[0.12em] uppercase font-semibold
                   border border-[#c8b49a] dark:border-gray-500
                   text-[#776a5d] dark:text-gray-300 bg-transparent
                   transition-all duration-300 ease-in-out cursor-pointer
@@ -167,24 +175,24 @@ const Navbar = () => {
 
               {/* Cart */}
               <IconButton onClick={() => navigate("/cart")} badge={cart.length}>
-                <HiOutlineShoppingBag className="w-[17px] h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
+                <HiOutlineShoppingBag className="w-[16px] h-[16px] xs:w-[17px] xs:h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
               </IconButton>
 
               {/* Wishlist */}
               <IconButton onClick={() => navigate("/wishlist")} badge={wishlist.length}>
-                <FiHeart className="w-[17px] h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
+                <FiHeart className="w-[16px] h-[16px] xs:w-[17px] xs:h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
               </IconButton>
 
               {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
-                className="cursor-pointer w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
+                className="cursor-pointer w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0
                   bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
                   transition-all duration-300 hover:bg-[rgba(92,61,30,0.13)] hover:border-[#b89870]"
               >
                 {theme === "dark"
-                  ? <FiSun className="w-[16px] h-[16px] text-[#5c3d1e] dark:text-yellow-300" />
-                  : <FiMoon className="w-[16px] h-[16px] text-[#5c3d1e]" />
+                  ? <FiSun className="w-[15px] h-[15px] xs:w-[16px] xs:h-[16px] text-[#5c3d1e] dark:text-yellow-500" />
+                  : <FiMoon className="w-[15px] h-[15px] xs:w-[16px] xs:h-[16px] text-[#5c3d1e]" />
                 }
               </button>
 
@@ -193,24 +201,29 @@ const Navbar = () => {
                 <button
                   onClick={() => setShowLogoutPopup(true)}
                   className="hidden md:flex items-center gap-1.5 cursor-pointer
-                    px-3 lg:px-4 py-2 rounded-full
-                    text-[11px] lg:text-[12px] tracking-[0.1em] uppercase font-semibold
+                    px-3 xl:px-4 py-2 rounded-full
+                    text-[10px] xl:text-[12px] tracking-[0.08em] xl:tracking-[0.1em] uppercase font-semibold
                     border border-red-200 dark:border-gray-300
                     text-red-700 dark:text-gray-300 bg-transparent
                     transition-all duration-300
                     hover:bg-red-600 hover:text-white hover:border-red-700"
                 >
-                  <FiLock className="w-3.5 h-3.5" />
-                  <span>{t("sign out")}</span>
+                  <FiLock className="w-3 h-3 xl:w-3.5 xl:h-3.5" />
+                  <span className="hidden lg:inline">{t("sign out")}</span>
                 </button>
               )}
-              {/* langauage  */}
-              <LanguageSwitcher/>
+
+              {/* ── Language Switcher — styled wrapper ── */}
+              <div className="shrink-0
+               
+              ">
+                <LanguageSwitcher/>
+              </div>
 
               {/* Hamburger — mobile only */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden w-9 h-9 rounded-full flex items-center justify-center
+                className="md:hidden w-8 h-8 xs:w-9 xs:h-9 rounded-full flex items-center justify-center shrink-0
                   bg-[rgba(92,61,30,0.06)] border border-[#d4c4b0] dark:border-gray-600
                   transition-all duration-200 hover:border-[#b89870] cursor-pointer"
                 aria-label="Toggle menu"
@@ -251,7 +264,7 @@ const Navbar = () => {
               className="md:hidden overflow-hidden border-t border-[#e8dfd0] dark:border-gray-700
                 bg-[#fffcf7] dark:bg-black"
             >
-              <div className="px-4 sm:px-6 pt-3 pb-5 space-y-1">
+              <div className="px-3 xs:px-4 sm:px-6 pt-3 pb-5 space-y-1">
                 {navLinks.map(({ to, label }, i) => (
                   <motion.div
                     key={to}
@@ -285,6 +298,8 @@ const Navbar = () => {
 
                 {/* Mobile bottom actions */}
                 <div className="pt-3 mt-1 space-y-2 border-t border-[#e8dfd0] dark:border-gray-700">
+
+                  {/* Sign In */}
                   <button
                     onClick={() => { navigate("/login"); setMobileOpen(false); }}
                     className="cursor-pointer w-full py-3 rounded-full
@@ -294,7 +309,7 @@ const Navbar = () => {
                       hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]
                       transition-colors duration-200"
                   >
-                  {t("sign in")} / {t("sign up")}
+                    {t("sign in")} / {t("sign up")}
                   </button>
 
                   {token && (
@@ -333,7 +348,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 12 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="bg-white dark:bg-[#0f0a06] p-7 rounded-3xl shadow-2xl w-full max-w-[320px] text-center"
+              className="bg-white dark:bg-[#0f0a06] p-6 xs:p-7 rounded-3xl shadow-2xl w-full max-w-[300px] xs:max-w-[320px] text-center"
               style={{ border: "1px solid #e8dfd0" }}
             >
               <div className="text-4xl mb-3">🔒</div>
@@ -350,7 +365,7 @@ const Navbar = () => {
               <div className="flex justify-center gap-3">
                 <button
                   onClick={() => setShowLogoutPopup(false)}
-                  className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light
+                  className="cursor-pointer px-4 xs:px-5 py-2.5 rounded-full text-sm font-light
                     border border-[#d4c4b0] dark:border-gray-600
                     text-[#776a5d] dark:text-gray-400 bg-transparent
                     hover:bg-[#f5ede0] dark:hover:bg-[#1a1208] transition-colors duration-200"
@@ -368,8 +383,8 @@ const Navbar = () => {
                       setShowLogoutPopup(false);
                     }, 500);
                   }}
-                  className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white
-                    transition-all duration-200 min-w-[100px]"
+                  className="cursor-pointer px-4 xs:px-5 py-2.5 rounded-full text-sm font-light text-white
+                    transition-all duration-200 min-w-[90px] xs:min-w-[100px]"
                   style={{ background: "#5c3d1e" }}
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#3d2b1a")}
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#5c3d1e")}

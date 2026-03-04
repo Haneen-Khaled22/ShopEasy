@@ -53,12 +53,12 @@ const Checkout = () => {
   const inputCls = `w-full px-4 py-3 rounded-xl text-sm font-light outline-none transition-all duration-200 bg-[#fdf9f4] border border-[#ddd0be] focus:border-[#8a5c2e] focus:ring-2 focus:ring-[#8a5c2e]/10 placeholder:text-[#b8a898] text-[#3d2b1a]`;
 
   return (
-    <div className="min-h-screen bg-[#faf8f4]">
+    <div className="min-h-screen bg-[#faf8f4] dark:bg-black">
 
       {/* ── TOP BAR ── */}
       <div
         style={{ background: "#ede4d3", borderBottom: "1px solid #ddd0be" }}
-        className="px-6 py-4 flex items-center justify-between"
+        className="px-6 py-4 flex items-center justify-between "
       >
         <button
           onClick={() => navigate("/cart")}
@@ -128,13 +128,13 @@ const Checkout = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.35 }}
-                  className="bg-white rounded-3xl p-8"
+                  className="bg-white dark:bg-black rounded-3xl p-8"
                   style={{ border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.06)" }}
                 >
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-1 h-6 rounded-full" style={{ background: "#8a5c2e" }} />
                     <h2
-                      className="text-xl font-light text-[#1a1410]"
+                      className="text-xl font-light text-[#1a1410] dark:text-gray-300"
                       style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                     >
                       Shipping <span className="italic text-[#8a5c2e]">Details</span>

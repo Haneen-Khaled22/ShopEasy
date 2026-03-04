@@ -11,6 +11,8 @@ export default {
         mono: ['Roboto Mono', 'monospace'], // للأرقام لو عايزة monospaced
         display: ['Poppins', 'sans-serif'], // للعناوين الكبيرة
       },
+      screens: {
+        'xs': '480px'}
     },
   },
   plugins: [],

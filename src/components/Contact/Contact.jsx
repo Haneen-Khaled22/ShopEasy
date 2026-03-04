@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { HiPhone, HiMail, HiLocationMarker, HiClock } from 'react-icons/hi';
 import { FaFacebook, FaInstagram, FaTwitter, FaPinterest } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const ContactUs = () => {
     subject: '',
     message: ''
   });
+
+  const {t} = useTranslation();
 
   const [focusedField, setFocusedField] = useState(null);
 
@@ -39,10 +42,10 @@ const ContactUs = () => {
           >
             <div className="mb-8">
               <h2 className="text-4xl md:text-5xl font-light mb-4">
-                Let's <span className="italic">Connect</span>
+  {t("heroTitle1")} <span className="italic">{t("heroTitle2")}</span>
               </h2>
               <p className="text-gray-600 text-lg font-sans">
-                Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+  {t("heroSubtitle")}
               </p>
             </div>
 
@@ -50,7 +53,7 @@ const ContactUs = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <FloatingInput
                   name="name"
-                  label="Your Name"
+                  label={t("name")}
                   type="text"
                   value={formData.name}
                   onChange={handleChange}
@@ -59,7 +62,7 @@ const ContactUs = () => {
                 />
                 <FloatingInput
                   name="email"
-                  label="Email Address"
+                  label={t("email")}
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -70,7 +73,7 @@ const ContactUs = () => {
 
               <FloatingInput
                 name="subject"
-                label="Subject"
+                label={t("subject")}
                 type="text"
                 value={formData.subject}
                 onChange={handleChange}
@@ -97,7 +100,7 @@ const ContactUs = () => {
                       : 'top-3 text-gray-500'
                   }`}
                 >
-                  Your Message
+                 {t("message")}
                 </label>
               </div>
 
@@ -111,7 +114,7 @@ const ContactUs = () => {
           }}
                 className=" cursor-pointer w-full py-4  text-white font-sans font-semibold rounded-xl hover:shadow-xl transition-all duration-300 tracking-wide"
               >
-                Send Message
+             { t( "sendButton")}
               </motion.button>
             </form>
           </motion.div>
@@ -127,30 +130,29 @@ const ContactUs = () => {
             <div className="space-y-4 ">
             
               <ContactCard
-              
-                icon={<HiPhone className="text-3xl " />}
-                title="Phone"
-                info="+1 (555) 123-4567"
-                delay={0.1}
-              />
-              <ContactCard
-                icon={<HiMail className="text-3xl" />}
-                title="Email"
-                info="easyshop@gmail.com"
-                delay={0.2}
-              />
-              <ContactCard
-                icon={<HiLocationMarker className="text-3xl" />}
-                title="Address"
-                info="123 Luxury Avenue, New York, NY 10001"
-                delay={0.3}
-              />
-              <ContactCard
-                icon={<HiClock className="text-3xl" />}
-                title="Business Hours"
-                info="Mon - Fri: 9AM - 6PM"
-                delay={0.4}
-              />
+  icon={<HiPhone className="text-3xl" />}
+  title={t("phone")}
+  info={t("phoneInfo")}
+  delay={0.1}
+/>
+<ContactCard
+  icon={<HiMail className="text-3xl" />}
+  title={t("emailInfoTitle")}
+  info={t("emailInfo")}
+  delay={0.2}
+/>
+<ContactCard
+  icon={<HiLocationMarker className="text-3xl" />}
+  title={t("address")}
+  info={t("addressInfo")}
+  delay={0.3}
+/>
+<ContactCard
+  icon={<HiClock className="text-3xl" />}
+  title={t("hours")}
+  info={t("hoursInfo")}
+  delay={0.4}
+/>
             </div>
 
             {/* Map */}
@@ -179,9 +181,9 @@ const ContactUs = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="bg-white dark:bg-black rounded-2xl p-8 shadow-lg"
             >
-              <h3 className="text-2xl font-light mb-4 dark:text-white">Follow Us</h3>
+              <h3 className="text-2xl font-light mb-4 dark:text-white">{t("followUs")}</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6 font-sans">
-                Join our community and stay updated with the latest trends.
+                {t("followUsSubtitle")}
               </p>
               <div className="flex gap-4">
                 {[
@@ -217,12 +219,13 @@ const ContactUs = () => {
 
 // Hero Section
 const HeroSection = () => {
+  const {t} = useTranslation();
   return (
     <section className="relative h-[50vh] overflow-hidden">
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=800&fit=crop"
-          alt="Contact us"
+          alt={t("heroImgAlt")}
           className="w-full h-full object-cover brightness-50"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
@@ -240,7 +243,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-sm tracking-[0.3em] uppercase mb-4 text-amber-200 font-sans"
         >
-          Get In Touch
+          {t("heroEst")}
         </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -248,7 +251,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl font-light mb-4"
         >
-          We'd Love to <span className="italic">Hear</span> From You
+          {t("heroTitle1")} <span className="italic">{t("heroTitle2")}</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -256,8 +259,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-gray-200 max-w-2xl font-sans font-light"
         >
-          Whether you have questions, feedback, or just want to say hello, we're here for you.
-        </motion.p>
+  {t("heroSubtitle")}        </motion.p>
       </motion.div>
     </section>
   );
@@ -314,23 +316,13 @@ const ContactCard = ({ icon, title, info, delay }) => {
 
 // FAQ Section
 const FAQSection = () => {
+
+  const {t} = useTranslation();
   const faqs = [
-    {
-      question: "What are your shipping options?",
-      answer: "We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on orders over $100."
-    },
-    {
-      question: "What is your return policy?",
-      answer: "We accept returns within 30 days of delivery. Items must be unused and in original packaging."
-    },
-    {
-      question: "Do you ship internationally?",
-      answer: "Yes! We ship to over 50 countries worldwide. Shipping costs vary by location."
-    },
-    {
-      question: "How can I track my order?",
-      answer: "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account."
-    }
+    { question: t("faqShippingQ"), answer: t("faqShippingA") },
+    { question: t("faqReturnQ"), answer: t("faqReturnA") },
+    { question: t("faqInternationalQ"), answer: t("faqInternationalA") },
+    { question: t("faqTrackQ"), answer: t("faqTrackA") }
   ];
 
   return (
@@ -344,11 +336,10 @@ const FAQSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-light mb-4 dark:text-white">
-            Frequently Asked <span className="italic">Questions</span>
+            {t("faqTitle")} 
           </h2>
           <p className="text-gray-500 text-lg font-sans">
-            Find quick answers to common questions below.
-          </p>
+{t("faqSubtitle")  }        </p>
         </motion.div>
 
         <div className="space-y-4">
@@ -402,6 +393,7 @@ const FAQItem = ({ faq, index }) => {
 // Newsletter Section
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
+  const {t} = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -430,10 +422,10 @@ const NewsletterSection = () => {
         className="relative z-10 max-w-3xl mx-auto px-6 text-center text-white"
       >
         <h2 className="text-4xl md:text-5xl font-light mb-4">
-          Stay In <span className="italic">The Loop</span>
+          {t("newsletterTitle")} <span className="italic">{t("newsletterTitleItalic")}</span>
         </h2>
         <p className="text-lg mb-8 text-amber-50 font-sans font-light">
-          Subscribe to our newsletter for exclusive offers, new arrivals, and design inspiration.
+          {t("newsletterSubtitle")}
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
@@ -441,7 +433,7 @@ const NewsletterSection = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder={t("newsletterPlaceholder")}
             className="flex-1 px-6 py-4 rounded-xl bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-white transition-colors duration-300 font-sans"
             required
           />
@@ -452,12 +444,13 @@ const NewsletterSection = () => {
 
             className=" cursor-pointer px-8 py-4 bg-white text-amber-600 font-sans font-semibold rounded-xl hover:bg-amber-50 transition-colors duration-300 shadow-xl"
           >
-            Subscribe
+                        {t("newsletterButton")}
+
           </motion.button>
         </form>
 
         <p className="mt-6 text-sm text-amber-100 font-sans">
-          No spam, ever. Unsubscribe anytime.
+          {t("newsletterDisclaimer")}
         </p>
       </motion.div>
     </section>

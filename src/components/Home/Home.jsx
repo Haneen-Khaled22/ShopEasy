@@ -4,10 +4,12 @@ import Products from '../Products/Products';
 import{ IoIosArrowForward } from "react-icons/io"; 
 import { useNavigate } from 'react-router-dom';
 import CategoriesComponent from '../Categories/Categories';
+import { useTranslation } from 'react-i18next';
 
 
 const Home = () => {
    const navigate = useNavigate();
+   const {t} = useTranslation();
 
    const navigateToAllProducts =()=>{
     navigate('/products')
@@ -33,7 +35,7 @@ const Home = () => {
       w-fit
     "
   >
-    See All Categories
+    {t("see all categories")}
     <IoIosArrowForward className="text-sm" />
   </button>
 
@@ -44,10 +46,10 @@ const Home = () => {
   
   <div>
     <h2 className="text-2xl font-semibold">
-      Featured Products
+    { t( "FeaturedProducts")}
     </h2>
     <p className="text-sm text-gray-600 mt-1">
-      Effortless style, inspired by the future of fashion
+     { t("Effortless style, inspired by the future of fashion")}
     </p>
   </div>
 
@@ -57,7 +59,7 @@ const Home = () => {
                hover:bg-gray-100 dark:hover:text-black 
                transition cursor-pointer w-fit"
   >
-    See More  
+   { t("See More" )}
     <IoIosArrowForward className="text-sm" />
   </button>
 

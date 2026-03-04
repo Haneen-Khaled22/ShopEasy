@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, decreaseQuantity, deleteFromCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
-import { FiMinus, FiMinusCircle, FiPlus } from "react-icons/fi";
+import { FiMinus, FiMinusCircle, FiPlus, FiSearch } from "react-icons/fi";
 import Breadcrumbs from "../BreadCrumb/BreadCrumb";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar, useSnackbar } from "notistack";
 
@@ -15,6 +15,8 @@ const Cart = () => {
   const [productsToClear, setProductsToClear] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
+   const [searchQuery, setSearchQuery] = useState("");
+    const [sortBy, setSortBy] = useState("default");
   useEffect(() => {
   const timer = setTimeout(() => {
     setIsPageLoading(false);
@@ -29,7 +31,7 @@ const Cart = () => {
   const total = cart.reduce((sum, product) => {
   const discountedPrice =
     product.price - (product.price * product.discountPercentage) / 100;
-  return sum + discountedPrice * product.quantity; // ضرب في الكمية
+  return sum + discountedPrice * product.quantity; 
 }, 0);
 if (isPageLoading) {
   return (
@@ -38,8 +40,17 @@ if (isPageLoading) {
     </div>
   );
 }
-const token = localStorage.getItem("token"); // token موجود لو في يوزر
-// const user = useSelector(state => state.auth.auth); // لو عندك user مخزن
+const token = localStorage.getItem("token"); 
+
+ const filteredCart = cart
+    .filter((p) =>
+      p.title?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "price-asc") return a.price - b.price;
+      if (sortBy === "price-desc") return b.price - a.price;
+      return 0;
+    });
 
   return (
     
@@ -66,7 +77,35 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                 {cart.length} item{cart.length !== 1 ? "s" : ""}
               </p>
             </div>
-            <button
+             <div className="flex items-center gap-3 flex-wrap">
+                          {/* Search */}
+                          <div
+                            className="flex items-center gap-2 px-4 py-2 rounded-full text-sm border border-[#c8b49a] bg-white
+                             dark:bg-black dark:text-gray-300 dark:border-gray-300"
+                          >
+                            <FiSearch className="text-[#776a5d] dark:text-gray-300" />
+                            <input
+                              type="text"
+                              placeholder="Search items..."
+                              value={searchQuery}
+                              onChange={(e) => setSearchQuery(e.target.value)}
+                              className="outline-none bg-transparent text-[#3d2b1a] dark:text-gray-300 placeholder-[#b0a090] text-sm w-36"
+                            />
+                          </div>
+            
+                          {/* Sort */}
+                          <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="px-4 py-2 border border-[#c8b49a] bg-white rounded-full text-sm outline-none cursor-pointer dark:bg-black dark:text-gray-300 dark:border-gray-300"
+                           
+                          >
+                            <option value="default">Sort: Default</option>
+                            <option value="price-asc">Price: Low → High</option>
+                            <option value="price-desc">Price: High → Low</option>
+                           
+                          </select>
+                             <button
   onClick={setProductsToClear}
   className="
     cursor-pointer flex items-center gap-2 px-5 py-2 
@@ -81,6 +120,8 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
 >
   ✕ Clear All
 </button>
+                          </div>
+         
           </motion.div>
         ) : null}
 
@@ -89,8 +130,18 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
           {/* Products Grid */}
           <div className="flex-1">
             {cart.length > 0 ? (
+           <AnimatePresence>
+            {filteredCart.length === 0 ? (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center text-[#776a5d] mt-16 text-sm"
+              >
+                No items match your search.
+              </motion.p>
+            ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-5">
-                {cart.map((product, index) => (
+                {filteredCart?.map((product, index) => (
                   <motion.div
                     key={product.id}
                     onClick={() => navigate(`/product/${product.id}`)}
@@ -192,7 +243,9 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                   </motion.div>
                 ))}
               </div>
-            ) : (
+            )}
+              </AnimatePresence>):
+            (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -225,7 +278,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
                   Browse Products
                 </button>
               </motion.div>
-            )}
+            )} 
           </div>
 
           {/* Checkout Sidebar */}
@@ -390,7 +443,7 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
               </div>
             </motion.div>
           )}
-        </div>
+        {/* </div> */}
 
         {/* ── Delete Modal ── */}
         {productToDelete && (
@@ -546,9 +599,9 @@ const token = localStorage.getItem("token"); // token موجود لو في يو�
             </motion.div>
           </div>
         )}
-      </div>
-    </div>
-  );
-};
+        </div>
+        </div>
+        </div>);
+}
 
 export default Cart;
