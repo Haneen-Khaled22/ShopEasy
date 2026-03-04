@@ -7,20 +7,25 @@ import { FiHeart, FiLock, FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../../Context/ThemeContext";
 import { logout } from "../../Redux/Slices/AuthSlice";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
-const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/products", label: "Products" },
-  { to: "/categories", label: "Categories" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-];
+
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [logoutLoading, setLogoutLoading] = useState(false);
+  const {t} = useTranslation();
+
+ const navLinks = [
+  { to: "/", label: t("home") },
+  { to: "/products", label: t("products") },
+  { to: "/categories", label: t("categories") },
+  { to: "/about", label: t("about") },
+  { to: "/contact", label: t("contact") },
+];
 
   const { toggleTheme, theme } = useContext(ThemeContext);
   const cart = useSelector((state) => state.cart);
@@ -157,7 +162,7 @@ const Navbar = () => {
                   transition-all duration-300 ease-in-out cursor-pointer
                   hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]"
               >
-                Sign In
+                {t("sign in")}
               </button>
 
               {/* Cart */}
@@ -196,9 +201,11 @@ const Navbar = () => {
                     hover:bg-red-600 hover:text-white hover:border-red-700"
                 >
                   <FiLock className="w-3.5 h-3.5" />
-                  <span>Sign Out</span>
+                  <span>{t("sign out")}</span>
                 </button>
               )}
+              {/* langauage  */}
+              <LanguageSwitcher/>
 
               {/* Hamburger — mobile only */}
               <button
@@ -287,7 +294,7 @@ const Navbar = () => {
                       hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]
                       transition-colors duration-200"
                   >
-                    Sign In / Sign Up
+                  {t("sign in")} / {t("sign up")}
                   </button>
 
                   {token && (

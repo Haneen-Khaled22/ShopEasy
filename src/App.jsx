@@ -20,8 +20,17 @@ import Login from "./components/Login/Login";
 import Register from "./components/Rejester/Rejester";
 import { ThemeProvider } from "./Context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 function App() {
+
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.dir =
+      i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
   const router = createBrowserRouter([
     {
       path: "/",

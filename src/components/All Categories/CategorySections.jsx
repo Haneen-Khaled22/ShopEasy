@@ -33,6 +33,7 @@ import { useNavigate } from "react-router-dom";
 import { getCategoryProducts } from "../../Redux/Slices/CategoryProducts";
 import Products from "../Products/Products";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 const categoryImages = [
   beauty, fragrances, furniture, groceries,
@@ -43,12 +44,7 @@ const categoryImages = [
   womensDresses, womensJewellery, womensShoes, womensWatches,
 ];
 
-const features = [
-  { icon: "✦", title: "Free Shipping", desc: "On all orders over $50" },
-  { icon: "◈", title: "Easy Returns", desc: "30-day return policy" },
-  { icon: "⬡", title: "Secure Payment", desc: "100% protected checkout" },
-  { icon: "◎", title: "24/7 Support", desc: "Always here to help" },
-];
+
 
 const CategorySections = () => {
   const {data,loading,error} = useSelector((state) => state.category);
@@ -60,6 +56,14 @@ const CategorySections = () => {
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
+  const features = [
+  { icon: "✦", title: t("Free Shipping"), desc: t("On all orders over $50") },
+  { icon: "◈", title: t("Easy Returns"), desc: t("30-day return policy") },
+  { icon: "⬡", title: t("Secure Payment"), desc: t("100% protected checkout") },
+  { icon: "◎", title: t("24/7 Support"), desc: t("Always here to help") }
+];
 
   useEffect(() => { dispatch(getAllCategories()); }, []);
   const { enqueueSnackbar } = useSnackbar();
@@ -151,7 +155,7 @@ const CategorySections = () => {
     >
       <div className="w-6 h-px sm:w-8 bg-amber-400" />
       <span className="text-[9px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-amber-400 font-medium">
-        New Collection 2025
+        {t("New Collection 2025")}
       </span>
     </motion.div>
 
@@ -162,11 +166,14 @@ const CategorySections = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
     >
-      Where Timeless
+      {t("Where Timeless")}
       <br />
-      <span className="italic text-amber-200 text-3xl sm:text-5xl md:text-6xl lg:text-7xl">Beauty</span> Meets
+      <span className="italic text-amber-200 text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+        {t("Beauty")}
+      </span> {t("Meets")}
       <br />
-      <span className="font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Modern Craft</span>
+      <span className="font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        {t("Modern Craft")}</span>
     </motion.h1>
 
     <motion.p
@@ -175,8 +182,7 @@ const CategorySections = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.55 }}
     >
-      Discover the latest trends and exclusive styles curated just for you — from beauty to furniture.
-    </motion.p>
+{t("Discover the latest trends and exclusive styles curated just for you — from beauty to furniture.")}   </motion.p>
 
    <motion.div
   className="flex flex-wrap sm:flex-row items-start sm:items-center gap-3 sm:gap-4"
@@ -188,14 +194,14 @@ const CategorySections = () => {
     onClick={() => navigate("/products")}
     className="cursor-pointer w-auto px-4 sm:px-6 py-2 sm:py-3 bg-white text-black text-sm font-medium flex items-center gap-2 hover:bg-amber-500 hover:text-white transition-all duration-300 rounded-full"
   >
-    Explore Collection
+    {t("Explore Collection")}
     <HiArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
   </button>
   <button
     onClick={() => scrollRef.current?.scrollIntoView({ behavior: "smooth" })}
     className="cursor-pointer w-auto px-4 sm:px-6 py-2 sm:py-3 border border-white/40 text-white text-sm font-light hover:border-white/80 transition-all duration-300 rounded-full"
   >
-    Browse Categories
+    {t("Browse Categories")}
   </button>
 </motion.div>
   </div>
@@ -207,7 +213,7 @@ const CategorySections = () => {
     animate={{ opacity: 1 }}
     transition={{ delay: 1.5 }}
   >
-    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/50">Scroll</span>
+    <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/50">{t("Scroll")}</span>
     <motion.div
       className="w-px h-8 sm:h-10 bg-white/30"
       animate={{ scaleY: [1, 0.4, 1], opacity: [0.3, 0.8, 0.3] }}
@@ -234,83 +240,81 @@ const CategorySections = () => {
       {/* ══ SHOP BY CATEGORY ══ */}
        
       <div className="max-w-7xl mx-auto mt-20 px-4">
-        {/* Section heading */}
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-6 h-px bg-amber-600" />
-              <p className="text-xs uppercase tracking-[0.3em] text-amber-600 font-medium">Discover</p>
-            </div>
-            <h2
-              className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white"
-            >
-              Shop By <span className="italic text-[#6b5744] ">Category</span>
-            </h2>
-          </div>
-          <p className="hidden md:block text-sm text-gray-400 font-light">
-            {data?.length} categories available
-          </p>
-        </div>
-
-        {/* Scrollable cards */}
-        <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto select-none pb-4"
-          onWheel={handleWheel}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => { setIsHovering(false); setIsDragging(false); }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          style={{
-            scrollBehavior: "auto",
-            msOverflowStyle: "none",
-            scrollbarWidth: "none",
-            cursor: isDragging ? "grabbing" : "grab",
-          }}
-        >
-          {[...data, ...data].map((cat, index) => (
-            <motion.div
-              key={index}
-              onClick={() => handleCategoryClick(cat)}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.25 }}
-              className={`min-w-[180px] flex-shrink-0 cursor-pointer group rounded-2xl overflow-hidden relative
-                ${selectedCategory === cat.slug ? "ring-2 ring-amber-500 ring-offset-2" : ""}
-              `}
-            >
-              <div className="relative w-full h-[240px] overflow-hidden ">
-                <img
-                  src={categoryImages[index % categoryImages.length]}
-                  alt={cat.slug}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  draggable="false"
-                />
-                {/* Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-
-                {/* Active indicator */}
-                {selectedCategory === cat.slug && (
-                  <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50" />
-                )}
-
-                {/* Name */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h2 className="text-white text-sm font-light capitalize tracking-wide leading-snug">
-                    {cat.slug.replace(/-/g, " ")}
-                  </h2>
-                  <div className="w-0 group-hover:w-full h-px bg-amber-400/70 transition-all duration-400 mt-1.5" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Drag hint */}
-        <p className="text-center text-xs text-gray-400 mt-4 tracking-widest uppercase">
-          ← drag or scroll to explore →
-        </p>
+  {/* Section heading */}
+  <div className="flex items-end justify-between mb-10">
+    <div>
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-6 h-px bg-amber-600" />
+        <p className="text-xs uppercase tracking-[0.3em] text-amber-600 font-medium">{t("Discover")}</p>
       </div>
+      <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white">
+        {t("Shop By")} <span className="italic text-[#6b5744] ">{t("Category")}</span>
+      </h2>
+    </div>
+    <p className="hidden md:block text-sm text-gray-400 font-light">
+      {data?.length} {t("categories available")}
+    </p>
+  </div>
+
+  {/* Scrollable cards */}
+  <div
+    ref={scrollRef}
+    className="flex gap-5 overflow-x-auto select-none pb-4"
+    onWheel={handleWheel}
+    onMouseEnter={() => setIsHovering(true)}
+    onMouseLeave={() => { setIsHovering(false); setIsDragging(false); }}
+    onMouseDown={handleMouseDown}
+    onMouseMove={handleMouseMove}
+    onMouseUp={handleMouseUp}
+    style={{
+      scrollBehavior: "auto",
+      msOverflowStyle: "none",
+      scrollbarWidth: "none",
+      cursor: isDragging ? "grabbing" : "grab",
+    }}
+  >
+    {[...data, ...data].map((cat, index) => (
+      <motion.div
+        key={index}
+        onClick={() => handleCategoryClick(cat)}
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.25 }}
+        className={`min-w-[180px] flex-shrink-0 cursor-pointer group rounded-2xl overflow-hidden relative
+          ${selectedCategory === cat.slug ? "ring-2 ring-amber-500 ring-offset-2" : ""}
+        `}
+      >
+        <div className="relative w-full h-[240px] overflow-hidden ">
+          <img
+            src={categoryImages[index % categoryImages.length]}
+            alt={cat.slug}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            draggable="false"
+          />
+          {/* Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+
+          {/* Active indicator */}
+          {selectedCategory === cat.slug && (
+            <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50" />
+          )}
+
+          {/* Name */}
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <h2 className="text-white text-sm font-light capitalize tracking-wide leading-snug">
+              {cat.slug.replace(/-/g, " ")}
+            </h2>
+            <div className="w-0 group-hover:w-full h-px bg-amber-400/70 transition-all duration-400 mt-1.5" />
+          </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+
+  {/* Drag hint */}
+  <p className="text-center text-xs text-gray-400 mt-4 tracking-widest uppercase">
+    {t("drag or scroll to explore")}
+  </p>
+</div>
 
       {/* ══ SELECTED CATEGORY LABEL ══ */}
       <AnimatePresence>
@@ -355,7 +359,7 @@ const CategorySections = () => {
              <h3
               className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white"
             >
-             <span> Featured Products</span>
+             <span> {t("FeaturedProducts")}</span>
             </h3>
             <div className="px-2">
           <Products limit={3} showFilter={false} showBread={false} showPagination={false} showBottomBanner={false} showNumberOfProducts={false} showHeroSrip={false}/>

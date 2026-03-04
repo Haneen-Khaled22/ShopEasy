@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const FilterBar = ({ filters, handleChange, brands, categories }) => {
+
+  const {t} = useTranslation()
   return (
     <div className="p-4 rounded-md mt-8 max-w-4xl bg-gray-50 dark:bg-black/20 dark:text-black text-center ">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -10,7 +13,7 @@ const FilterBar = ({ filters, handleChange, brands, categories }) => {
           value={filters.category}
           onChange={handleChange}
         >
-          <option value="">Category</option>
+          <option value="">{t("Category")}</option>
           {categories.map((category, index) => (
             <option
             className="cursor-pointer"
@@ -23,7 +26,7 @@ const FilterBar = ({ filters, handleChange, brands, categories }) => {
         <select name="brand"
         className="filter-select"
         value={filters.brand} onChange={handleChange}>
-          <option value="">Brand</option>
+          <option value="">{t("Brand")}</option>
           {brands.map((brand, index) => (
             <option key={index} value={brand}>
               {brand}
@@ -37,9 +40,9 @@ const FilterBar = ({ filters, handleChange, brands, categories }) => {
           onChange={handleChange}
           className="filter-select"
         >
-          <option value="">Price</option>
-          <option value="low">Low → High</option>
-          <option value="high">High → Low</option>
+          <option value="">{t("Price")}</option>
+          <option value="low">{t("Low → High")}</option>
+          <option value="high">{t("High → Low")}</option>
         </select>
 
         <select
@@ -48,11 +51,10 @@ const FilterBar = ({ filters, handleChange, brands, categories }) => {
           onChange={handleChange}
           className="filter-select"
         >
-          <option value="">Sort By</option>
-          <option value="newest">Newest</option>
-          <option value="rating">Highest Rating</option>
-
-          <option value="discount">Biggest Discount</option>
+          <option value="">{t("Sort By")}</option>
+          <option value="newest">{t("Newest")}</option>
+          <option value="rating">{t("Highest Rating")}</option>
+          <option value="discount">{t("Biggest Discount")}</option>
         </select>
       </div>
     </div>

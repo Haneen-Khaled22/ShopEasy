@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../../Redux/Slices/CategoriesSlice";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 
 
 const Categories = () => {
   const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
+    const {t} = useTranslation();
     
   
 
@@ -76,11 +78,11 @@ const categoryImages = [beauty, fragrances, furniture, groceries];
       {/* Content */}
       <div className="relative h-full flex flex-col justify-end p-6 md:p-8 text-white">
         <p className="text-xs md:text-sm font-light mb-2 tracking-wide opacity-90">
-          {index === 0 ? "Featured Collection" : "Collections"}
+          {index === 0 ? t("featuredCollection") : t("collections")}
         </p>
 
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif font-light mb-4 md:mb-6">
-          {category.name} {/* ✅ هنا الحل */}
+          {category.name} 
         </h3>
 
         <button className="flex items-center gap-2 px-6 py-2.5 border border-white/80 rounded-full w-fit text-sm font-light hover:bg-white hover:text-black transition-all duration-300">
