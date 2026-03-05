@@ -159,6 +159,58 @@
   "faqInternationalQ": "Do you ship internationally?",
   "faqInternationalA": "Yes! We ship to over 50 countries worldwide. Shipping costs vary by location.",
   "faqTrackQ": "How can I track my order?",
-  "faqTrackA": "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account."
+  "faqTrackA": "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account.",
+
+
+
+
+
+
+
+
+
+
+
+
+  "shopName": "ShopEasy",
+  "quickLinks": "Quick Links",
+  "home": "Home",
+  "products": "Products",
+  "categories": "Categories",
+  "aboutUs": "About Us",
+  "contact": "Contact",
+  "contactUs": "Contact Us",
+  "address": "123 Fashion Street, New York, NY",
+  "email": "Email: support@shopeasy.com",
+  "phone": "Phone: +1 234 567 890",
+  "followUs": "Follow Us",
+  "aboutText": "Your one-stop online shop for effortless style and fashion inspiration. We bring the latest trends to your doorstep with fast and secure delivery.",
+  "copyright": " All rights reserved.",
+
+
+  "my":"My",
+  "wishlist":"Wishlist",
+  "Search items...":"Search items...",
+  "Top Rated":"Top Rated",
+  "item_singular": "item",
+  "item_plural": "items",
+
+
+
+  "removeWishlistTitle": "Remove from wishlist?",
+  "removeWishlistDesc": "This item will be removed from your saved list.",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "clearWishlistTitle": "Clear entire wishlist?",
+  "clearWishlistDesc": "All {{count}} saved items will be removed.",
+  "clearing": "Clearing...",
+  "loading": "Loading...",
+  "clearall":"Clear All",
+  
+  "wishlistEmptyTitle": "Your wishlist is empty",
+  "wishlistEmptyDesc": "Save the items you love and come back to them anytime.",
+  "browseProducts":"Browse Products"
+
+
   
   }

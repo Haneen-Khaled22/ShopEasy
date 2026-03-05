@@ -71,7 +71,7 @@ const token = localStorage.getItem("token");
                 className="text-3xl font-light text-[#1a1410] dark:text-white"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                My <span className="italic text-[#5c3d1e]">Cart</span>
+                My <span className="italic text-[#5c3d1e] dark:text-[#bd9e7d]">Cart</span>
               </h1>
               <p className="text-sm text-[#776a5d] mt-1">
                 {cart.length} item{cart.length !== 1 ? "s" : ""}

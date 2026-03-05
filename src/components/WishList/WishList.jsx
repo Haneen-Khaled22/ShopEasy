@@ -11,6 +11,8 @@ import { deleteFromWishList, clearWishList, addToWishList }
 from "../../Redux/Slices/WishListSlice";
 import { decreaseQuantity, deleteFromCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
 import { addToCart } from "../../Redux/Slices/CartSlice";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 const WishList = () => {
   const wishlist = useSelector((state) => state.wishList);
@@ -20,6 +22,7 @@ const WishList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const {t} = useTranslation();
 
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [productToDelete, setProductToDelete] = useState(null);
@@ -97,11 +100,11 @@ const WishList = () => {
                 className="text-3xl font-light text-[#1a1410] dark:text-white"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                My{" "}
-                <span className="italic text-[#5c3d1e]">Wishlist</span>
+              {i18next.language === "en" && "My " }
+                <span className="italic text-[#5c3d1e] dark:text-[#bd9e7d]">{t("wishlist")}</span>
               </h1>
               <p className="text-sm text-[#776a5d] mt-1">
-                {wishlist.length}  item{wishlist.length !== 1 ? "s" : ""}
+                {wishlist.length} {wishlist.length === 1 ? t("item_singular") : t("item_plural")}
               </p>
             </div>
 
@@ -114,7 +117,7 @@ const WishList = () => {
                 <FiSearch className="text-[#776a5d] dark:text-gray-300" />
                 <input
                   type="text"
-                  placeholder="Search items..."
+                  placeholder={t("Search items...")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="outline-none bg-transparent text-[#3d2b1a] dark:text-gray-300 placeholder-[#b0a090] text-sm w-36"
@@ -128,10 +131,10 @@ const WishList = () => {
                 className="px-4 py-2 border border-[#c8b49a] bg-white rounded-full text-sm outline-none cursor-pointer dark:bg-black dark:text-gray-300 dark:border-gray-300"
                
               >
-                <option value="default">Sort: Default</option>
-                <option value="price-asc">Price: Low → High</option>
-                <option value="price-desc">Price: High → Low</option>
-                <option value="rating">Top Rated</option>
+                <option value="default">{t("Sort By")}</option>
+                <option value="price-asc">{t("Low → High")}</option>
+                <option value="price-desc">{t("High → Low")}</option>
+                <option value="rating">{t("Top Rated")}</option>
               </select>
 
               {/* Clear All */}
@@ -150,7 +153,7 @@ const WishList = () => {
     hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]
   "               
               >
-                ✕ Clear All
+                ✕ {t("ClearFilters")}
               </button>
             </div>
           </motion.div>
@@ -165,7 +168,7 @@ const WishList = () => {
                 animate={{ opacity: 1 }}
                 className="text-center text-[#776a5d] mt-16 text-sm"
               >
-                No items match your search.
+                {t("noProductsFound")}
               </motion.p>
             ) : (
              
@@ -214,7 +217,15 @@ const WishList = () => {
   )}
 </div>
                                          <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
-                                           {product.availabilityStatus} • {product.stock} left
+                                            {i18next.language === "ar" ? (
+    <>
+      {t("left")}    {product.stock} {product.availabilityStatus}
+    </>
+  ) : (
+    <>
+      {product.availabilityStatus} {product.stock}    {t("left")}
+    </>
+  )}
                                          </div>
                                        </div>
                  
@@ -300,7 +311,7 @@ const WishList = () => {
                                            ${product.price}
                                          </span>
                                          <span className="text-sm text-gray-600 dark:text-gray-300">
-                                           {product.discountPercentage}% off
+                                          {product.discountPercentage}% {t("off")}
                                          </span>
                                        </div>
                                      </motion.div>
@@ -318,20 +329,17 @@ const WishList = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-3xl p-16 text-center mt-8"
+            className="bg-white dark:bg-black rounded-3xl p-16 text-center mt-8"
           >
             <div className="text-6xl mb-5">💛</div>
             <p
-              className="text-2xl font-light mb-2"
-              style={{
-                color: "#3d2b1a",
-               
-              }}
+              className="text-2xl font-light mb-2 text-[#3d2b1a] dark:text-white"
+              
             >
-              Your wishlist is <span className="italic">empty</span>
+              {t("wishlistEmptyTitle")}
             </p>
             <p className="text-sm mb-8" style={{ color: "#776a5d" }}>
-              Save the items you love and come back to them anytime.
+              {t("wishlistEmptyDesc")}
             </p>
             <button
               onClick={() => navigate("/products")}
@@ -344,123 +352,98 @@ const WishList = () => {
                 (e.currentTarget.style.background = "#5c3d1e")
               }
             >
-              Browse Products
+              {t("browseProducts")}
             </button>
           </motion.div>
         )}
 
-        {/* ── Remove Modal ── */}
-        <AnimatePresence>
-          {productToDelete && (
-            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
-                style={{ border: "1px solid #e8dfd0" }}
-              >
-              <div className="text-4xl mb-3">🗑️</div>
-                <h3
-                  className="text-lg font-light mb-2 text-[#1a1410]"
-                  style={{
-                  }}
-                >
-                  Remove from wishlist?
-                </h3>
-                <p className="text-xs text-[#776a5d] mb-6">
-                  This item will be removed from your saved list.
-                </p>
-                <div className="flex justify-center gap-3">
-                  <button
-                    onClick={() => setProductToDelete(null)}
-                    className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
-                    style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#f5ede0")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "transparent")
-                    }
-                  >
-                    Cancel
-                  </button>
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => handleRemove(productToDelete)}
-                    className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
-                    style={{ background: "#5c3d1e" }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#3d2b1a")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "#5c3d1e")
-                    }
-                  >
-                    {loading ? "Loading..." : "Delete"}
-                  </motion.button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
+      {/* ── Remove Modal ── */}
+<AnimatePresence>
+  {productToDelete && (
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
+        style={{ border: "1px solid #e8dfd0" }}
+      >
+        <div className="text-4xl mb-3">🗑️</div>
+        <h3 className="text-lg font-light mb-2 text-[#1a1410]">
+          {t("removeWishlistTitle")}
+        </h3>
+        <p className="text-xs text-[#776a5d] mb-6">
+          {t("removeWishlistDesc")}
+        </p>
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={() => setProductToDelete(null)}
+            className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
+            style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#f5ede0")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          >
+            {t("cancel")}
+          </button>
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            onClick={() => handleRemove(productToDelete)}
+            className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
+            style={{ background: "#5c3d1e" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#3d2b1a")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#5c3d1e")}
+          >
+            {loading ? t("loading") : t("delete")}
+          </motion.button>
+        </div>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
 
-        {/* ── Clear All Modal ── */}
-        <AnimatePresence>
-          {clearModalOpen && (
-            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
-                style={{ border: "1px solid #e8dfd0" }}
-              >
-                <div className="text-4xl mb-3">🗑️</div>
-                <h3
-                  className="text-lg font-light mb-2 text-[#1a1410]"
-                  style={{
-                    fontFamily: "'Palatino Linotype', Palatino, serif",
-                  }}
-                >
-                  Clear entire wishlist?
-                </h3>
-                <p className="text-xs text-[#776a5d] mb-6">
-                  All {wishlist.length} saved items will be removed.
-                </p>
-                <div className="flex justify-center gap-3">
-                  <button
-                    onClick={() => setClearModalOpen(false)}
-                    className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
-                    style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#f5ede0")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "transparent")
-                    }
-                  >
-                    Cancel
-                  </button>
-                  <motion.button
-                    whileTap={{ scale: 0.97 }}
-                    onClick={handleClearAll}
-                    className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
-                    style={{ background: "#5c3d1e" }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#3d2b1a")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "#5c3d1e")
-                    }
-                  >
-                    {loading ? "Clearing..." : "Clear All"}
-                  </motion.button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
+{/* ── Clear All Modal ── */}
+<AnimatePresence>
+  {clearModalOpen && (
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="bg-white p-7 rounded-3xl shadow-2xl w-80 text-center"
+        style={{ border: "1px solid #e8dfd0" }}
+      >
+        <div className="text-4xl mb-3">🗑️</div>
+        <h3 className="text-lg font-light mb-2 text-[#1a1410]">
+          {t("clearWishlistTitle")}
+        </h3>
+        <p className="text-xs text-[#776a5d] mb-6">
+          {t("clearWishlistDesc", { count: wishlist.length })}
+        </p>
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={() => setClearModalOpen(false)}
+            className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light transition-all duration-200"
+            style={{ border: "1px solid #d4c4b0", color: "#776a5d" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#f5ede0")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          >
+            {t("cancel")}
+          </button>
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            onClick={handleClearAll}
+            className="cursor-pointer px-5 py-2.5 rounded-full text-sm font-light text-white transition-all duration-200"
+            style={{ background: "#5c3d1e" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#3d2b1a")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#5c3d1e")}
+          >
+            {loading ? t("clearing") : t("clearall")}
+          </motion.button>
+        </div>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
       </div>
     </div>
   );
