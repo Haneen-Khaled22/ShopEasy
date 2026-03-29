@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../../Redux/Slices/CartSlice";
-
-const steps = ["Shipping", "Payment", "Review"];
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -12,6 +12,10 @@ const fadeUp = {
 };
 
 const Checkout = () => {
+  const { t } = useTranslation();
+  const isRTL = i18next.language === "ar";
+  const steps = [t("steps.shipping"), t("steps.payment"), t("steps.review")];
+
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +53,6 @@ const Checkout = () => {
     setTimeout(() => navigate("/"), 3500);
   };
 
-  // ── Shared input style — full dark mode support
   const inputCls = `w-full px-4 py-3 rounded-xl text-sm font-light outline-none transition-all duration-200
     bg-[#fdf9f4] dark:bg-[#1e1510]
     border border-[#ddd0be] dark:border-[#3d2e1f]
@@ -58,13 +61,12 @@ const Checkout = () => {
     placeholder:text-[#b8a898] dark:placeholder:text-[#5a4535]
     text-[#3d2b1a] dark:text-[#d4b898]`;
 
-  // ── Shared card style
   const cardCls = `bg-white dark:bg-black rounded-3xl p-8`;
   const cardStyle = { border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.06)" };
   const cardStyleDark = "dark:[border-color:#2a1f12] dark:[box-shadow:0_4px_24px_rgba(0,0,0,0.3)]";
 
   return (
-    <div className="min-h-screen bg-[#faf8f4] dark:bg-[#0e0a06]">
+    <div className="min-h-screen bg-[#faf8f4] dark:bg-[#0e0a06]" dir={isRTL ? "rtl" : "ltr"}>
 
       {/* ── TOP BAR ── */}
       <div className="px-6 py-4 flex items-center justify-between bg-[#ede4d3] dark:bg-[#1a1108] border-b border-[#ddd0be] dark:border-[#2a1f12]">
@@ -72,7 +74,7 @@ const Checkout = () => {
           onClick={() => navigate("/cart")}
           className="flex items-center gap-2 text-sm font-light text-[#776a5d] dark:text-[#7a6555] hover:text-[#3d2b1a] dark:hover:text-[#c4a07a] transition-colors"
         >
-          ← Back to Cart
+          {t("backToCart")}
         </button>
         <span
           className="text-lg font-light text-[#1a1410] dark:text-[#e8d5bc]"
@@ -80,7 +82,7 @@ const Checkout = () => {
         >
           Shop<span style={{ color: "#8a5c2e", fontStyle: "italic" }}>Easy</span>
         </span>
-        <span className="text-xs text-[#9a8878] dark:text-[#6a5545] tracking-widest uppercase">Secure Checkout 🔒</span>
+        <span className="text-xs text-[#9a8878] dark:text-[#6a5545] tracking-widest uppercase">{t("secureCheckout")}</span>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-10">
@@ -98,17 +100,14 @@ const Checkout = () => {
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-light transition-all duration-400 relative"
                   style={{
-                    background: i < step ? "#5c3d1e" : i === step ? "#8a5c2e" : "var(--step-inactive, #e8dfd0)",
+                    background: i < step ? "#5c3d1e" : i === step ? "#8a5c2e" : "#e8dfd0",
                     color: i <= step ? "#fffcf7" : "#9a8878",
                     boxShadow: i === step ? "0 0 0 4px rgba(138,92,46,0.18)" : "none",
                   }}
                 >
                   {i < step ? "✓" : i + 1}
                 </div>
-                <span
-                  className="text-[11px] uppercase tracking-widest"
-                  style={{ color: i === step ? "#5c3d1e" : "#9a8878" }}
-                >
+                <span className="text-[11px] uppercase tracking-widest" style={{ color: i === step ? "#5c3d1e" : "#9a8878" }}>
                   {s}
                 </span>
               </div>
@@ -145,20 +144,20 @@ const Checkout = () => {
                       className="text-xl font-light text-[#1a1410] dark:text-[#e8d5bc]"
                       style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                     >
-                      Shipping <span className="italic text-[#8a5c2e]">Details</span>
+                      {t("shippingDetails")}
                     </h2>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
-                      { label: "First Name", name: "firstName", placeholder: "John" },
-                      { label: "Last Name", name: "lastName", placeholder: "Doe" },
-                      { label: "Email Address", name: "email", placeholder: "john@example.com", full: true },
-                      { label: "Phone Number", name: "phone", placeholder: "+1 234 567 8900" },
-                      { label: "Country", name: "country", placeholder: "United States" },
-                      { label: "Street Address", name: "address", placeholder: "123 Main St", full: true },
-                      { label: "City", name: "city", placeholder: "New York" },
-                      { label: "ZIP Code", name: "zip", placeholder: "10001" },
+                      { label: t("firstName"),     name: "firstName", placeholder: "John" },
+                      { label: t("lastName"),      name: "lastName",  placeholder: "Doe" },
+                      { label: t("emailAddress"),  name: "email",     placeholder: "john@example.com", full: true },
+                      { label: t("phoneNumber"),   name: "phone",     placeholder: "+1 234 567 8900" },
+                      { label: t("country"),       name: "country",   placeholder: "United States" },
+                      { label: t("streetAddress"), name: "address",   placeholder: "123 Main St", full: true },
+                      { label: t("city"),          name: "city",      placeholder: "New York" },
+                      { label: t("zipCode"),       name: "zip",       placeholder: "10001" },
                     ].map((field, i) => (
                       <motion.div
                         key={field.name}
@@ -191,7 +190,7 @@ const Checkout = () => {
                     onMouseEnter={(e) => e.currentTarget.style.background = "#5c3d1e"}
                     onMouseLeave={(e) => e.currentTarget.style.background = "#3d2b1a"}
                   >
-                    Continue to Payment →
+                    {t("continueToPayment")}
                   </motion.button>
                 </motion.div>
               )}
@@ -213,15 +212,15 @@ const Checkout = () => {
                       className="text-xl font-light text-[#1a1410] dark:text-[#e8d5bc]"
                       style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                     >
-                      Payment <span className="italic text-[#8a5c2e]">Method</span>
+                      {t("paymentMethod")}
                     </h2>
                   </div>
 
                   {/* Method toggle */}
                   <div className="flex gap-3 mb-7">
                     {[
-                      { id: "card", label: "💳 Credit Card" },
-                      { id: "cod", label: "🏠 Cash on Delivery" },
+                      { id: "card", label: t("creditCard") },
+                      { id: "cod",  label: t("cashOnDelivery") },
                     ].map(({ id, label }) => (
                       <button
                         key={id}
@@ -255,27 +254,27 @@ const Checkout = () => {
                         >
                           <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.08)" }} />
                           <div style={{ position: "absolute", bottom: -20, left: -20, width: 100, height: 100, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.06)" }} />
-                          <p className="text-white/40 text-[10px] uppercase tracking-widest mb-3">Card Number</p>
+                          <p className="text-white/40 text-[10px] uppercase tracking-widest mb-3">{t("cardNumber")}</p>
                           <p className="text-white text-lg font-light tracking-[0.2em] mb-4">
                             {payment.cardNumber || "•••• •••• •••• ••••"}
                           </p>
                           <div className="flex justify-between">
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-widest">Card Holder</p>
+                              <p className="text-white/40 text-[9px] uppercase tracking-widest">{t("cardHolder")}</p>
                               <p className="text-white text-sm font-light">{payment.cardName || "YOUR NAME"}</p>
                             </div>
                             <div>
-                              <p className="text-white/40 text-[9px] uppercase tracking-widest">Expires</p>
+                              <p className="text-white/40 text-[9px] uppercase tracking-widest">{t("expires")}</p>
                               <p className="text-white text-sm font-light">{payment.expiry || "MM/YY"}</p>
                             </div>
                           </div>
                         </div>
 
                         {[
-                          { label: "Cardholder Name", name: "cardName", placeholder: "John Doe", full: true },
-                          { label: "Card Number", name: "cardNumber", placeholder: "1234 5678 9012 3456", full: true },
-                          { label: "Expiry Date", name: "expiry", placeholder: "MM/YY" },
-                          { label: "CVV", name: "cvv", placeholder: "•••" },
+                          { label: t("cardholderName"), name: "cardName",   placeholder: "John Doe",            full: true },
+                          { label: t("cardNumber"),     name: "cardNumber", placeholder: "1234 5678 9012 3456", full: true },
+                          { label: t("expiryDate"),     name: "expiry",     placeholder: "MM/YY" },
+                          { label: t("cvv"),            name: "cvv",        placeholder: "•••" },
                         ].map((f, i) => (
                           <motion.div key={f.name} custom={i} variants={fadeUp} initial="hidden" animate="show"
                             className={f.full ? "" : "inline-block w-[calc(50%-8px)]"}
@@ -305,8 +304,8 @@ const Checkout = () => {
                         style={{ border: "1px dashed #c8b49a" }}
                       >
                         <div className="text-4xl mb-3">🏡</div>
-                        <p className="text-sm font-light text-[#5c3d1e] dark:text-[#c4956a] mb-1">Pay when your order arrives</p>
-                        <p className="text-xs text-[#9a8878] dark:text-[#6a5545]">No card needed. Our delivery team will collect payment at your door.</p>
+                        <p className="text-sm font-light text-[#5c3d1e] dark:text-[#c4956a] mb-1">{t("codTitle")}</p>
+                        <p className="text-xs text-[#9a8878] dark:text-[#6a5545]">{t("codDesc")}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -316,7 +315,7 @@ const Checkout = () => {
                       onClick={() => setStep(0)}
                       className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200 text-[#776a5d] dark:text-[#7a6555] border border-[#ddd0be] dark:border-[#3d2e1f] hover:bg-[#f5ede0] dark:hover:bg-[#1e1510]"
                     >
-                      ← Back
+                      {t("back")}
                     </button>
                     <motion.button
                       whileHover={{ scale: 1.01 }}
@@ -327,7 +326,7 @@ const Checkout = () => {
                       onMouseEnter={(e) => e.currentTarget.style.background = "#5c3d1e"}
                       onMouseLeave={(e) => e.currentTarget.style.background = "#3d2b1a"}
                     >
-                      Review Order →
+                      {t("reviewOrder")}
                     </motion.button>
                   </div>
                 </motion.div>
@@ -345,17 +344,17 @@ const Checkout = () => {
                 >
                   {[
                     {
-                      title: "Shipping Details",
+                      title: t("shippingDetails"),
                       edit: () => setStep(0),
                       content: (
                         <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                           {[
-                            ["Name", `${shipping.firstName} ${shipping.lastName}`],
-                            ["Email", shipping.email],
-                            ["Phone", shipping.phone],
-                            ["Address", shipping.address],
-                            ["City", `${shipping.city}, ${shipping.zip}`],
-                            ["Country", shipping.country],
+                            [t("name"),        `${shipping.firstName} ${shipping.lastName}`],
+                            [t("email"),        shipping.email],
+                            [t("phone"),        shipping.phone],
+                            [t("address"),      shipping.address],
+                            [t("cityLabel"),   `${shipping.city}, ${shipping.zip}`],
+                            [t("countryLabel"), shipping.country],
                           ].map(([k, v]) => (
                             <div key={k}>
                               <p className="text-[10px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545]">{k}</p>
@@ -366,10 +365,10 @@ const Checkout = () => {
                       ),
                     },
                     {
-                      title: "Payment Method",
+                      title: t("paymentMethod"),
                       edit: () => setStep(1),
                       content: method === "cod" ? (
-                        <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] font-light">🏡 Cash on Delivery</p>
+                        <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] font-light">🏡 {t("cashOnDelivery")}</p>
                       ) : (
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-7 rounded bg-[#3d2b1a] flex items-center justify-center">
@@ -392,11 +391,8 @@ const Checkout = () => {
                     >
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="text-sm uppercase tracking-widest text-[#776a5d] dark:text-[#7a6555]">{title}</h3>
-                        <button
-                          onClick={edit}
-                          className="text-xs text-[#8a5c2e] hover:underline transition-colors"
-                        >
-                          Edit
+                        <button onClick={edit} className="text-xs text-[#8a5c2e] hover:underline transition-colors">
+                          {t("edit")}
                         </button>
                       </div>
                       {content}
@@ -405,7 +401,9 @@ const Checkout = () => {
 
                   {/* Items review */}
                   <div className="bg-white dark:bg-[#141008] rounded-2xl p-6 border border-[#e8dfd0] dark:border-[#2a1f12]">
-                    <h3 className="text-sm uppercase tracking-widest text-[#776a5d] dark:text-[#7a6555] mb-4">Items ({cart.length})</h3>
+                    <h3 className="text-sm uppercase tracking-widest text-[#776a5d] dark:text-[#7a6555] mb-4">
+                      {t("items")} ({cart.length})
+                    </h3>
                     <div className="space-y-3 max-h-52 overflow-y-auto pr-2">
                       {cart.map((p) => (
                         <div key={p.id} className="flex items-center gap-3">
@@ -431,7 +429,7 @@ const Checkout = () => {
                       onClick={() => setStep(1)}
                       className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200 text-[#776a5d] dark:text-[#7a6555] border border-[#ddd0be] dark:border-[#3d2e1f] hover:bg-[#f5ede0] dark:hover:bg-[#1e1510]"
                     >
-                      ← Back
+                      {t("back")}
                     </button>
                     <motion.button
                       whileHover={{ scale: 1.01 }}
@@ -442,7 +440,7 @@ const Checkout = () => {
                       onMouseEnter={(e) => e.currentTarget.style.background = "#5c3d1e"}
                       onMouseLeave={(e) => e.currentTarget.style.background = "#3d2b1a"}
                     >
-                      ✦ Place Order
+                      {t("placeOrder")}
                     </motion.button>
                   </div>
                 </motion.div>
@@ -466,7 +464,7 @@ const Checkout = () => {
                   className="text-base font-light text-[#1a1410] dark:text-[#e8d5bc]"
                   style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                 >
-                  Order Summary
+                  {t("orderSummary")}
                 </h3>
               </div>
 
@@ -488,21 +486,18 @@ const Checkout = () => {
               {/* Totals */}
               <div className="space-y-2.5 pt-4 border-t border-[#f0e8da] dark:border-[#2a1f12]">
                 {[
-                  ["Subtotal", `$${subtotal.toFixed(2)}`],
-                  ["Shipping", "Free"],
-                  ["Tax (10%)", `$${tax.toFixed(2)}`],
+                  [t("subtotal"),      `$${subtotal.toFixed(2)}`],
+                  [t("shippingLabel"), t("free")],
+                  [t("tax"),           `$${tax.toFixed(2)}`],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between">
                     <span className="text-xs font-light text-[#9a8878] dark:text-[#6a5545]">{k}</span>
-                    <span className={`text-xs font-medium ${v === "Free" ? "text-green-600 dark:text-green-500" : "text-[#3d2b1a] dark:text-[#d4b898]"}`}>{v}</span>
+                    <span className={`text-xs font-medium ${v === t("free") ? "text-green-600 dark:text-green-500" : "text-[#3d2b1a] dark:text-[#d4b898]"}`}>{v}</span>
                   </div>
                 ))}
                 <div className="flex justify-between pt-3 mt-1 border-t border-[#f0e8da] dark:border-[#2a1f12]">
-                  <span className="text-sm font-medium text-[#1a1410] dark:text-[#e8d5bc]">Total</span>
-                  <span
-                    className="text-xl font-light"
-                    style={{ color: "#5c3d1e", fontFamily: "'Palatino Linotype', Palatino, serif" }}
-                  >
+                  <span className="text-sm font-medium text-[#1a1410] dark:text-[#e8d5bc]">{t("total")}</span>
+                  <span className="text-xl font-light" style={{ color: "#5c3d1e", fontFamily: "'Palatino Linotype', Palatino, serif" }}>
                     ${total.toFixed(2)}
                   </span>
                 </div>
@@ -511,7 +506,7 @@ const Checkout = () => {
               {/* Step progress */}
               <div className="mt-5 pt-4 border-t border-[#f0e8da] dark:border-[#2a1f12]">
                 <div className="flex justify-between mb-1.5">
-                  <span className="text-[10px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545]">Progress</span>
+                  <span className="text-[10px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545]">{t("progress")}</span>
                   <span className="text-[10px] text-[#8a5c2e]">{step + 1}/3</span>
                 </div>
                 <div className="h-1 rounded-full bg-[#f0e8da] dark:bg-[#2a1f12] overflow-hidden">
@@ -526,7 +521,7 @@ const Checkout = () => {
 
               {/* Trust */}
               <div className="mt-5 flex justify-around">
-                {["🔒 Secure", "🔄 Returns", "🚚 Fast Ship"].map((b) => (
+                {[t("secure"), t("returns"), t("fastShip")].map((b) => (
                   <span key={b} className="text-[10px] text-[#9a8878] dark:text-[#6a5545]">{b}</span>
                 ))}
               </div>
@@ -568,7 +563,7 @@ const Checkout = () => {
                 className="text-2xl font-light text-[#1a1410] dark:text-[#e8d5bc] mb-2"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                Order <span className="italic text-[#8a5c2e]">Placed!</span>
+                {t("orderPlaced")}
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -576,7 +571,7 @@ const Checkout = () => {
                 transition={{ delay: 0.55 }}
                 className="text-sm text-[#776a5d] dark:text-[#7a6555] font-light mb-2"
               >
-                Thank you for your purchase. You'll receive a confirmation email shortly.
+                {t("thankYou")}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -584,7 +579,7 @@ const Checkout = () => {
                 transition={{ delay: 0.7 }}
                 className="text-xs text-[#9a8878] dark:text-[#6a5545]"
               >
-                Redirecting you home...
+                {t("redirecting")}
               </motion.p>
               <motion.div
                 className="mt-5 h-1 rounded-full bg-[#f0e8da] dark:bg-[#2a1f12] overflow-hidden"

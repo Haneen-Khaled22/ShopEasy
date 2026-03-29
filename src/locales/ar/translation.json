@@ -350,7 +350,74 @@
     "loading": "جارٍ التحميل..",
     "mustLogin": "يجب تسجيل الدخول أولًا",
     "deletedFromCart": "تم الحذف من السلة",
-    "cartCleared": "تم مسح السلة"
+    "cartCleared": "تم مسح السلة",
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  "backToCart": "العودة للسلة",
+  "secureCheckout": "دفع آمن 🔒",
+  "steps": {
+    "shipping": "الشحن",
+    "payment": "الدفع",
+    "review": "المراجعة"
+  },
+  "shippingDetails": "بيانات الشحن",
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة",
+  "emailAddress": "البريد الإلكتروني",
+  "phoneNumber": "رقم الهاتف",
+  "country": "الدولة",
+  "streetAddress": "عنوان الشارع",
+  "city": "المدينة",
+  "zipCode": "الرمز البريدي",
+  "continueToPayment": "← متابعة للدفع",
+  "paymentMethod": "طريقة الدفع",
+  "creditCard": "💳 بطاقة ائتمان",
+  "cashOnDelivery": "🏠 الدفع عند الاستلام",
+  "cardNumber": "رقم البطاقة",
+  "cardHolder": "اسم حامل البطاقة",
+  "expires": "تاريخ الانتهاء",
+  "cardholderName": "اسم حامل البطاقة",
+  "expiryDate": "تاريخ الانتهاء",
+  "cvv": "CVV",
+  "codTitle": "ادفع عند وصول طلبك",
+  "codDesc": "لا حاجة لبطاقة. فريق التوصيل سيستلم المبلغ عند بابك.",
+  "reviewOrder": "← مراجعة الطلب",
+  "name": "الاسم",
+  "email": "البريد",
+  "phone": "الهاتف",
+  "address": "العنوان",
+  "cityLabel": "المدينة",
+  "countryLabel": "الدولة",
+  "edit": "تعديل",
+  "items": "المنتجات",
+  "back": "رجوع →",
+  "orderSummary": "ملخص الطلب",
+  "subtotal": "المجموع الفرعي",
+  "shippingLabel": "الشحن",
+  "free": "مجاناً",
+  "tax": "الضريبة (10%)",
+  "total": "الإجمالي",
+  "progress": "التقدم",
+  "secure": "🔒 آمن",
+  "returns": "🔄 إرجاع",
+  "fastShip": "🚚 شحن سريع",
+  "orderPlaced": "تم الطلب!",
+  "thankYou": "شكراً لشرائك. ستصلك رسالة تأكيد على بريدك قريباً.",
+  "redirecting": "جاري تحويلك للرئيسية...",
+  "placeOrder": "✦ تأكيد الطلب"
+
 
   
 

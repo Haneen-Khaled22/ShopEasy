@@ -283,7 +283,71 @@
     "loading": "loading..",
     "mustLogin": "You must login first to checkout!",
     "deletedFromCart": "deleted from Cart",
-    "cartCleared": "Cart has been cleared"
+    "cartCleared": "Cart has been cleared",
+
+
+
+
+
+
+
+
+
+
+    
+  "backToCart": "Back to Cart",
+  "secureCheckout": "Secure Checkout 🔒",
+  "steps": {
+    "shipping": "Shipping",
+    "payment": "Payment",
+    "review": "Review"
+  },
+  "shippingDetails": "Shipping Details",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "emailAddress": "Email Address",
+  "phoneNumber": "Phone Number",
+  "country": "Country",
+  "streetAddress": "Street Address",
+  "city": "City",
+  "zipCode": "ZIP Code",
+  "continueToPayment": "Continue to Payment →",
+  "paymentMethod": "Payment Method",
+  "creditCard": "💳 Credit Card",
+  "cashOnDelivery": "🏠 Cash on Delivery",
+  "cardNumber": "Card Number",
+  "cardHolder": "Card Holder",
+  "expires": "Expires",
+  "cardholderName": "Cardholder Name",
+  "expiryDate": "Expiry Date",
+  "cvv": "CVV",
+  "codTitle": "Pay when your order arrives",
+  "codDesc": "No card needed. Our delivery team will collect payment at your door.",
+  "reviewOrder": "Review Order →",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "address": "Address",
+  "cityLabel": "City",
+  "countryLabel": "Country",
+  "edit": "Edit",
+  "items": "Items",
+  "back": "← Back",
+  "orderSummary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shippingLabel": "Shipping",
+  "free": "Free",
+  "tax": "Tax (10%)",
+  "total": "Total",
+  "progress": "Progress",
+  "secure": "🔒 Secure",
+  "returns": "🔄 Returns",
+  "fastShip": "🚚 Fast Ship",
+  "orderPlaced": "Order Placed!",
+  "thankYou": "Thank you for your purchase. You'll receive a confirmation email shortly.",
+  "redirecting": "Redirecting you home...",
+  "placeOrder": "✦ Place Order"
+
 
 
   
