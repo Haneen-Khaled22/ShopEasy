@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../../Redux/Slices/CategoriesSlice";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
+import { FiArrowRight } from "react-icons/fi";
+import i18next from "i18next";
 
 
 
@@ -86,20 +88,19 @@ const categoryImages = [beauty, fragrances, furniture, groceries];
         </h3>
 
         <button className="flex items-center gap-2 px-6 py-2.5 border border-white/80 rounded-full w-fit text-sm font-light hover:bg-white hover:text-black transition-all duration-300">
-          Explore Now
-          <svg
-            className="w-4 h-4 transition-transform group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
+
+           {i18next.language === "ar" ? (
+  <>
+          <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+{t("exploreNow")}  </>
+) : (
+  <>
+{t("exploreNow")}   
+          <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+  </>
+)}
+          
+
         </button>
       </div>
     </div>

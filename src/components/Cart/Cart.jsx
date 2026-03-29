@@ -6,6 +6,8 @@ import Breadcrumbs from "../BreadCrumb/BreadCrumb";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar, useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -17,6 +19,7 @@ const Cart = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
    const [searchQuery, setSearchQuery] = useState("");
     const [sortBy, setSortBy] = useState("default");
+    const {t} = useTranslation();
   useEffect(() => {
   const timer = setTimeout(() => {
     setIsPageLoading(false);
@@ -71,10 +74,12 @@ const token = localStorage.getItem("token");
                 className="text-3xl font-light text-[#1a1410] dark:text-white"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                My <span className="italic text-[#5c3d1e] dark:text-[#bd9e7d]">Cart</span>
+              {i18next.language === "en" && "My " }
+                <span className="italic text-[#5c3d1e] dark:text-[#bd9e7d]">{t("Cart")}</span>
               </h1>
               <p className="text-sm text-[#776a5d] mt-1">
-                {cart.length} item{cart.length !== 1 ? "s" : ""}
+              
+                 {cart.length} {cart.length === 1 ? t("item_singular") : t("item_plural")}
               </p>
             </div>
              <div className="flex items-center gap-3 flex-wrap">
@@ -86,7 +91,7 @@ const token = localStorage.getItem("token");
                             <FiSearch className="text-[#776a5d] dark:text-gray-300" />
                             <input
                               type="text"
-                              placeholder="Search items..."
+                              placeholder={t("Search items...")}
                               value={searchQuery}
                               onChange={(e) => setSearchQuery(e.target.value)}
                               className="outline-none bg-transparent text-[#3d2b1a] dark:text-gray-300 placeholder-[#b0a090] text-sm w-36"
@@ -100,9 +105,9 @@ const token = localStorage.getItem("token");
                             className="px-4 py-2 border border-[#c8b49a] bg-white rounded-full text-sm outline-none cursor-pointer dark:bg-black dark:text-gray-300 dark:border-gray-300"
                            
                           >
-                            <option value="default">Sort: Default</option>
-                            <option value="price-asc">Price: Low → High</option>
-                            <option value="price-desc">Price: High → Low</option>
+                            <option value="default">{t("sortDefault")}</option>
+<option value="price-asc">{t("priceLowHigh")}</option>
+<option value="price-desc">{t("priceHighLow")}</option>
                            
                           </select>
                              <button
@@ -116,9 +121,9 @@ const token = localStorage.getItem("token");
     dark:border-gray-300
     
     hover:bg-[#5c3d1e] hover:text-[#fffcf7] hover:border-[#5c3d1e]
-  "
->
-  ✕ Clear All
+  "               
+              >
+                ✕ {t("ClearFilters")}
 </button>
                           </div>
          
@@ -137,7 +142,7 @@ const token = localStorage.getItem("token");
                 animate={{ opacity: 1 }}
                 className="text-center text-[#776a5d] mt-16 text-sm"
               >
-                No items match your search.
+                {t("noItemsMatch")}
               </motion.p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-5">
@@ -182,7 +187,15 @@ const token = localStorage.getItem("token");
 
                       {/* Stock Badge */}
                       <div className="absolute bottom-0 left-0 px-3 bg-white/30 rounded-2xl py-1 text-xs font-medium text-gray-600 dark:text-gray-300">
-                        {product.availabilityStatus} • {product.stock} left
+                         {i18next.language === "ar" ? (
+    <>
+      {t("left")}    {product.stock} {product.availabilityStatus}
+    </>
+  ) : (
+    <>
+      {product.availabilityStatus} {product.stock}    {t("left")}
+    </>
+  )}
                       </div>
                     </div>
 
@@ -237,7 +250,7 @@ const token = localStorage.getItem("token");
                         ${product.price}
                       </span>
                       <span className="text-sm text-[#776a5d] dark:text-gray-300">
-                        {product.discountPercentage}% off
+                         {product.discountPercentage}% {t("off")}
                       </span>
                     </div>
                   </motion.div>
@@ -259,10 +272,10 @@ const token = localStorage.getItem("token");
                     fontFamily: "'Palatino Linotype', Palatino, serif",
                   }}
                 >
-                  Your cart is <span className="italic">empty</span>
+                  {t("yourCartEmpty")}
                 </p>
                 <p className="text-sm mb-8" style={{ color: "#776a5d" }}>
-                  Start shopping and add items to your cart!
+                {t("startShopping")}
                 </p>
                 <button
                   onClick={() => navigate("/products")}
@@ -275,8 +288,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "#5c3d1e")
                   }
                 >
-                  Browse Products
-                </button>
+{t("browseProducts")}                </button>
               </motion.div>
             )} 
           </div>
@@ -308,7 +320,7 @@ const token = localStorage.getItem("token");
                       fontFamily: "'Palatino Linotype', Palatino, serif",
                     }}
                   >
-                    Order Summary
+                  {t("orderSummary")}
                   </h3>
                 </div>
 
@@ -318,7 +330,7 @@ const token = localStorage.getItem("token");
                   style={{ borderBottom: "1px solid #f0e8da" }}
                 >
                   <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
-                    Items in cart
+                    {t("itemsInCart")}
                   </span>
                   <span
                     className="text-sm font-medium px-3 py-0.5 rounded-full"
@@ -332,7 +344,7 @@ const token = localStorage.getItem("token");
                 {/* Subtotal */}
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
-                    Subtotal
+                    {t("subtotal")}
                   </span>
                   <span className="text-sm font-medium text-[#3d2b1a] dark:text-gray-300">
                     ${total.toFixed(2)}
@@ -342,10 +354,10 @@ const token = localStorage.getItem("token");
                 {/* Shipping */}
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
-                    Shipping
+                    {t("shipping")}
                   </span>
                   <span className="text-sm font-medium text-green-600">
-                    Free
+                    {t("free")}
                   </span>
                 </div>
 
@@ -355,7 +367,7 @@ const token = localStorage.getItem("token");
                   style={{ borderBottom: "1px solid #f0e8da" }}
                 >
                   <span className="text-sm font-light text-[#776a5d] dark:text-gray-300">
-                    Tax (10%)
+                    {t("tax")} (10%)
                   </span>
                   <span className="text-sm font-medium text-[#3d2b1a] dark:text-gray-300">
                     ${(total * 0.1).toFixed(2)}
@@ -365,7 +377,7 @@ const token = localStorage.getItem("token");
                 {/* Total */}
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-base font-medium text-[#1a1410] dark:text-gray-400">
-                    Total
+                    {t("total")}
                   </span>
                   <span
                     className="text-2xl font-light text-[#5c3d1e] dark:text-[#b07235]"
@@ -387,7 +399,7 @@ const token = localStorage.getItem("token");
   if (token) {
     navigate("/checkout");
   } else {
-    enqueueSnackbar("You must login first to checkout!", { 
+    enqueueSnackbar(t("mustLogin"), { 
       variant: "error",
       autoHideDuration: 2000,
     });
@@ -403,7 +415,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "#3d2b1a")
                   }
                 >
-                  Proceed to Checkout →
+                 {t("checkout")}
                 </motion.button>
 
                 {/* Continue Shopping */}
@@ -422,7 +434,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "transparent")
                   }
                 >
-                  Continue Shopping
+                {t("continueShopping")}
                 </button>
 
                 {/* Trust Badges */}
@@ -430,13 +442,16 @@ const token = localStorage.getItem("token");
                   className="mt-5 pt-5 flex items-center justify-center gap-5"
                   style={{ borderTop: "1px solid #f0e8da" }}
                 >
-                  {["🔒 Secure Payment", "🔄 Free Returns"].map((badge) => (
+                  {[
+  { icon: "🔒", text: t("securePayment") },
+  { icon: "🔄", text: t("freeReturns") },
+].map((badge) => (
                     <span
                       key={badge}
                       className="text-xs font-light"
                       style={{ color: "#9a8878" }}
                     >
-                      {badge}
+                      {badge.icon}  {badge.text}
                     </span>
                   ))}
                 </div>
@@ -459,10 +474,10 @@ const token = localStorage.getItem("token");
                 className="text-lg font-light mb-2 text-[#1a1410]"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                Remove this product?
+                {t("removeProduct")}
               </h3>
               <p className="text-xs text-[#776a5d] mb-6">
-                This item will be removed from your cart.
+                {t("removeConfirm")}
               </p>
               <div className="flex justify-center gap-3">
                 <button
@@ -478,7 +493,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "transparent")
                   }
                 >
-                  Cancel
+                 {t("cancel")}
                 </button>
                 <motion.button
                   whileTap={{ scale: 0.97 }}
@@ -495,7 +510,7 @@ const token = localStorage.getItem("token");
     setLoading(false);
 
     enqueueSnackbar(
-      `${deletedProduct.title} deleted from Cart`,
+       `${deletedProduct.title} ${t("deletedFromCart")}`,
       { variant: "default", sx: {
                                 backgroundColor: "#776a5d", // لون الخلفية
                                 color: "#fff", // لون النص
@@ -518,7 +533,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "#5c3d1e")
                   }
                 >
-                  {loading ? "loading.." : "Remove"}
+                  {loading ? t("loading") : t("remove")}
                 </motion.button>
               </div>
             </motion.div>
@@ -539,10 +554,10 @@ const token = localStorage.getItem("token");
                 className="text-lg font-light mb-2 text-[#1a1410]"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
-                Clear entire cart?
+               {t("clearCart")}
               </h3>
               <p className="text-xs text-[#776a5d] mb-6">
-                All {cart.length} items will be removed.
+               {t("clearConfirm", { count: cart.length })}
               </p>
               <div className="flex justify-center gap-3">
                 <button
@@ -556,7 +571,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "transparent")
                   }
                 >
-                  Cancel
+                  {t("cancel")}
                 </button>
                 <motion.button
                   whileTap={{ scale: 0.97 }}
@@ -568,7 +583,7 @@ const token = localStorage.getItem("token");
     setProductsToClear(null);
     setLoading(false);
 
-    enqueueSnackbar("Cart has been cleared", {
+    enqueueSnackbar(t("cartCleared"), {
       variant: "default",
       sx: {
                                 backgroundColor: "#776a5d", // لون الخلفية
@@ -593,7 +608,7 @@ const token = localStorage.getItem("token");
                     (e.currentTarget.style.background = "#5c3d1e")
                   }
                 >
-                 {loading ? "loading" : "Clear All"}
+                 {loading ? t("loading") : t("clearAll")}
                 </motion.button>
               </div>
             </motion.div>

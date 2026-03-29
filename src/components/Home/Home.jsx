@@ -5,6 +5,8 @@ import{ IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import CategoriesComponent from '../Categories/Categories';
 import { useTranslation } from 'react-i18next';
+import { FiChevronRight } from 'react-icons/fi';
+import i18next from 'i18next';
 
 
 const Home = () => {
@@ -35,8 +37,17 @@ const Home = () => {
       w-fit
     "
   >
-    {t("see all categories")}
-    <IoIosArrowForward className="text-sm" />
+       {i18next.language === "ar" ? (
+  <>
+    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+ {t("see all categories")} </>
+) : (
+  <>
+ {t("see all categories")}   <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+  </>
+)}
+    {/* {t("see all categories")}
+    <IoIosArrowForward className="text-sm" /> */}
   </button>
 
 </div>
@@ -59,8 +70,16 @@ const Home = () => {
                hover:bg-gray-100 dark:hover:text-black 
                transition cursor-pointer w-fit"
   >
-   { t("See More" )}
-    <IoIosArrowForward className="text-sm" />
+       {i18next.language === "ar" ? (
+  <>
+    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+{ t("See More" )} </>
+) : (
+  <>
+{ t("See More" )}   <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+  </>
+)}
+  
   </button>
 
 </div>

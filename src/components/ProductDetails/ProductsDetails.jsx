@@ -6,6 +6,8 @@ import { FiChevronDown, FiChevronUp, FiShoppingBag } from "react-icons/fi";
 import { addToCart, increaseQuantity } from "../../Redux/Slices/CartSlice";
 import Breadcrumbs from "../BreadCrumb/BreadCrumb";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const ProductsDetails = () => {
   const { id } = useParams();
@@ -40,6 +42,8 @@ const ProductsDetails = () => {
           enqueueSnackbar(error, { variant: "error" });
         }
       }, [error]);
+      const { t } = useTranslation();
+
     
   return (
     <div className="min-h-screen bg-white dark:bg-black   max-w-7xl mx-auto">
@@ -135,7 +139,7 @@ const ProductsDetails = () => {
                 
                   if(!isInCart){
                     dispatch(addToCart(product));
-                    enqueueSnackbar(`${product.title} added to cart`, {
+enqueueSnackbar(`${product.title} ${t("addedToCart")}`, {
                     variant: "default",
                     sx: {
                       backgroundColor: "#776a5d", // لون الخلفية
@@ -148,7 +152,7 @@ const ProductsDetails = () => {
 
                   }else{
                     dispatch(increaseQuantity(product.id));
-                    enqueueSnackbar(`${product.title} is already in Cart`, {
+enqueueSnackbar(`${product.title} ${t("alreadyInCart")}`, {
                     variant: "default",
                     sx: {
                       backgroundColor: "#776a5d", // لون الخلفية
@@ -163,13 +167,25 @@ const ProductsDetails = () => {
                 }}
                 className="w-full bg-black dark:bg-[#776a5d] text-white py-4 rounded hover:bg-gray-800 dark:hover:dark:bg-[#b19d86] transition-colors flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider cursor-pointer"
               >
-                <FiShoppingBag className="w-4 h-4" />
-                Add to Cart
+                {i18next.language === "en" ? (
+  <>
+    <FiShoppingBag className="w-4 h-4" />
+    {t("addToCart")}
+  </>
+) : (
+  <>
+    {t("addToCart")}
+    <FiShoppingBag className="w-4 h-4" />
+  </>
+)}
+
+                
               </button>
               <button
               onClick={()=>navigate('/cart')}
               className="cursor-pointer w-full border-2 border-black dark:border-white text-black dark:text-white dark:hover:text-black py-4 rounded hover:bg-gray-50 transition-colors text-sm font-medium uppercase tracking-wider">
-                Buy Now
+                {t("buyNow")}
+
               </button>
             </div>
 
@@ -182,7 +198,7 @@ const ProductsDetails = () => {
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider">
-                    Characteristics
+{t("characteristics")}
                   </span>
                   {showCharacteristics ? (
                     <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
@@ -194,20 +210,23 @@ const ProductsDetails = () => {
                   <div className="pb-4 space-y-2 text-sm">
                     {product?.brand && (
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-300 ">Brand</span>
+                        <span className="text-gray-600 dark:text-gray-300 ">{t("brand")}
+</span>
                         <span className="text-gray-900 dark:text-gray-300 ">
                           {product.brand}
                         </span>
                       </div>
                     )}
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-300 ">Stock</span>
+                      <span className="text-gray-600 dark:text-gray-300 ">{t("stock")}
+</span>
                       <span className="text-gray-900 dark:text-gray-300 ">
                         {product?.stock}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-300 ">Rating</span>
+                      <span className="text-gray-600 dark:text-gray-300 ">{t("rating")}
+</span>
                       <span className="text-gray-900 dark:text-gray-300 ">
                         {product?.rating}
                       </span>
@@ -223,7 +242,8 @@ const ProductsDetails = () => {
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer "
                 >
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
-                    DESCRIPTION
+                    {t("description")}
+
                   </span>
                   {showDescription ? (
                     <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
@@ -245,7 +265,7 @@ const ProductsDetails = () => {
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
-                    Payment & Delivery
+{t("paymentDelivery")}
                   </span>
                   {showPayment ? (
                     <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
@@ -256,8 +276,8 @@ const ProductsDetails = () => {
                 {showPayment && (
                   <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed">
                     <p>
-                      We accept all major credit cards and secure payment
-                      methods. Free delivery on orders over $100.
+                      {t("paymentText")}
+
                     </p>
                   </div>
                 )}
@@ -270,7 +290,8 @@ const ProductsDetails = () => {
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
-                    Returns
+                    {t("returns")}
+
                   </span>
                   {showReturns ? (
                     <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />
@@ -281,8 +302,7 @@ const ProductsDetails = () => {
                 {showReturns && (
                   <div className="pb-4 text-sm text-gray-600 dark:text-gray-300  leading-relaxed">
                     <p>
-                      {product?.returnPolicy}. Items must be unused and in
-                      original packaging.
+                      {product?.returnPolicy}. {i18next.language === "en" && t("Items must be unused and in original packaging.")}
                     </p>
                   </div>
                 )}
@@ -294,7 +314,8 @@ const ProductsDetails = () => {
                   className="w-full py-4 flex items-center justify-between text-left cursor-pointer"
                 >
                   <span className="text-sm font-semibold text-gray-900 dark:text-gray-100  uppercase tracking-wider ">
-                    Reviews
+                    {t("reviews")}
+
                   </span>
                   {showReviews ? (
                     <FiChevronUp className="w-5 h-5 text-gray-500 dark:text-gray-300 " />

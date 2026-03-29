@@ -209,7 +209,81 @@
   
   "wishlistEmptyTitle": "Your wishlist is empty",
   "wishlistEmptyDesc": "Save the items you love and come back to them anytime.",
-  "browseProducts":"Browse Products"
+  "browseProducts":"Browse Products",
+
+
+
+
+
+
+
+
+
+  "addToCart": "Add to Cart",
+  "buyNow": "Buy Now",
+  "characteristics": "Characteristics",
+  "brand": "Brand",
+  "stock": "Stock",
+  "rating": "Rating",
+  "description": "Description",
+  "paymentDelivery": "Payment & Delivery",
+  "paymentText": "We accept all major credit cards and secure payment methods. Free delivery on orders over $100.",
+  "returns": "Returns",
+  "returnsNote": "Items must be unused and in original packaging.",
+  "reviews": "Reviews",
+  "addedToCart": "added to cart",
+  "alreadyInCart": "is already in Cart",
+  "exploreNow":"Explore Now",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "Cart": "Cart",
+    "items": "items",
+    "searchPlaceholder": "Search items...",
+    "sortDefault": "Sort: Default",
+    "priceLowHigh": "Price: Low → High",
+    "priceHighLow": "Price: High → Low",
+    "clearAll": "Clear All",
+    "noItemsMatch": "No items match your search.",
+    "left": "left",
+    "off": "off",
+    "yourCartEmpty": "Your cart is empty",
+    "startShopping": "Start shopping and add items to your cart!",
+    "browseProducts": "Browse Products",
+    "orderSummary": "Order Summary",
+    "itemsInCart": "Items in cart",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "tax": "Tax (10%)",
+    "total": "Total",
+    "checkout": "Proceed to Checkout →",
+    "continueShopping": "Continue Shopping",
+    "securePayment": "Secure Payment",
+    "freeReturns": "Free Returns",
+    "removeProduct": "Remove this product?",
+    "removeConfirm": "This item will be removed from your cart.",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "clearCart": "Clear entire cart?",
+    "clearConfirm":"All {{count}} items will be removed.",
+    "loading": "loading..",
+    "mustLogin": "You must login first to checkout!",
+    "deletedFromCart": "deleted from Cart",
+    "cartCleared": "Cart has been cleared"
 
 
   

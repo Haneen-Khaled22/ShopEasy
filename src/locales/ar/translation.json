@@ -259,7 +259,98 @@
   
   "wishlistEmptyTitle": "قائمة المفضلة الخاصة بك فارغة",
   "wishlistEmptyDesc": "احفظ المنتجات التي تحبها وعد إليها في أي وقت.",
-  "browseProducts":"تصفح المنتجات "
+  "browseProducts":"تصفح المنتجات ",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "addToCart": "أضف إلى السلة",
+  "buyNow": "اشترِ الآن",
+  "characteristics": "المواصفات",
+  "brand": "العلامة التجارية",
+  "stock": "المخزون",
+  "rating": "التقييم",
+  "description": "الوصف",
+  "paymentDelivery": "الدفع والتوصيل",
+  "paymentText": "نقبل جميع بطاقات الائتمان وطرق الدفع الآمنة. توصيل مجاني للطلبات التي تزيد عن 100 دولار.",
+  "returns": "الإرجاع",
+  "returnsNote": "يجب أن تكون المنتجات غير مستخدمة وفي العبوة الأصلية.",
+  "reviews": "التقييمات",
+  "addedToCart": "تمت إضافته إلى السلة",
+  "alreadyInCart": "موجود بالفعل في السلة",
+  "exploreNow":"اكتشف الان",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "Cart": "سلة المشتريات",
+    "items": "منتجات",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "sortDefault": "ترتيب: افتراضي",
+    "priceLowHigh": "السعر: من الأقل للأعلى",
+    "priceHighLow": "السعر: من الأعلى للأقل",
+    "clearAll": "مسح الكل",
+    "noItemsMatch": "لا يوجد منتجات مطابقة",
+    "left": "متبقي",
+    "off": "خصم",
+    "yourCartEmpty": "سلة المشتريات فارغة",
+    "startShopping": "ابدأ التسوق وأضف منتجاتك",
+    "browseProducts": "تصفح المنتجات",
+    "orderSummary": "ملخص الطلب",
+    "itemsInCart": "عدد المنتجات",
+    "subtotal": "الإجمالي الفرعي",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "tax": "الضريبة (10%)",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء →",
+    "continueShopping": "متابعة التسوق",
+    "securePayment": "دفع آمن",
+    "freeReturns": "إرجاع مجاني",
+    "removeProduct": "حذف المنتج؟",
+    "removeConfirm": "سيتم حذف هذا المنتج من السلة",
+    "cancel": "إلغاء",
+    "remove": "حذف",
+    "clearCart": "مسح السلة بالكامل؟",
+    "clearConfirm": "سيتم حذف {{count}} منتج",
+    "loading": "جارٍ التحميل..",
+    "mustLogin": "يجب تسجيل الدخول أولًا",
+    "deletedFromCart": "تم الحذف من السلة",
+    "cartCleared": "تم مسح السلة"
 
   
 

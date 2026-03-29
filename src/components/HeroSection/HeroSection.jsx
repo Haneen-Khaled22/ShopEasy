@@ -8,6 +8,8 @@ import img2 from "../../assets/slider2.png"
 import img3 from "../../assets/slider3.png"
 import top from "../../assets/rightttimg.png"
 import left from "../../assets/lefttimg.png"
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import i18next from 'i18next'
 
 // كومبوننت الأرقام المتحركة
 const AnimatedCounter = ({ target, suffix = '', duration = 2000 }) => {
@@ -114,18 +116,39 @@ const HeroSection = () => {
             whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             onClick={()=>navigate(`/products`)}>
-            {t("shopNow")}
-            <motion.svg className='w-3.5 h-3.5 sm:w-4 sm:h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24' whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
+             {i18next.language === "ar" ? (
+  <>
+    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+    {t("shopNow")}
+  </>
+) : (
+  <>
+    {t("shopNow")}
+    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+  </>
+)}
+
+           
+            {/* <motion.svg className='w-3.5 h-3.5 sm:w-4 sm:h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24' whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-            </motion.svg>
+            </motion.svg> */}
+            {/* <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> */}
+
           </motion.button>
           
           <motion.button className='w-fit border border-gray-300 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer'
             whileHover={{ scale: 1.05, borderColor: "#666" }}>
-            {t("trendyCollections")}
-            <motion.svg className='w-3.5 h-3.5 sm:w-4 sm:h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24' whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-            </motion.svg>
+                    {i18next.language === "ar" ? (
+  <>
+    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+{t("trendyCollections")}  </>
+) : (
+  <>
+{t("trendyCollections")}    <FiChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+  </>
+)}
+            
+        
           </motion.button>
         </motion.div>
 
