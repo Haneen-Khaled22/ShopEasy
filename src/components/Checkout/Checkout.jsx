@@ -16,7 +16,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(0); // 0=Shipping, 1=Payment, 2=Review
+  const [step, setStep] = useState(0);
   const [placed, setPlaced] = useState(false);
 
   const [shipping, setShipping] = useState({
@@ -28,7 +28,7 @@ const Checkout = () => {
     cardName: "", cardNumber: "", expiry: "", cvv: "",
   });
 
-  const [method, setMethod] = useState("card"); // card | cod
+  const [method, setMethod] = useState("card");
 
   const subtotal = cart.reduce((sum, p) => sum + (p.price - (p.price * p.discountPercentage) / 100), 0);
   const tax = subtotal * 0.1;
@@ -49,30 +49,38 @@ const Checkout = () => {
     setTimeout(() => navigate("/"), 3500);
   };
 
-  // ── Shared input style
-  const inputCls = `w-full px-4 py-3 rounded-xl text-sm font-light outline-none transition-all duration-200 bg-[#fdf9f4] border border-[#ddd0be] focus:border-[#8a5c2e] focus:ring-2 focus:ring-[#8a5c2e]/10 placeholder:text-[#b8a898] text-[#3d2b1a]`;
+  // ── Shared input style — full dark mode support
+  const inputCls = `w-full px-4 py-3 rounded-xl text-sm font-light outline-none transition-all duration-200
+    bg-[#fdf9f4] dark:bg-[#1e1510]
+    border border-[#ddd0be] dark:border-[#3d2e1f]
+    focus:border-[#8a5c2e] dark:focus:border-[#a87040]
+    focus:ring-2 focus:ring-[#8a5c2e]/10 dark:focus:ring-[#a87040]/15
+    placeholder:text-[#b8a898] dark:placeholder:text-[#5a4535]
+    text-[#3d2b1a] dark:text-[#d4b898]`;
+
+  // ── Shared card style
+  const cardCls = `bg-white dark:bg-black rounded-3xl p-8`;
+  const cardStyle = { border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.06)" };
+  const cardStyleDark = "dark:[border-color:#2a1f12] dark:[box-shadow:0_4px_24px_rgba(0,0,0,0.3)]";
 
   return (
-    <div className="min-h-screen bg-[#faf8f4] dark:bg-black">
+    <div className="min-h-screen bg-[#faf8f4] dark:bg-[#0e0a06]">
 
       {/* ── TOP BAR ── */}
-      <div
-        style={{ background: "#ede4d3", borderBottom: "1px solid #ddd0be" }}
-        className="px-6 py-4 flex items-center justify-between "
-      >
+      <div className="px-6 py-4 flex items-center justify-between bg-[#ede4d3] dark:bg-[#1a1108] border-b border-[#ddd0be] dark:border-[#2a1f12]">
         <button
           onClick={() => navigate("/cart")}
-          className="flex items-center gap-2 text-sm font-light text-[#776a5d] hover:text-[#3d2b1a] transition-colors"
+          className="flex items-center gap-2 text-sm font-light text-[#776a5d] dark:text-[#7a6555] hover:text-[#3d2b1a] dark:hover:text-[#c4a07a] transition-colors"
         >
           ← Back to Cart
         </button>
         <span
-          className="text-lg font-light text-[#1a1410]"
+          className="text-lg font-light text-[#1a1410] dark:text-[#e8d5bc]"
           style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
         >
           Shop<span style={{ color: "#8a5c2e", fontStyle: "italic" }}>Easy</span>
         </span>
-        <span className="text-xs text-[#9a8878] tracking-widest uppercase">Secure Checkout 🔒</span>
+        <span className="text-xs text-[#9a8878] dark:text-[#6a5545] tracking-widest uppercase">Secure Checkout 🔒</span>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-10">
@@ -90,7 +98,7 @@ const Checkout = () => {
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-light transition-all duration-400 relative"
                   style={{
-                    background: i < step ? "#5c3d1e" : i === step ? "#8a5c2e" : "#e8dfd0",
+                    background: i < step ? "#5c3d1e" : i === step ? "#8a5c2e" : "var(--step-inactive, #e8dfd0)",
                     color: i <= step ? "#fffcf7" : "#9a8878",
                     boxShadow: i === step ? "0 0 0 4px rgba(138,92,46,0.18)" : "none",
                   }}
@@ -128,13 +136,13 @@ const Checkout = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.35 }}
-                  className="bg-white dark:bg-black rounded-3xl p-8"
-                  style={{ border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.06)" }}
+                  className={`${cardCls} ${cardStyleDark}`}
+                  style={cardStyle}
                 >
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-1 h-6 rounded-full" style={{ background: "#8a5c2e" }} />
                     <h2
-                      className="text-xl font-light text-[#1a1410] dark:text-gray-300"
+                      className="text-xl font-light text-[#1a1410] dark:text-[#e8d5bc]"
                       style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                     >
                       Shipping <span className="italic text-[#8a5c2e]">Details</span>
@@ -160,7 +168,7 @@ const Checkout = () => {
                         animate="show"
                         className={field.full ? "sm:col-span-2" : ""}
                       >
-                        <label className="block text-[11px] uppercase tracking-widest text-[#9a8878] mb-1.5">
+                        <label className="block text-[11px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545] mb-1.5">
                           {field.label}
                         </label>
                         <input
@@ -196,13 +204,13 @@ const Checkout = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.35 }}
-                  className="bg-white rounded-3xl p-8"
-                  style={{ border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.06)" }}
+                  className={`${cardCls} ${cardStyleDark}`}
+                  style={cardStyle}
                 >
                   <div className="flex items-center gap-3 mb-8">
                     <div className="w-1 h-6 rounded-full" style={{ background: "#8a5c2e" }} />
                     <h2
-                      className="text-xl font-light text-[#1a1410]"
+                      className="text-xl font-light text-[#1a1410] dark:text-[#e8d5bc]"
                       style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                     >
                       Payment <span className="italic text-[#8a5c2e]">Method</span>
@@ -273,7 +281,7 @@ const Checkout = () => {
                             className={f.full ? "" : "inline-block w-[calc(50%-8px)]"}
                             style={!f.full && i === 3 ? { marginLeft: 16 } : {}}
                           >
-                            <label className="block text-[11px] uppercase tracking-widest text-[#9a8878] mb-1.5">
+                            <label className="block text-[11px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545] mb-1.5">
                               {f.label}
                             </label>
                             <input
@@ -293,12 +301,12 @@ const Checkout = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="rounded-2xl p-6 text-center"
-                        style={{ background: "#fdf9f4", border: "1px dashed #c8b49a" }}
+                        className="rounded-2xl p-6 text-center bg-[#fdf9f4] dark:bg-[#1a1108]"
+                        style={{ border: "1px dashed #c8b49a" }}
                       >
                         <div className="text-4xl mb-3">🏡</div>
-                        <p className="text-sm font-light text-[#5c3d1e] mb-1">Pay when your order arrives</p>
-                        <p className="text-xs text-[#9a8878]">No card needed. Our delivery team will collect payment at your door.</p>
+                        <p className="text-sm font-light text-[#5c3d1e] dark:text-[#c4956a] mb-1">Pay when your order arrives</p>
+                        <p className="text-xs text-[#9a8878] dark:text-[#6a5545]">No card needed. Our delivery team will collect payment at your door.</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -306,10 +314,7 @@ const Checkout = () => {
                   <div className="flex gap-3 mt-8">
                     <button
                       onClick={() => setStep(0)}
-                      className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200"
-                      style={{ border: "1px solid #ddd0be", color: "#776a5d" }}
-                      onMouseEnter={(e) => e.currentTarget.style.background = "#f5ede0"}
-                      onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                      className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200 text-[#776a5d] dark:text-[#7a6555] border border-[#ddd0be] dark:border-[#3d2e1f] hover:bg-[#f5ede0] dark:hover:bg-[#1e1510]"
                     >
                       ← Back
                     </button>
@@ -338,7 +343,6 @@ const Checkout = () => {
                   transition={{ duration: 0.35 }}
                   className="space-y-5"
                 >
-                  {/* Shipping summary */}
                   {[
                     {
                       title: "Shipping Details",
@@ -354,8 +358,8 @@ const Checkout = () => {
                             ["Country", shipping.country],
                           ].map(([k, v]) => (
                             <div key={k}>
-                              <p className="text-[10px] uppercase tracking-widest text-[#9a8878]">{k}</p>
-                              <p className="text-sm text-[#3d2b1a] font-light">{v || "—"}</p>
+                              <p className="text-[10px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545]">{k}</p>
+                              <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] font-light">{v || "—"}</p>
                             </div>
                           ))}
                         </div>
@@ -365,15 +369,15 @@ const Checkout = () => {
                       title: "Payment Method",
                       edit: () => setStep(1),
                       content: method === "cod" ? (
-                        <p className="text-sm text-[#3d2b1a] font-light">🏡 Cash on Delivery</p>
+                        <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] font-light">🏡 Cash on Delivery</p>
                       ) : (
                         <div className="flex items-center gap-4">
                           <div className="w-10 h-7 rounded bg-[#3d2b1a] flex items-center justify-center">
                             <span className="text-white text-[9px]">CARD</span>
                           </div>
                           <div>
-                            <p className="text-sm text-[#3d2b1a] font-light">{payment.cardName || "—"}</p>
-                            <p className="text-xs text-[#9a8878]">
+                            <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] font-light">{payment.cardName || "—"}</p>
+                            <p className="text-xs text-[#9a8878] dark:text-[#6a5545]">
                               •••• •••• •••• {payment.cardNumber.slice(-4) || "••••"}
                             </p>
                           </div>
@@ -383,11 +387,11 @@ const Checkout = () => {
                   ].map(({ title, edit, content }) => (
                     <div
                       key={title}
-                      className="bg-white rounded-2xl p-6"
-                      style={{ border: "1px solid #e8dfd0", boxShadow: "0 2px 12px rgba(100,70,40,0.05)" }}
+                      className="bg-white dark:bg-[#141008] rounded-2xl p-6 border border-[#e8dfd0] dark:border-[#2a1f12]"
+                      style={{ boxShadow: "0 2px 12px rgba(100,70,40,0.05)" }}
                     >
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-sm uppercase tracking-widest text-[#776a5d]">{title}</h3>
+                        <h3 className="text-sm uppercase tracking-widest text-[#776a5d] dark:text-[#7a6555]">{title}</h3>
                         <button
                           onClick={edit}
                           className="text-xs text-[#8a5c2e] hover:underline transition-colors"
@@ -400,22 +404,19 @@ const Checkout = () => {
                   ))}
 
                   {/* Items review */}
-                  <div
-                    className="bg-white rounded-2xl p-6"
-                    style={{ border: "1px solid #e8dfd0" }}
-                  >
-                    <h3 className="text-sm uppercase tracking-widest text-[#776a5d] mb-4">Items ({cart.length})</h3>
+                  <div className="bg-white dark:bg-[#141008] rounded-2xl p-6 border border-[#e8dfd0] dark:border-[#2a1f12]">
+                    <h3 className="text-sm uppercase tracking-widest text-[#776a5d] dark:text-[#7a6555] mb-4">Items ({cart.length})</h3>
                     <div className="space-y-3 max-h-52 overflow-y-auto pr-2">
                       {cart.map((p) => (
                         <div key={p.id} className="flex items-center gap-3">
                           <img
                             src={p.images?.[0]}
                             alt={p.title}
-                            className="w-12 h-12 object-contain rounded-xl bg-[#faf8f4]"
+                            className="w-12 h-12 object-contain rounded-xl bg-[#faf8f4] dark:bg-[#1e1510]"
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm text-[#3d2b1a] truncate">{p.title}</p>
-                            <p className="text-xs text-[#9a8878]">{p.discountPercentage}% off</p>
+                            <p className="text-sm text-[#3d2b1a] dark:text-[#d4b898] truncate">{p.title}</p>
+                            <p className="text-xs text-[#9a8878] dark:text-[#6a5545]">{p.discountPercentage}% off</p>
                           </div>
                           <span className="text-sm font-medium" style={{ color: "#5c3d1e" }}>
                             ${(p.price - (p.price * p.discountPercentage) / 100).toFixed(2)}
@@ -428,10 +429,7 @@ const Checkout = () => {
                   <div className="flex gap-3">
                     <button
                       onClick={() => setStep(1)}
-                      className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200"
-                      style={{ border: "1px solid #ddd0be", color: "#776a5d" }}
-                      onMouseEnter={(e) => e.currentTarget.style.background = "#f5ede0"}
-                      onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                      className="px-6 py-3.5 rounded-xl text-sm font-light transition-all duration-200 text-[#776a5d] dark:text-[#7a6555] border border-[#ddd0be] dark:border-[#3d2e1f] hover:bg-[#f5ede0] dark:hover:bg-[#1e1510]"
                     >
                       ← Back
                     </button>
@@ -459,14 +457,13 @@ const Checkout = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <div
-              className="rounded-3xl p-6 sticky top-6"
-              style={{ background: "#fff", border: "1px solid #e8dfd0", boxShadow: "0 4px 24px rgba(100,70,40,0.07)" }}
+            <div className="rounded-3xl p-6 sticky top-6 bg-white dark:bg-black border border-[#e8dfd0] dark:border-[#2a1f12]"
+              style={{ boxShadow: "0 4px 24px rgba(100,70,40,0.07)" }}
             >
-              <div className="flex items-center gap-3 mb-5 pb-4" style={{ borderBottom: "1px solid #f0e8da" }}>
+              <div className="flex items-center gap-3 mb-5 pb-4 border-b border-[#f0e8da] dark:border-[#2a1f12]">
                 <div className="w-1 h-5 rounded-full" style={{ background: "#8a5c2e" }} />
                 <h3
-                  className="text-base font-light text-[#1a1410]"
+                  className="text-base font-light text-[#1a1410] dark:text-[#e8d5bc]"
                   style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
                 >
                   Order Summary
@@ -477,11 +474,11 @@ const Checkout = () => {
               <div className="space-y-3 mb-5 max-h-48 overflow-y-auto pr-1">
                 {cart.map((p) => (
                   <div key={p.id} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#faf8f4] shrink-0">
+                    <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#faf8f4] dark:bg-[#1e1510] shrink-0">
                       <img src={p.images?.[0]} alt={p.title} className="w-full h-full object-contain" />
                     </div>
-                    <p className="text-xs text-[#776a5d] flex-1 truncate">{p.title}</p>
-                    <span className="text-xs font-medium text-[#5c3d1e]">
+                    <p className="text-xs text-[#776a5d] dark:text-[#7a6555] flex-1 truncate">{p.title}</p>
+                    <span className="text-xs font-medium text-[#5c3d1e] dark:text-[#c4956a]">
                       ${(p.price - (p.price * p.discountPercentage) / 100).toFixed(2)}
                     </span>
                   </div>
@@ -489,22 +486,19 @@ const Checkout = () => {
               </div>
 
               {/* Totals */}
-              <div className="space-y-2.5 pt-4" style={{ borderTop: "1px solid #f0e8da" }}>
+              <div className="space-y-2.5 pt-4 border-t border-[#f0e8da] dark:border-[#2a1f12]">
                 {[
                   ["Subtotal", `$${subtotal.toFixed(2)}`],
                   ["Shipping", "Free"],
                   ["Tax (10%)", `$${tax.toFixed(2)}`],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between">
-                    <span className="text-xs font-light text-[#9a8878]">{k}</span>
-                    <span className={`text-xs font-medium ${v === "Free" ? "text-green-600" : "text-[#3d2b1a]"}`}>{v}</span>
+                    <span className="text-xs font-light text-[#9a8878] dark:text-[#6a5545]">{k}</span>
+                    <span className={`text-xs font-medium ${v === "Free" ? "text-green-600 dark:text-green-500" : "text-[#3d2b1a] dark:text-[#d4b898]"}`}>{v}</span>
                   </div>
                 ))}
-                <div
-                  className="flex justify-between pt-3 mt-1"
-                  style={{ borderTop: "1px solid #f0e8da" }}
-                >
-                  <span className="text-sm font-medium text-[#1a1410]">Total</span>
+                <div className="flex justify-between pt-3 mt-1 border-t border-[#f0e8da] dark:border-[#2a1f12]">
+                  <span className="text-sm font-medium text-[#1a1410] dark:text-[#e8d5bc]">Total</span>
                   <span
                     className="text-xl font-light"
                     style={{ color: "#5c3d1e", fontFamily: "'Palatino Linotype', Palatino, serif" }}
@@ -515,12 +509,12 @@ const Checkout = () => {
               </div>
 
               {/* Step progress */}
-              <div className="mt-5 pt-4" style={{ borderTop: "1px solid #f0e8da" }}>
+              <div className="mt-5 pt-4 border-t border-[#f0e8da] dark:border-[#2a1f12]">
                 <div className="flex justify-between mb-1.5">
-                  <span className="text-[10px] uppercase tracking-widest text-[#9a8878]">Progress</span>
+                  <span className="text-[10px] uppercase tracking-widest text-[#9a8878] dark:text-[#6a5545]">Progress</span>
                   <span className="text-[10px] text-[#8a5c2e]">{step + 1}/3</span>
                 </div>
-                <div className="h-1 rounded-full bg-[#f0e8da] overflow-hidden">
+                <div className="h-1 rounded-full bg-[#f0e8da] dark:bg-[#2a1f12] overflow-hidden">
                   <motion.div
                     className="h-full rounded-full"
                     style={{ background: "linear-gradient(90deg, #5c3d1e, #8a5c2e)" }}
@@ -533,7 +527,7 @@ const Checkout = () => {
               {/* Trust */}
               <div className="mt-5 flex justify-around">
                 {["🔒 Secure", "🔄 Returns", "🚚 Fast Ship"].map((b) => (
-                  <span key={b} className="text-[10px] text-[#9a8878]">{b}</span>
+                  <span key={b} className="text-[10px] text-[#9a8878] dark:text-[#6a5545]">{b}</span>
                 ))}
               </div>
             </div>
@@ -555,8 +549,8 @@ const Checkout = () => {
               initial={{ scale: 0.8, opacity: 0, y: 30 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: [0.34, 1.56, 0.64, 1] }}
-              className="bg-white rounded-3xl p-12 text-center max-w-sm mx-4"
-              style={{ border: "1px solid #e8dfd0", boxShadow: "0 32px 80px rgba(0,0,0,0.25)" }}
+              className="bg-white dark:bg-[#141008] rounded-3xl p-12 text-center max-w-sm mx-4 border border-[#e8dfd0] dark:border-[#2a1f12]"
+              style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.25)" }}
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -571,7 +565,7 @@ const Checkout = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-2xl font-light text-[#1a1410] mb-2"
+                className="text-2xl font-light text-[#1a1410] dark:text-[#e8d5bc] mb-2"
                 style={{ fontFamily: "'Palatino Linotype', Palatino, serif" }}
               >
                 Order <span className="italic text-[#8a5c2e]">Placed!</span>
@@ -580,7 +574,7 @@ const Checkout = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.55 }}
-                className="text-sm text-[#776a5d] font-light mb-2"
+                className="text-sm text-[#776a5d] dark:text-[#7a6555] font-light mb-2"
               >
                 Thank you for your purchase. You'll receive a confirmation email shortly.
               </motion.p>
@@ -588,12 +582,12 @@ const Checkout = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                className="text-xs text-[#9a8878]"
+                className="text-xs text-[#9a8878] dark:text-[#6a5545]"
               >
                 Redirecting you home...
               </motion.p>
               <motion.div
-                className="mt-5 h-1 rounded-full bg-[#f0e8da] overflow-hidden"
+                className="mt-5 h-1 rounded-full bg-[#f0e8da] dark:bg-[#2a1f12] overflow-hidden"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
