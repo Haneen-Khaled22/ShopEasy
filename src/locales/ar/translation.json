@@ -416,7 +416,31 @@
   "orderPlaced": "تم الطلب!",
   "thankYou": "شكراً لشرائك. ستصلك رسالة تأكيد على بريدك قريباً.",
   "redirecting": "جاري تحويلك للرئيسية...",
-  "placeOrder": "✦ تأكيد الطلب"
+  "placeOrder": "✦ تأكيد الطلب",
+
+
+
+
+   "badge": "مرحباً بك",
+    "title": "تسجيل الدخول",
+    "subtitle": "أدخل بياناتك لتسجيل الدخول",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "اسمك الكامل",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "01XXXXXXXXX",
+    "country": "الدولة",
+    "countryPlaceholder": "دولتك",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "••••••••",
+    "submit": "تسجيل الدخول",
+    "submitting": "جاري تسجيل الدخول...",
+    "loginSuccess":"تم تسجيل الدخول بنجاح",
+    "passwordRequired":"كلمة السر مطلوبة ",
+    "emailRequired":"البريد الالكترونى مطلوب",
+    "invalidEmail":"بريد الكترونى غير صحيح",
+    "passwordMin":"يجب ان تكون كلمة السر اكبر من 6 حروف "
 
 
   

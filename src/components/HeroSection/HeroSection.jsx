@@ -182,7 +182,7 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Right Content - Images Carousel */}
-      <div className='w-full lg:w-1/2 relative pb-8 order-1 lg:order-2'>
+      <div className='w-full lg:w-1/2 relative pb-8 order-1 lg:order-2 px-3'>
         <div className='relative max-w-xs sm:max-w-sm md:max-w-md mx-auto'>
           {/* Main Image */}
           <motion.div className='rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl relative' whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>

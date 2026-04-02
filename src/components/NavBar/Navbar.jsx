@@ -10,22 +10,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 
-
-
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [logoutLoading, setLogoutLoading] = useState(false);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
- const navLinks = [
-  { to: "/", label: t("home") },
-  { to: "/products", label: t("products") },
-  { to: "/categories", label: t("categories") },
-  { to: "/about", label: t("about") },
-  { to: "/contact", label: t("contact") },
-];
+  const navLinks = [
+    { to: "/", label: t("home") },
+    { to: "/products", label: t("products") },
+    { to: "/categories", label: t("categories") },
+    { to: "/about", label: t("about") },
+    { to: "/contact", label: t("contact") },
+  ];
 
   const { toggleTheme, theme } = useContext(ThemeContext);
   const cart = useSelector((state) => state.cart);
@@ -40,7 +38,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setMobileOpen(false);
@@ -49,7 +46,6 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Prevent body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -65,8 +61,7 @@ const Navbar = () => {
       onClick={onClick}
       className="cursor-pointer relative w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center
         bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
-        transition-all duration-300 hover:bg-[rgba(92,61,30,0.13)] hover:border-[#b89870]
-        shrink-0"
+        transition-all duration-300 hover:bg-[rgba(92,61,30,0.13)] hover:border-[#b89870] shrink-0"
     >
       {children}
       {badge > 0 && (
@@ -83,16 +78,9 @@ const Navbar = () => {
   return (
     <>
       {/* ── Announcement bar ── */}
-     <div
-  className="
-    flex flex-col sm:flex-row
-    justify-center items-center
-    py-2 px-3
-    bg-gradient-to-r from-[#f5f0e8] via-[#ede4d3] to-[#f5f0e8]
-    border-b border-[#ddd4c0]
-    gap-0.5 xs:gap-2 sm:gap-4
-  "
->
+      <div className="flex flex-col sm:flex-row justify-center items-center py-2 px-3
+        bg-gradient-to-r from-[#f5f0e8] via-[#ede4d3] to-[#f5f0e8]
+        border-b border-[#ddd4c0] gap-0.5 xs:gap-2 sm:gap-4">
         <p className="text-[9px] xs:text-[10px] sm:text-[11px] tracking-[0.2em] xs:tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8a6f4e] text-center leading-relaxed">
           ✦ Free shipping on orders over $50
         </p>
@@ -110,7 +98,8 @@ const Navbar = () => {
         }`}
       >
         <div className="mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 max-w-screen-2xl">
-          <div className="flex items-center justify-between h-[56px] xs:h-[60px] sm:h-[68px]">
+          {/* ↓ زودنا px-2 xs:px-3 عشان padding بين اللوجو والبرجر */}
+          <div className="flex items-center justify-between h-[56px] xs:h-[60px] sm:h-[68px] px-2 xs:px-3">
 
             {/* ── Logo ── */}
             <NavLink to="/" className="flex items-center gap-2 xs:gap-2.5 group shrink-0">
@@ -157,12 +146,10 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* ── Right Actions ── */}
-            <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-2.5">
-
-              {/* Sign In — desktop only */}
+            {/* ── Desktop Right Actions ── */}
+            <div className="hidden md:flex items-center gap-1.5 xs:gap-2 sm:gap-2.5">
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/register")}
                 className="hidden lg:flex items-center gap-1.5 px-4 xl:px-5 py-2 rounded-full
                   text-[11px] xl:text-[12px] tracking-[0.1em] xl:tracking-[0.12em] uppercase font-semibold
                   border border-[#c8b49a] dark:border-gray-500
@@ -173,17 +160,14 @@ const Navbar = () => {
                 {t("sign in")}
               </button>
 
-              {/* Cart */}
               <IconButton onClick={() => navigate("/cart")} badge={cart.length}>
                 <HiOutlineShoppingBag className="w-[16px] h-[16px] xs:w-[17px] xs:h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
               </IconButton>
 
-              {/* Wishlist */}
               <IconButton onClick={() => navigate("/wishlist")} badge={wishlist.length}>
                 <FiHeart className="w-[16px] h-[16px] xs:w-[17px] xs:h-[17px] sm:w-[18px] sm:h-[18px] text-[#5c3d1e] dark:text-gray-300" />
               </IconButton>
 
-              {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
                 className="cursor-pointer w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0
@@ -196,7 +180,6 @@ const Navbar = () => {
                 }
               </button>
 
-              {/* Sign Out — desktop only */}
               {token && (
                 <button
                   onClick={() => setShowLogoutPopup(true)}
@@ -213,17 +196,22 @@ const Navbar = () => {
                 </button>
               )}
 
-              {/* ── Language Switcher — styled wrapper ── */}
-              <div className="shrink-0
-               
-              ">
-                <LanguageSwitcher/>
+              <div className="shrink-0">
+                <LanguageSwitcher />
+              </div>
+            </div>
+
+            {/* ── Mobile: Language + Burger ── */}
+            <div className="md:hidden flex items-center gap-2">
+              {/* Language switcher فوق جنب البرجر */}
+              <div className="shrink-0">
+                <LanguageSwitcher />
               </div>
 
-              {/* Hamburger — mobile only */}
+              {/* Burger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden w-8 h-8 xs:w-9 xs:h-9 rounded-full flex items-center justify-center shrink-0
+                className="w-8 h-8 xs:w-9 xs:h-9 rounded-full flex items-center justify-center shrink-0
                   bg-[rgba(92,61,30,0.06)] border border-[#d4c4b0] dark:border-gray-600
                   transition-all duration-200 hover:border-[#b89870] cursor-pointer"
                 aria-label="Toggle menu"
@@ -250,6 +238,7 @@ const Navbar = () => {
                 </motion.div>
               </button>
             </div>
+
           </div>
         </div>
 
@@ -265,6 +254,8 @@ const Navbar = () => {
                 bg-[#fffcf7] dark:bg-black"
             >
               <div className="px-3 xs:px-4 sm:px-6 pt-3 pb-5 space-y-1">
+
+                {/* Nav Links */}
                 {navLinks.map(({ to, label }, i) => (
                   <motion.div
                     key={to}
@@ -287,19 +278,92 @@ const Navbar = () => {
                       {({ isActive }) => (
                         <>
                           <span>{label}</span>
-                          {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#8a5c2e]" />
-                          )}
+                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#8a5c2e]" />}
                         </>
                       )}
                     </NavLink>
                   </motion.div>
                 ))}
 
-                {/* Mobile bottom actions */}
-                <div className="pt-3 mt-1 space-y-2 border-t border-[#e8dfd0] dark:border-gray-700">
+                {/* ── Icons Row: Cart, Wishlist, Dark Mode ── */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 + 0.05, duration: 0.25 }}
+                  className="pt-3 mt-1 border-t border-[#e8dfd0] dark:border-gray-700"
+                >
+                  <div className="flex items-center justify-around px-2 py-1">
 
-                  {/* Sign In */}
+                    {/* Cart */}
+                    <button
+                      onClick={() => { navigate("/cart"); setMobileOpen(false); }}
+                      className="flex flex-col items-center gap-1.5 group"
+                    >
+                      <div className="relative w-11 h-11 rounded-full flex items-center justify-center
+                        bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
+                        transition-all duration-300 group-hover:bg-[rgba(92,61,30,0.13)] group-hover:border-[#b89870]">
+                        <HiOutlineShoppingBag className="w-5 h-5 text-[#5c3d1e] dark:text-gray-300" />
+                        {cart.length > 0 && (
+                          <span className="absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full flex items-center justify-center"
+                            style={{ background: "#5c3d1e", color: "#fffcf7", fontSize: 10, fontWeight: 700 }}>
+                            {cart.length}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] tracking-[0.08em] uppercase text-[#8a6f4e] dark:text-gray-500">
+                        {t("cart") || "Cart"}
+                      </span>
+                    </button>
+
+                    {/* Wishlist */}
+                    <button
+                      onClick={() => { navigate("/wishlist"); setMobileOpen(false); }}
+                      className="flex flex-col items-center gap-1.5 group"
+                    >
+                      <div className="relative w-11 h-11 rounded-full flex items-center justify-center
+                        bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
+                        transition-all duration-300 group-hover:bg-[rgba(92,61,30,0.13)] group-hover:border-[#b89870]">
+                        <FiHeart className="w-5 h-5 text-[#5c3d1e] dark:text-gray-300" />
+                        {wishlist.length > 0 && (
+                          <span className="absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full flex items-center justify-center"
+                            style={{ background: "#5c3d1e", color: "#fffcf7", fontSize: 10, fontWeight: 700 }}>
+                            {wishlist.length}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] tracking-[0.08em] uppercase text-[#8a6f4e] dark:text-gray-500">
+                        {t("wishlist") || "Wishlist"}
+                      </span>
+                    </button>
+
+                    {/* Dark Mode */}
+                    <button
+                      onClick={toggleTheme}
+                      className="flex flex-col items-center gap-1.5 group"
+                    >
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center
+                        bg-[rgba(92,61,30,0.07)] border border-[#d4c4b0] dark:border-gray-600
+                        transition-all duration-300 group-hover:bg-[rgba(92,61,30,0.13)] group-hover:border-[#b89870]">
+                        {theme === "dark"
+                          ? <FiSun className="w-5 h-5 text-[#5c3d1e] dark:text-yellow-500" />
+                          : <FiMoon className="w-5 h-5 text-[#5c3d1e]" />
+                        }
+                      </div>
+                      <span className="text-[10px] tracking-[0.08em] uppercase text-[#8a6f4e] dark:text-gray-500">
+                        {theme === "dark" ? "Light" : "Dark"}
+                      </span>
+                    </button>
+
+                  </div>
+                </motion.div>
+
+                {/* ── Sign In / Sign Out Buttons ── */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 + 0.1, duration: 0.25 }}
+                  className="pt-3 space-y-2 border-t border-[#e8dfd0] dark:border-gray-700"
+                >
                   <button
                     onClick={() => { navigate("/login"); setMobileOpen(false); }}
                     className="cursor-pointer w-full py-3 rounded-full
@@ -326,7 +390,8 @@ const Navbar = () => {
                       Sign Out
                     </button>
                   )}
-                </div>
+                </motion.div>
+
               </div>
             </motion.div>
           )}

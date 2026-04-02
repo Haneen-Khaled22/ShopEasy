@@ -350,5 +350,33 @@
 
 
 
+
+
+
+
+
+
+  ,"badge": "Welcome",
+  "title": "Login",
+  "subtitle": "Enter your details to log in",
+  "fullName": "Full Name",
+  "fullNamePlaceholder": "Your full name",
+  "email": "Email",
+  "emailPlaceholder": "you@example.com",
+  "phone": "Phone Number",
+  "phonePlaceholder": "01XXXXXXXXX",
+  "country": "Country",
+  "countryPlaceholder": "Your country",
+  "password": "Password",
+  "passwordPlaceholder": "••••••••",
+  "submit": "Login",
+  "submitting": "Logging in...",
+  "loginSuccess":"Logged in successfully",
+   "passwordRequired": "Password is required",
+  "emailRequired": "Email is required",
+  "invalidEmail": "Invalid email address",
+  "passwordMin": "Password must be at least 6 characters"
+
+
   
   }
