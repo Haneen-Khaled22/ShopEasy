@@ -346,7 +346,14 @@
   "orderPlaced": "Order Placed!",
   "thankYou": "Thank you for your purchase. You'll receive a confirmation email shortly.",
   "redirecting": "Redirecting you home...",
-  "placeOrder": "✦ Place Order"
+  "placeOrder": "✦ Place Order",
+   "added to Wishlist":"added  to wishlist",
+   "addedToCart": "Added {{product}} to Cart",
+  "removedFromWishlist": "Removed {{product}} from Wishlist",
+  "clearedWishlist": "Wishlist has been cleared",
+"searchItems": "Search for a product...",
+"removedFromCart": "{{product}} has been removed from the cart",
+"deletedFromCart": "{{product}} has been removed from the cart"
 
 
 

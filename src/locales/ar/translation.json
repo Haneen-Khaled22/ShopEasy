@@ -440,7 +440,14 @@
     "passwordRequired":"كلمة السر مطلوبة ",
     "emailRequired":"البريد الالكترونى مطلوب",
     "invalidEmail":"بريد الكترونى غير صحيح",
-    "passwordMin":"يجب ان تكون كلمة السر اكبر من 6 حروف "
+    "passwordMin":"يجب ان تكون كلمة السر اكبر من 6 حروف ",
+"added to Wishlist": "تمت الإضافة إلى قائمة المفضلات",
+"addedToCart": "تمت إضافة {{product}} إلى السلة",
+  "removedFromWishlist": "تمت إزالة {{product}} من قائمة المفضلات",
+  "clearedWishlist": "تم مسح قائمة المفضلات",
+"searchItems": "ابحث عن منتج...",
+"removedFromCart": "تمت إزالة {{product}} من السلة",
+"deletedFromCart": "تمت إزالة {{product}} من السلة"
 
 
   

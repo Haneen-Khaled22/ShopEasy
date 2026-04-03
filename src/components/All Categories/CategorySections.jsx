@@ -243,11 +243,11 @@ const CategorySections = () => {
   {/* Section heading */}
   <div className="flex items-end justify-between mb-10">
     <div>
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-6 h-px bg-amber-600" />
+      <div className="flex items-center gap-3 mb-3 sm: px-3">
+        <div className="w-6 h-px bg-amber-600 " />
         <p className="text-xs uppercase tracking-[0.3em] text-amber-600 font-medium">{t("Discover")}</p>
       </div>
-      <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white">
+      <h2 className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white sm: px-3">
         {t("Shop By")} <span className="italic text-[#6b5744] ">{t("Category")}</span>
       </h2>
     </div>
@@ -357,11 +357,11 @@ const CategorySections = () => {
           <CategoryProducts slug={selectedCategory} />
         ) : (<div className="max-w-7xl mx-auto px-4 mt-14">
              <h3
-              className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white"
+              className="text-3xl md:text-4xl font-light text-[#1a1a1a] dark:text-white sm: px-3"
             >
              <span> {t("FeaturedProducts")}</span>
             </h3>
-            <div className="px-2">
+            <div className=" px-1">
           <Products limit={3} showFilter={false} showBread={false} showPagination={false} showBottomBanner={false} showNumberOfProducts={false} showHeroSrip={false}/>
           </div>
         </div>

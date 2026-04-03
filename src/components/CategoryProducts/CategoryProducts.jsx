@@ -27,6 +27,19 @@ const CategoryProducts = () => {
   console.log(data);
 
   const dispatch = useDispatch();
+   const snackbarConfig = {
+    variant: "default",
+    sx: {
+      backgroundColor: "#776a5d",
+      color: "#fff",
+      fontWeight: "bold",
+    },
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "left",
+    },
+    autoHideDuration: 2500,
+  };
 
   useEffect(() => {
     dispatch(getCategoryProducts(slug));
@@ -47,7 +60,7 @@ const CategoryProducts = () => {
           <span className="loader"></span>
         </div>
       )}
-    <h1 className="text-2xl font-medium text-gray-800 dark:text-gray-300 mb-6 capitalize">
+    <h1 className="text-2xl font-medium text-gray-800 dark:text-gray-300 mb-6 capitalize p-3">
   {slug}
 </h1>
       <motion.div
@@ -56,7 +69,7 @@ const CategoryProducts = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12 px-4 sm:px-8"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-12 px-4"
       >
         
         
@@ -72,7 +85,7 @@ const CategoryProducts = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: index * 0.05 }}
-                className="cursor-pointer p-4 transition-all duration-200 group"
+                className="cursor-pointer p-4 transition-all duration-200 group sm:px-3"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden rounded-xl mb-4">
@@ -85,25 +98,22 @@ const CategoryProducts = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       if (!isInCart) dispatch(addToCart(product));
-                      enqueueSnackbar(`${product.title} ${t("added to Cart")}`, {
-                        variant: "default",
-                        sx: { backgroundColor: "#776a5d", color: "#fff", fontWeight: "bold" },
-                        anchorOrigin: { vertical: "top", horizontal: "left" },
-                        autoHideDuration: 2500,
-                      });
+                      enqueueSnackbar(
+                          t("addedToCart", { product: product?.title }),
+                          snackbarConfig
+                        );
                     }}
                     className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
                   >
                     {isInCart ? (
                       <FiCheck
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation(),
                           dispatch(deleteFromCart(product.id));
-                          enqueueSnackbar(`${product.title} ${t("deleted from Cart")}`, {
-                            variant: "default",
-                            sx: { backgroundColor: "#776a5d", color: "#fff", fontWeight: "bold" },
-                            anchorOrigin: { vertical: "top", horizontal: "left" },
-                            autoHideDuration: 2500,
-                          });
+                          enqueueSnackbar(
+                          t("deletedFromCart", { product: product?.title }),
+                          snackbarConfig
+                        );
                         }}
                         className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]"
                       />
@@ -148,8 +158,10 @@ const CategoryProducts = () => {
                       onClick={(e) => {
                         e.stopPropagation();
                         dispatch(deleteFromWishList(product.id));
-                        enqueueSnackbar(`${product.title} ${t("deleted from Wishlist")}`, { variant: "default" });
-                      }}
+  enqueueSnackbar(
+                          t("removedFromWishlist", { product: product?.title }),
+                          snackbarConfig
+                        );                      }}
                       className="cursor-pointer text-red-600 hover:text-red-700 transition-all duration-200 transform hover:scale-110 active:scale-95"
                     />
                   ) : (

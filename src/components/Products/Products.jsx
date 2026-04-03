@@ -43,6 +43,19 @@ const Products = ({
     setCurrentPage(1);
   };
 
+   const snackbarConfig = {
+    variant: "default",
+    sx: {
+      backgroundColor: "#776a5d",
+      color: "#fff",
+      fontWeight: "bold",
+    },
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "left",
+    },
+    autoHideDuration: 2500,
+  };
   const { data, loading, error } = useSelector((state) => state.products);
   const cart = useSelector((state) => state.cart);
     const wishlist = useSelector((state) => state.wishList);
@@ -330,25 +343,22 @@ const Products = ({
                     onClick={(e) => {
                       e.stopPropagation();
                       if (!isInCart) dispatch(addToCart(product));
-                      enqueueSnackbar(`${product.title} ${t("added to Cart")}`, {
-                        variant: "default",
-                        sx: { backgroundColor: "#776a5d", color: "#fff", fontWeight: "bold" },
-                        anchorOrigin: { vertical: "top", horizontal: "left" },
-                        autoHideDuration: 2500,
-                      });
+                      enqueueSnackbar(
+                          t("addedToCart", { product: product?.title }),
+                          snackbarConfig
+                        );  
                     }}
                     className="absolute top-2 right-2 cursor-pointer transition-all hover:scale-110 active:scale-95"
                   >
                     {isInCart ? (
                       <FiCheck
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           dispatch(deleteFromCart(product.id));
-                          enqueueSnackbar(`${product.title} ${t("deleted from Cart")}`, {
-                            variant: "default",
-                            sx: { backgroundColor: "#776a5d", color: "#fff", fontWeight: "bold" },
-                            anchorOrigin: { vertical: "top", horizontal: "left" },
-                            autoHideDuration: 2500,
-                          });
+                            enqueueSnackbar(
+                          t("deletedFromCart", { product: product?.title }),
+                          snackbarConfig
+                        );  
                         }}
                         className="text-white bg-green-700 rounded-full w-7 h-7 p-1.5 shadow-lg stroke-[2.5]"
                       />
@@ -393,8 +403,10 @@ const Products = ({
                       onClick={(e) => {
                         e.stopPropagation();
                         dispatch(deleteFromWishList(product.id));
-                        enqueueSnackbar(`${product.title} ${t("deleted from Wishlist")}`, { variant: "default" });
-                      }}
+  enqueueSnackbar(
+                          t("removedFromWishlist", { product: product?.title }),
+                          snackbarConfig
+                        );                        }}
                       className="cursor-pointer text-red-600 hover:text-red-700 transition-all duration-200 transform hover:scale-110 active:scale-95"
                     />
                   ) : (
@@ -402,8 +414,10 @@ const Products = ({
                       onClick={(e) => {
                         e.stopPropagation();
                         dispatch(addToWishList(product));
-                        enqueueSnackbar(`${product.title} ${t("added to Wishlist")}`, { variant: "default" });
-                      }}
+enqueueSnackbar(
+                          t("added to Wishlist", { product: product?.title }),
+                          snackbarConfig
+                        );                        }}
                       className="cursor-pointer text-gray-400 hover:text-red-500 transition-all duration-200 transform hover:scale-110 active:scale-95"
                     />
                   )}
