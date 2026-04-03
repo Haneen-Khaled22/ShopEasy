@@ -365,7 +365,7 @@ const Navbar = () => {
                   className="pt-3 space-y-2 border-t border-[#e8dfd0] dark:border-gray-700"
                 >
                   <button
-                    onClick={() => { navigate("/login"); setMobileOpen(false); }}
+                    onClick={() => { navigate("/register"); setMobileOpen(false); }}
                     className="cursor-pointer w-full py-3 rounded-full
                       text-[12px] tracking-[0.15em] uppercase font-light
                       border border-[#c8b49a] dark:border-gray-500
