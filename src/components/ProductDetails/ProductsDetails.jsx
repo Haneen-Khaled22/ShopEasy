@@ -22,6 +22,19 @@ const ProductsDetails = () => {
   const cart = useSelector((state)=>state.cart);
 
   const { enqueueSnackbar } = useSnackbar();
+   const snackbarConfig = {
+    variant: "default",
+    sx: {
+      backgroundColor: "#776a5d",
+      color: "#fff",
+      fontWeight: "bold",
+    },
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "left",
+    },
+    autoHideDuration: 2500,
+  };
 
   const {product,loading,error} = useSelector((state) => state.productDetails);
   console.log(product);
@@ -139,16 +152,10 @@ const ProductsDetails = () => {
                 
                   if(!isInCart){
                     dispatch(addToCart(product));
-enqueueSnackbar(`${product.title} ${t("addedToCart")}`, {
-                    variant: "default",
-                    sx: {
-                      backgroundColor: "#776a5d", // لون الخلفية
-                      color: "#fff", // لون النص
-                      fontWeight: "bold",
-                    },
-                    anchorOrigin: { vertical: "top", horizontal: "left" },
-                    autoHideDuration: 2500,
-                  });
+enqueueSnackbar(
+                          t("addedToCart", { product: product?.title }),
+                          snackbarConfig
+                        );
 
                   }else{
                     dispatch(increaseQuantity(product.id));
