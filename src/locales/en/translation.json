@@ -97,6 +97,40 @@
 
 
 
+   , "storyTitle1": "We Create Spaces,",
+"storyTitle2": "And Elevate Living",
+"storyParagraph1": "We believe beauty is not a luxury — it’s a necessity. From furniture that embraces you after a long day to skincare products that enhance your glow, every item we choose tells a story of craftsmanship and care.",
+"storyParagraph2": "We built this place with a passion for design and a love for beauty, and our mission is simple: to bring together the finest products from around the world to transform houses into homes and routines into meaningful rituals.",
+
+"valuesTitle1": "What We",
+"valuesTitle2": "Believe In",
+"valuesSubtitle": "Our values are not just words, but promises we uphold every day.",
+
+"qualityTitle": "Quality First",
+"qualityDesc": "Every product is carefully selected and tested to meet our highest standards.",
+
+"sustainabilityTitle": "Sustainability",
+"sustainabilityDesc": "We collaborate with brands that care about the planet as much as we do.",
+"designTitle": "Timeless Design",
+"designDesc": "Trends may fade, but true style lasts forever. We choose pieces that endure.",
+
+"loveTitle": "Customer Love",
+"loveDesc": "Your satisfaction is not just a goal — it’s our passion.",
+
+"galleryTitle1": "A Glimpse Into",
+"galleryTitle2": "Our World",
+
+"teamTitle1": "Meet the",
+"teamTitle2": "Curators",
+"teamSubtitle": "Passionate experts carefully selecting every piece with love and attention.",
+"founderRole": "Founder & Creative Director",
+"furnitureRole": "Head of Furniture Curation",
+"beautyRole": "Beauty & Skincare Specialist",
+
+"ctaTitle1": "Ready to Transform",
+"ctaTitle2": "Your Space?",
+"ctaSubtitle": "Explore our curated collection and discover pieces that reflect your style.",
+"startShopping": "Start Shopping",
   
   
   
@@ -114,7 +148,7 @@
 
 
   
-   , "heroEst": "Get In Touch",
+    "heroEst": "Get In Touch",
   "heroTitle1": "We'd Love to",
   "heroTitle2": "Hear From You",
   "heroSubtitle": "Whether you have questions, feedback, or just want to say hello, we're here for you.",

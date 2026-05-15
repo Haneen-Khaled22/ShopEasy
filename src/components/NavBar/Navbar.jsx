@@ -202,9 +202,9 @@ const Navbar = () => {
             </div>
 
             {/* ── Mobile: Language + Burger ── */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-2 cursor-pointer">
               {/* Language switcher فوق جنب البرجر */}
-              <div className="shrink-0">
+              <div className="shrink-0 cursor-pointer">
                 <LanguageSwitcher />
               </div>
 
